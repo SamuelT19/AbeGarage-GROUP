@@ -22,3 +22,5 @@ use this to login
      password: 123456        
 
 DONE!!!
+
+NB: Before pushing your code to the repository change your branch by running ( git checkout side )
