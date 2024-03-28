@@ -13,7 +13,7 @@ run ( nodemon app.js) in your backend terminal ! if u already install nodemon gl
 
 run ( http://localhost:8787/install ) in your browser searchbar and check if the tables created in your abegarageGroup database
 
-To create employee run post request ( http://localhost:8787//api/employee) in postman or thunder client
+To create employee send POST request ( http://localhost:8787//api/employee) in postman or thunder client
 
      // body data 
 { "employee_email": "test@test.com",
