@@ -52,27 +52,19 @@ async function getAllEmployees(req, res, next) {
   }
 }
 
-
 // Create the getEmployeeById controller
 async function getEmployeeById(req, res, next) {
-  try {
-    const employeeId = req.params.id;
-    // Call the getEmployeeById method from the employee service
-    const employee = await employeeService.getEmployeeById(employeeId);
-    if (!employee) {
-      res.status(404).json({
-        error: "Employee not found!"
-      });
-    } else {
-      res.status(200).json({
-        status: "success",
-        data: employee,
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "Internal server error"
+  const employeeId = req.params.id;
+  // Call the getEmployeeById method from the employee service
+  const employee = await employeeService.getEmployeeById(employeeId);
+  if (!employee) {
+    res.status(400).json({
+      error: "Failed to get employee!"
+    });
+  } else {
+    res.status(200).json({
+      status: "success",
+      data: employee,
     });
   }
 }
@@ -85,4 +77,5 @@ module.exports = {
   createEmployee,
   getAllEmployees,
   getEmployeeById
+ 
 };

@@ -14,7 +14,12 @@ router.get(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   employeeController.getAllEmployees
 );
-
+// Create a route to handle the get employee by ID request on get
+router.get(
+    "/api/employee/:id",
+    [authMiddleware.verifyToken, authMiddleware.isAdmin],
+    employeeController.getEmployeeById
+  );
 
 
 
