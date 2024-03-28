@@ -3,9 +3,9 @@ First clone the repository by runing this command in empty folder ( git clone ht
 open terminal in both backend and frontend then run in both this command ( npm install . )
 
 create new database and useraccount
-    useraccount      : abegarageGroup
-    database name    : abegarageGroup
-    database password: abegarageGroup
+    useraccount      : abegarage-group
+    database name    : abegarage-group
+    database password: abegarage-group
 
 adjust your port based on your database in ( db.config.js  @ line 5 )
 
@@ -13,14 +13,32 @@ run ( nodemon app.js) in your backend terminal ! if u already install nodemon gl
 
 run ( http://localhost:8787/install ) in your browser searchbar and check if the tables created in your abegarageGroup database
 
+To create employee run post request ( http://localhost:8787//api/employee) in postman or thunder client
+
+     // body data 
+{ "employee_email": "test@test.com",
+  "employee_password": "12345678",
+  "active_employee": "1",
+  "employee_first_name": "test",
+  "employee_last_name": "test",
+  "employee_phone": "123456789",
+  "company_role_id": "3" }
+
+
 run ( npm start ) in your frontend terminal
 
-then http://localhost:3000/login
 
 use this to login
-     username: group@group.com
-     password: 123456        
+     username: test@test.com
+     password: 12345678       
 
 DONE!!!
 
-NB: Before pushing your code to the repository change your branch by running ( git checkout side )
+NB: Before pushing your code to the repository create and change your branch by running these commands one by one
+
+     To get the letest update of the repository run ( git pull ),
+     
+     To create branch locally run ( git checkout -b side) 
+       # if side branch already created run command ( git checkout side ),
+       
+    To create remote branch and push run ( git push -u origin side )
