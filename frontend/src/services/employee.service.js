@@ -30,9 +30,24 @@ const getAllEmployees = async (token) => {
   return response;
 }
 
+// A function to send get request to get a single employee
+const getEmployeeById = async (id, token) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  const response = await fetch(`${api_url}/api/employee/${id}`, requestOptions);
+  return response;
+};
+
+
 // Export all the functions 
 const employeeService = {
   createEmployee,
-  getAllEmployees
+  getAllEmployees,
+  getEmployeeById
 }
 export default employeeService; 
