@@ -59,10 +59,23 @@ async function getAllEmployees() {
   const rows = await conn.query(query);
   return rows;
 }
+
+// A function to get employee by ID
+async function getEmployeeById(employee_id) {
+  const query = "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id WHERE employee.employee_id = ?";
+  const rows = await conn.query(query, [employee_id]);
+  return rows;
+}
+
+
+
+
 // Export the functions for use in the controller
 module.exports = {
   checkIfEmployeeExists,
   createEmployee,
   getEmployeeByEmail,
-  getAllEmployees
+  getAllEmployees,
+  getEmployeeById 
+
 };
