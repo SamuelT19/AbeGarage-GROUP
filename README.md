@@ -13,7 +13,7 @@ run ( nodemon app.js) in your backend terminal ! if u already install nodemon gl
 
 run ( http://localhost:8787/install ) in your browser searchbar and check if the tables created in your abegarageGroup database
 
-To create employee send POST request ( http://localhost:8787//api/employee) in postman or thunder client
+To create employee send POST request ( http://localhost:8787/api/employee) in postman or thunder client
 
      // body data
 
@@ -35,11 +35,12 @@ DONE!!!
 
 NB: Before pushing your code to the repository create and change your branch by running these commands one by one
 
-     To get the letest update of the repository run ( git pull ),
+on the remote repo:
+first create a branch with name of your task <your-branch>
+on your local repo:
+git pull
+git checkout -b <your-branch>
+git pull origin <your-branch>
+git push -u origin <your-branch>
 
-     To create branch locally run ( git checkout -b side)
-       # if side branch already created run command ( git checkout side ),
 
-    To create remote branch and push run ( git push -u origin side )
-
-// test from employee delete group
