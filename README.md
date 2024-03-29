@@ -47,5 +47,3 @@ git checkout -b <your-branch>
 git pull origin <your-branch>
 
 git push -u origin <your-branch>
-
-

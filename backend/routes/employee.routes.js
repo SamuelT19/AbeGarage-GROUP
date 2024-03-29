@@ -18,5 +18,12 @@ router.get(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   employeeController.getAllEmployees
 );
+
+//delete by id
+router.delete(
+  "/api/employee/:employee_id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  employeeController.deleteEmployeeById
+);
 // Export the router
 module.exports = router;
