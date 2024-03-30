@@ -30,6 +30,14 @@ const getAllEmployees = async (token) => {
   return response;
 };
 
+// A function to send get request to get a single employee it is get request
+const getEmployeeById = async (id, token) => {
+  const requestOptions = {
+    method: "GET",
+      const response = await fetch(`${api_url}/api/employee/${id}`, requestOptions);
+  return response;
+};
+
 //* A function to send delete request to delete an employee
 const deleteEmployee = async (employeeId, token) => {
   console.log(token)
@@ -40,6 +48,7 @@ const deleteEmployee = async (employeeId, token) => {
       "x-access-token": token,
     },
   };
+
   const response = await fetch(
     `${api_url}/api/employee/${employeeId}`,
     requestOptions
@@ -53,6 +62,8 @@ const deleteEmployee = async (employeeId, token) => {
 const employeeService = {
   createEmployee,
   getAllEmployees,
+  getEmployeeById,
   deleteEmployee,
+
 };
 export default employeeService;

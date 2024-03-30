@@ -47,7 +47,7 @@ function LoginForm() {
     };
     console.log(formData);
     // Call the service
-    const loginEmployee = loginService.logIn(formData);
+    const loginEmployee= loginService.logIn(formData);
     console.log(loginEmployee);
     loginEmployee.then((response) => response.json())
       .then((response) => {

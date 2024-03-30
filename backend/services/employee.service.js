@@ -77,6 +77,14 @@ async function getAllEmployees() {
   return rows;
 }
 
+// A function to get employee by ID to get single employee
+async function getEmployeeById(employee_id) {
+  const query = "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id WHERE employee.employee_id = ?";
+  const rows = await conn.query(query, [employee_id]);
+  return rows;
+}
+
+
 // A function to delete employee by id
 async function deleteEmployeeById(employee_id) {
   await conn.query("DELETE FROM employee_info WHERE employee_id = ?", [
@@ -99,5 +107,7 @@ module.exports = {
   createEmployee,
   getEmployeeByEmail,
   getAllEmployees,
+  getEmployeeById,
   deleteEmployeeById,
 };
+
