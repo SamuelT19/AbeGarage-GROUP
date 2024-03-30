@@ -30,23 +30,45 @@ const getAllEmployees = async (token) => {
   return response;
 };
 
+<<<<<<< HEAD
 // A function to send get request to get a single employee it is get request
 const getEmployeeById = async (id, token) => {
   const requestOptions = {
     method: "GET",
+=======
+//* A function to send delete request to delete an employee
+const deleteEmployee = async (employeeId, token) => {
+  const requestOptions = {
+    method: "DELETE",
+>>>>>>> 7765f0de61bcbc9c5dfff7042f9047100b2f22c9
     headers: {
       "Content-Type": "application/json",
       "x-access-token": token,
     },
   };
+<<<<<<< HEAD
   const response = await fetch(`${api_url}/api/employee/${id}`, requestOptions);
   return response;
 };
+=======
+  const response = await fetch(
+    `${api_url}/api/employee/${employeeId}`,
+    requestOptions
+  );
+  console.log(response);
+  return response;
+};
+// *End of function to delete an employee
+>>>>>>> 7765f0de61bcbc9c5dfff7042f9047100b2f22c9
 
 // Export all the functions
 const employeeService = {
   createEmployee,
   getAllEmployees,
+<<<<<<< HEAD
   getEmployeeById,
+=======
+  deleteEmployee,
+>>>>>>> 7765f0de61bcbc9c5dfff7042f9047100b2f22c9
 };
 export default employeeService;
