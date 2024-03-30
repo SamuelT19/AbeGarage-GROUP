@@ -32,6 +32,7 @@ const getAllEmployees = async (token) => {
 
 //* A function to send delete request to delete an employee
 const deleteEmployee = async (employeeId, token) => {
+  console.log(token)
   const requestOptions = {
     method: "DELETE",
     headers: {

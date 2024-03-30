@@ -69,10 +69,10 @@ const EmployeesList = () => {
   // *End of function to confirm the deletion of an employee
 
   // *Create a function to handle the deletion of an employee
-  const handleDeleteEmployee = async (employeeId) => {
+  const handleDeleteEmployee = async (employeeId,token) => {
     try {
       // Call the deleteEmployee function from your employeeService
-      await employeeService.deleteEmployee(employeeId);
+      await employeeService.deleteEmployee(employeeId,token);
 
       console.log("Employee deleted successfully");
       // Handle successful deletion, e.g., remove the employee from the UI
