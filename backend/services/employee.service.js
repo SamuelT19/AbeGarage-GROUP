@@ -79,7 +79,8 @@ async function getAllEmployees() {
 
 // A function to get employee by ID to get single employee
 async function getEmployeeById(employee_id) {
-  const query = "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id WHERE employee.employee_id = ?";
+  const query =
+    "SELECT employee.employee_email, employee.active_employee,employee_info.employee_first_name, employee_info.employee_last_name, employee_info.employee_phone,company_roles.company_role_id FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id WHERE employee.employee_id = ?";
   const rows = await conn.query(query, [employee_id]);
   return rows;
 }
@@ -101,6 +102,83 @@ async function deleteEmployeeById(employee_id) {
   return true;
 }
 
+const editEmployee = async (employee) => {
+  console.log(employee);
+  let updatedEmployee = {};
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = employee?.employee_password
+    ? await bcrypt.hash(employee?.employee_password, salt)
+    : null;
+
+
+  if (employee.employee_email || employee.active_employee) {
+    const employeeQuery = `
+        UPDATE employee
+        SET 
+          ${employee.employee_email ? "employee_email = ?," : ""}
+          ${employee.active_employee ? "active_employee = ?" : ""}
+        WHERE
+          employee_id = ?
+      `;
+    const queryParams = [
+      employee.employee_email,
+      employee.active_employee,
+     
+      employee.employee_id,
+    ].filter((param) => param !== undefined);
+
+    await conn.query(employeeQuery, queryParams);
+  }
+
+  if (employee.employee_phone) {
+    const employeeInfoQuery = `
+        UPDATE employee_info
+        SET 
+          employee_phone = ?
+        WHERE
+          employee_id = ?
+      `;
+    const queryParams = [employee.employee_phone, employee.employee_id];
+
+    await conn.query(employeeInfoQuery, queryParams);
+  }
+
+  if (hashedPassword) {
+    const employeePassQuery = `
+        UPDATE employee_pass
+        SET 
+          employee_password_hashed = ?
+        WHERE
+          employee_id = ?
+      `;
+    await conn.query(employeePassQuery, [hashedPassword, employee.employee_id]);
+  }
+
+  if (employee.company_role_id) {
+    const employeeRoleQuery = `
+        UPDATE employee_role
+        SET 
+          company_role_id = ?
+        WHERE
+          employee_id = ?
+      `;
+    await conn.query(employeeRoleQuery, [
+      employee.company_role_id,
+      employee.employee_id,
+    ]);
+  }
+
+  updatedEmployee = {
+    employee_id: employee.employee_id,
+    employee_email: employee.employee_email,
+    employee_phone: employee.employee_phone,
+    active_employee: employee.active_employee,
+    company_role_id: employee.company_role_id,
+  };
+  return updatedEmployee;
+};
+
 // Export the functions for use in the controller
 module.exports = {
   checkIfEmployeeExists,
@@ -109,5 +187,6 @@ module.exports = {
   getAllEmployees,
   getEmployeeById,
   deleteEmployeeById,
+  editEmployee,
 };
 
