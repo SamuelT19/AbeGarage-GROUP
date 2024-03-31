@@ -81,7 +81,8 @@ async function getAllEmployees() {
 async function getEmployeeById(employee_id) {
   const query =
     "SELECT employee.employee_email, employee.active_employee,employee_info.employee_first_name, employee_info.employee_last_name, employee_info.employee_phone,company_roles.company_role_id FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id WHERE employee.employee_id = ?";
-  const row = await conn.query(query, [employee_id]);
+  const rows = await conn.query(query, [employee_id]);
+  console.log(rows)
   return rows;
 }
 
