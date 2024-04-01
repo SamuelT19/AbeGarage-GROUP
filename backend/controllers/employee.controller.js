@@ -61,7 +61,6 @@ async function deleteEmployeeById(req, res, next) {
     const deleteEmployee = await employeeService.deleteEmployeeById(
       employee_id
     );
-    console.log(deleteEmployee)
 
     if (!deleteEmployee) {
       res.status(400).json({
