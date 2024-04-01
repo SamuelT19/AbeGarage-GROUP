@@ -32,12 +32,16 @@ router.get(
 );
 // Create a route to handle the get employee by ID request on get
 router.get(
-    "/api/employee/:id",
+    "/api/employee/:employee_id",
     [authMiddleware.verifyToken, authMiddleware.isAdmin],
     employeeController.getEmployeeById
   );
 
-
+router.post(
+  "/api/edit-employee",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  employeeController.editEmployee
+);
 
 // Export the router
 module.exports = router;

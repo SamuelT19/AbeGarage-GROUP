@@ -10,6 +10,7 @@ import employeeService from "../../../../services/employee.service";
 
 //import the icons
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 // Create the EmployeesList component
 const EmployeesList = () => {
@@ -26,6 +27,7 @@ const EmployeesList = () => {
   if (employee) {
     token = employee.employee_token;
   }
+  console.log(token);
 
   useEffect(() => {
     // Call the getAllEmployees function
@@ -57,24 +59,33 @@ const EmployeesList = () => {
 
   // *Create a function to confirm the deletion of an employee
   const confirmDeleteEmployee = (employee) => {
-    const { employee_first_name } = employee;
+    const { employee_first_name, employee_id } = employee;
     const isConfirmed = window.confirm(
       `Are you sure you want to delete employee "${employee_first_name}"?`
     );
 
     if (isConfirmed) {
-      handleDeleteEmployee(employee.employee_id);
+      handleDeleteEmployee(employee_id, token);
     }
+    console.log(employee_id);
   };
   // *End of function to confirm the deletion of an employee
 
   // *Create a function to handle the deletion of an employee
-  const handleDeleteEmployee = async (employeeId) => {
+  const handleDeleteEmployee = async (employee_id, token) => {
     try {
       // Call the deleteEmployee function from your employeeService
-      await employeeService.deleteEmployee(employeeId);
+      const status = await employeeService.deleteEmployee(employee_id, token);
+      console.log(status);
+      if (status) {
+        console.log("Employee deleted successfully");
+        const updatedEmployees = employees.filter(
+          (employee) => employee.employee_id !== employee_id
+        );
 
-      console.log("Employee deleted successfully");
+        setEmployees(updatedEmployees);
+      }
+
       // Handle successful deletion, e.g., remove the employee from the UI
     } catch (error) {
       console.error("Error deleting employee:", error);
@@ -86,18 +97,18 @@ const EmployeesList = () => {
   return (
     <>
       {apiError ? (
-        <section className='contact-section'>
-          <div className='auto-container'>
-            <div className='contact-title'>
+        <section className="contact-section">
+          <div className="auto-container">
+            <div className="contact-title">
               <h2>{apiErrorMessage}</h2>
             </div>
           </div>
         </section>
       ) : (
         <>
-          <section className='contact-section'>
-            <div className='auto-container'>
-              <div className='contact-title'>
+          <section className="contact-section">
+            <div className="auto-container">
+              <div className="contact-title">
                 <h2>Employees</h2>
               </div>
               <Table striped bordered hover>
@@ -130,11 +141,19 @@ const EmployeesList = () => {
                       <td>{employee.company_role_name}</td>
                       <td>
                         {/* <div className='edit-delete-icons'>edit | delete</div> */}
-                        <FaEdit className='edit-icon' />
+                        <Link
+                          to={`/admin/edit-employee/${employee.employee_id}`}
+                        >
+                          <FaEdit
+                            className="edit-icon"
+                            style={{ cursor: "pointer" }}
+                          />
+                        </Link>
                         &nbsp; &nbsp;
                         {/* // *Delet icon and event listnere  */}
                         <FaTrash
-                          className='delete-icon'
+                          className="delete-icon"
+                          style={{ cursor: "pointer" }}
                           onClick={() => confirmDeleteEmployee(employee)}
                         />
                       </td>
