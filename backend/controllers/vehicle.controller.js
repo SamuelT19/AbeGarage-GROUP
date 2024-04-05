@@ -117,5 +117,6 @@ module.exports = {
   deleteVehicle,
   getVehicleById,
   getAllVehicles,
+  editVehicleById
 };
 
