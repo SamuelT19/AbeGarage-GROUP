@@ -1,10 +1,3 @@
-
-
-// Import the vehicle service
-const vehicleService = require("../services/vehicle.service");
-
-
-
 // Create the get all vehicles controller
 async function getAllVehicles(req, res, next) {
     const customerId = req.params.customer_id;
@@ -32,10 +25,3 @@ async function getAllVehicles(req, res, next) {
 
 
 
-// Export the controller functions
-module.exports = {
- 
-  getAllVehicles
-
-
-};
