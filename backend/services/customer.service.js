@@ -107,5 +107,5 @@ module.exports = {
   getAllCustomers,
   getCustomerById,
   deleteCustomerById,
-  editCustomer,
+  editCustomer
 };
