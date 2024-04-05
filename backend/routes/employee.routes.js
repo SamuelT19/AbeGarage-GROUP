@@ -19,12 +19,13 @@ router.get(
   employeeController.getAllEmployees
 );
 
-//delete by id
+// Create a route to handle the delete by id
 router.delete(
   "/api/employee/:employee_id",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   employeeController.deleteEmployeeById
 );
+// Create a route to handle the get employee by ID request on get
 router.get(
   "/api/employees",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
@@ -32,11 +33,11 @@ router.get(
 );
 // Create a route to handle the get employee by ID request on get
 router.get(
-    "/api/employee/:employee_id",
-    [authMiddleware.verifyToken, authMiddleware.isAdmin],
-    employeeController.getEmployeeById
-  );
-
+  "/api/employee/:employee_id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  employeeController.getEmployeeById
+);
+// Create a route to handle the edit employee request on post
 router.post(
   "/api/edit-employee",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
