@@ -13,6 +13,7 @@ async function checkIfCustomerExists(email) {
 
 async function addCustomer(customer) {
   const customer_hash = uuidv4();
+  console.log(customer_hash);
   try {
     // Insert customer data into the database
     const query =
@@ -107,5 +108,5 @@ module.exports = {
   getAllCustomers,
   getCustomerById,
   deleteCustomerById,
-  editCustomer,
+  editCustomer
 };
