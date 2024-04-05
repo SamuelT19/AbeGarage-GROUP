@@ -9,7 +9,6 @@ async function getAllVehicles(req, res, next) {
         error: "Failed to get all vehicles!",
       });
     }
-
     // Success response
     res.status(200).json({
       status: "success",
@@ -22,6 +21,3 @@ async function getAllVehicles(req, res, next) {
     });
   }
 }
-
-
-
