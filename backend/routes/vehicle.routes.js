@@ -13,33 +13,23 @@ router.post(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.createVehicle
 );
-
-//create a route to get all vehicles
+// Create a route to handle the get vehicle by ID request on get
 router.get(
-  "/api/all-vehicles/:customer_id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
-  vehicleController.getAllVehicles
-);
-
-//create a route to get a vehicle by its ID
-router.get(
-  "/api/singel-vehicel/:vehicle_id",
+  "/api/single-vehicle/:vehicle_id",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.getVehicleById
 );
+// Route to delete a vehicle by its ID
+router.delete(
+  "/api/vehicle/delete/:vehicle_id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  vehicleController.deleteVehicle
+);
 
-//create a route to edit a vehicle
+// Create a route to handle the editVehicle request on editVehicle
 router.put(
   "/api/edit-vehicle",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.editVehicleById
 );
-
-//create a route to delete a vehicle
-router.delete(
-  "/api/delete-vehicle/:vehicle_id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
-  vehicleController.deleteVehicleById
-);
-
 module.exports = router;
