@@ -20,4 +20,9 @@ router.delete(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.deleteVehicle
 );
+
+// Create a route to handle the editVehicle request on editVehicle
+router.put("/api/edit-vehicle",
+   [authMiddleware.verifyToken, authMiddleware.isAdmin],
+   vehicleController.editVehicleById);
 module.exports = router;

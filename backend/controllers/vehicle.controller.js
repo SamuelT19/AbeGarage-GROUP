@@ -62,9 +62,32 @@ async function deleteVehicle(req, res, next) {
   }
 }
 
+async function editVehicleById(req, res, next) {
+  const vehicle = req.body;
+  try {
+  const updatedVehicle = await vehicleService.editVehicleById(vehicle);
+  if (!updatedVehicle) {
+    res.status(400).json({
+      error: "Failed to edit vehicle info!",
+    });
+  } else {
+    res.status(200).json({
+      message: "Vehicle data updated successfully",
+      updatedVehicle,
+    });
+  }
+} catch (error) {
+  console.log(error);
+  res.status(400).json({
+    error: "something went wrong!"
+  });
+}
+}
+
 // Export the delete vehicle controller
 
 module.exports = { createVehicle ,
-  deleteVehicle
+  deleteVehicle,
+  editVehicleById
 };
 

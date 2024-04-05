@@ -83,9 +83,33 @@ async function deleteVehicle(vehicleId) {
   }
 }
 
+async function editVehicleById(req, res, next) {
+  const vehicle = req.body;
+  try {
+  const updatedVehicle = await vehicleService.editVehicleById(vehicle);
+  if (!updatedVehicle) {
+    res.status(400).json({
+      error: "Failed to edit vehicle info!",
+    });
+  } else {
+    res.status(200).json({
+      message: "Vehicle data updated successfully",
+      updatedVehicle,
+    });
+  }
+} catch (error) {
+  console.log(error);
+  res.status(400).json({
+    error: "something went wrong!"
+  });
+}
+}
+
+
 
 // Export the vehicle service
 module.exports = {
   checkIfVehicleExists,
-  createVehicle, deleteVehicle
+  createVehicle, deleteVehicle,
+  editVehicleById
 };
