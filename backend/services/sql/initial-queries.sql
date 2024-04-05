@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `common_services` (
   `service_id` int(11) NOT NULL AUTO_INCREMENT,
   `service_name` varchar(255) NOT NULL,
   `service_description` TEXT,
+  service_price DECIMAL(10, 2),
   PRIMARY KEY (service_id)
 ) ENGINE=InnoDB;
 
