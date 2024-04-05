@@ -62,6 +62,14 @@ async function createVehicle(vehicleData) {
     return { success: false, error: "Internal server error" };
   }
 }
+// get vehicle by id
+async function getVehicleById(vehicle_id) {
+  const query = `
+    SELECT * FROM customer_vehicle_info WHERE vehicle_id = ?
+  `;
+  const rows = await conn.query(query, [vehicle_id]);
+  return rows;
+}
 
 
 // Function to delete a vehicle by its ID
@@ -110,6 +118,8 @@ async function editVehicleById(req, res, next) {
 // Export the vehicle service
 module.exports = {
   checkIfVehicleExists,
-  createVehicle, deleteVehicle,
+  createVehicle,
+  getVehicleById,
+  deleteVehicle,
   editVehicleById
 };
