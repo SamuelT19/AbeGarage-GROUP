@@ -13,7 +13,12 @@ router.post(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.createVehicle
 );
-
+// Create a route to handle the get vehicle by ID request on get
+router.get(
+  "/api/single-vehicle/:vehicle_id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  vehicleController.getVehicleById
+);
 // Route to delete a vehicle by its ID
 router.delete(
   "/api/vehicle/delete/:vehicle_id",
