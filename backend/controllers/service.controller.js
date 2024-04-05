@@ -75,9 +75,25 @@ async function deleteService(req, res, next) {
   }
 }
 
+async function getAllServices(req, res, next) {
+  
+  const services = await serviceService.getAllServices();
+  if (!services) {
+    res.status(400).json({
+      error: "Failed to get all service!",
+    });
+  } else {
+    res.status(200).json({
+      status: "success",
+      services,
+    });
+  }
+}
+
 module.exports = {
   addService,
   getSingleService,
   editService,
   deleteService,
+  getAllServices,
 };

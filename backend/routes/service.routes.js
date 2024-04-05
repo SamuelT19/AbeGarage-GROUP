@@ -18,4 +18,6 @@ router.delete(
   "/api/service/delete/:service_id",
   serviceController.deleteService
 );
+
+router.get("/api/service/all", serviceController.getAllServices);
 module.exports = router;

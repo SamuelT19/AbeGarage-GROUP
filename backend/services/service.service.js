@@ -69,4 +69,16 @@ async function deleteService(serviceId) {
   return true;
 }
 
-module.exports = { addService, getSingleService, editService, deleteService };
+async function getAllServices() {
+  const query = "SELECT * FROM common_services";
+  const rows = await conn.query(query);
+  return rows;
+}
+
+module.exports = {
+  addService,
+  getSingleService,
+  editService,
+  deleteService,
+  getAllServices,
+};
