@@ -3,7 +3,6 @@ const conn = require("../config/db.config");
 
 // A function to check if vehicle exists in the database
 async function checkIfVehicleExists(vehicleData) {
-  console.log(vehicleData);
   const query =
     "SELECT * FROM customer_vehicle_info  WHERE  vehicle_serial = ? ";
   const rows = await conn.query(query, [vehicleData.vehicle_serial]);
@@ -28,38 +27,29 @@ async function createVehicle(vehicleData) {
     vehicle_color,
   } = vehicleData;
 
-  try {
-    // Construct the SQL query
-    const query = `
+  // Construct the SQL query
+  const query = `
       INSERT INTO customer_vehicle_info 
         (customer_id, vehicle_year, vehicle_make, vehicle_model, vehicle_type, vehicle_mileage, vehicle_tag, vehicle_serial, vehicle_color) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    // Execute the query
-    const result = await conn.query(query, [
-      customer_id,
-      vehicle_year,
-      vehicle_make,
-      vehicle_model,
-      vehicle_type,
-      vehicle_mileage,
-      vehicle_tag,
-      vehicle_serial,
-      vehicle_color,
-    ]);
+  // Execute the query
+  const result = await conn.query(query, [
+    customer_id,
+    vehicle_year,
+    vehicle_make,
+    vehicle_model,
+    vehicle_type,
+    vehicle_mileage,
+    vehicle_tag,
+    vehicle_serial,
+    vehicle_color,
+  ]);
 
-    // Check if the query was successful
-    if (result.affectedRows === 1) {
-      // Vehicle successfully added to the database
-      return { success: true };
-    } else {
-      // Handle the case where no rows were affected (e.g., query failed)
-      return { success: false, error: "Failed to add vehicle" };
-    }
-  } catch (error) {
-    // Handle any errors that occurred during the execution of the function
-    console.error("Error creating vehicle:", error);
-    return { success: false, error: "Internal server error" };
+  // Check if the query was successful
+  if (result.affectedRows === 1) {
+    // Vehicle successfully added to the database
+    return true;
   }
 }
 
@@ -70,14 +60,10 @@ async function getAllVehicles(customerId) {
   INNER JOIN customer_identifier ci ON ci.customer_id = cvi.customer_id
   WHERE cvi.customer_id = ?`;
 
-  try {
+
     const results = await conn.query(query, [customerId]);
     console.log(results); // Handle the retrieved vehicles as needed
     return results;
-  } catch (error) {
-    console.error("Error retrieving vehicles from the database:", error);
-    throw error;
-  }
 }
 
 // get vehicle by id

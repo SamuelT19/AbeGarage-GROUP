@@ -9,13 +9,13 @@ const vehicleController = require("../controllers/vehicle.controller");
 
 //create a route to add a new vehicle
 router.post(
-  "/api/add-vehicle",
+  "/api/vehicle/add",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.createVehicle
 );
 // Create a route to handle the get vehicle by ID request on get
 router.get(
-  "/api/single-vehicle/:vehicle_id",
+  "/api/vehicle/single/:vehicle_id",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.getVehicleById
 );
@@ -28,14 +28,14 @@ router.delete(
 
 // Create a route to handle the editVehicle request on editVehicle
 router.put(
-  "/api/edit-vehicle",
+  "/api/vehicle/edit",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.editVehicleById
 );
 // create a route to get all vehicles by customer
 
 router.get(
-  "/api/all-vehicles/:customer_id",
+  "/api/vehicle/all/:customer_id",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.getAllVehicles
 );

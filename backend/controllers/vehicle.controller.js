@@ -12,13 +12,12 @@ const createVehicle = async (req, res, next) => {
         "This vehicle registration number is already associated with another vehicle!",
     });
   } else {
-    if (!req.body) {
+    if (!vehicleData) {
       return res.status(400).json({
         error: "Please provide vehicle details!",
       });
     }
     try {
-      const vehicleData = req.body;
       // Create the vehicle
       const vehicle = await vehicleService.createVehicle(vehicleData);
       if (!vehicle) {
@@ -55,7 +54,7 @@ async function getAllVehicles(req, res, next) {
     // Success response
     res.status(200).json({
       status: "success",
-      data: vehicles,
+      vehicles,
     });
   } catch (error) {
     console.error(error);
