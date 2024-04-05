@@ -62,6 +62,24 @@ async function createVehicle(vehicleData) {
     return { success: false, error: "Internal server error" };
   }
 }
+
+// Function to retrieve all vehicles for a single customer
+async function getAllVehicles(customerId) {
+  const query = `SELECT *
+  FROM customer_vehicle_info cvi
+  INNER JOIN customer_identifier ci ON ci.customer_id = cvi.customer_id
+  WHERE cvi.customer_id = ?`;
+
+  try {
+    const results = await conn.query(query, [customerId]);
+    console.log(results); // Handle the retrieved vehicles as needed
+    return results;
+  } catch (error) {
+    console.error("Error retrieving vehicles from the database:", error);
+    throw error;
+  }
+}
+
 // get vehicle by id
 async function getVehicleById(vehicle_id) {
   const query = `
@@ -93,25 +111,52 @@ async function deleteVehicle(vehicleId) {
   }
 }
 
-async function editVehicleById(req, res, next) {
-  const vehicle = req.body;
+//edit vehicle by id
+async function editVehicleById(vehicleData) {
+  const {
+    vehicle_id,
+    vehicle_year,
+    vehicle_make,
+    vehicle_model,
+    vehicle_type,
+    vehicle_mileage,
+    vehicle_tag,
+    vehicle_serial,
+    vehicle_color,
+  } = vehicleData;
+
   try {
-    const updatedVehicle = await vehicleService.editVehicleById(vehicle);
-    if (!updatedVehicle) {
-      res.status(400).json({
-        error: "Failed to edit vehicle info!",
-      });
+    // Construct the SQL query
+    const query = `
+      UPDATE customer_vehicle_info 
+      SET vehicle_year = ?, vehicle_make = ?, vehicle_model = ?, vehicle_type = ?, vehicle_mileage = ?, vehicle_tag = ?, vehicle_serial = ?, vehicle_color = ?
+      WHERE vehicle_id = ?`;
+
+    // Execute the query
+    const result = await conn.query(query, [
+      vehicle_year,
+      vehicle_make,
+      vehicle_model,
+      vehicle_type,
+      vehicle_mileage,
+      vehicle_tag,
+      vehicle_serial,
+      vehicle_color,
+      vehicle_id,
+    ]);
+
+    // Check if the query was successful
+    if (result.affectedRows === 1) {
+      // Vehicle successfully updated in the database
+      return { success: true };
     } else {
-      res.status(200).json({
-        message: "Vehicle data updated successfully",
-        updatedVehicle,
-      });
+      // Handle the case where no rows were affected (e.g., query failed)
+      return { success: false, error: "Failed to update vehicle" };
     }
   } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      error: "something went wrong!",
-    });
+    // Handle any errors that occurred during the execution of the function
+    console.error("Error updating vehicle:", error);
+    return { success: false, error: "Internal server error" };
   }
 }
 
@@ -122,4 +167,5 @@ module.exports = {
   getVehicleById,
   deleteVehicle,
   editVehicleById,
+  getAllVehicles,
 };

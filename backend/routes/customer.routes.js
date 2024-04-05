@@ -10,7 +10,6 @@ router.post(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.addCustomer
 );
-
 // Create a route to handle the get all customers request on get
 router.get(
   "/api/customers",
@@ -18,11 +17,13 @@ router.get(
   customerController.getAllCustomers
 );
 // Create a route to handle the get customer by ID request on get
+
 router.get(
   "/api/customer/:customer_id",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.getCustomerById
 );
+
 // Create a route to handle the edit customer request on post
 router.put(
   "/api/edit-customer",
