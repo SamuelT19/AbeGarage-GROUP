@@ -133,7 +133,6 @@ async function editVehicleById(req, res, next) {
 module.exports = { createVehicle ,
   deleteVehicle,
   getVehicleById,
-  getAllVehicles,
   editVehicleById
 };
 
