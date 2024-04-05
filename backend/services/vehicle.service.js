@@ -91,30 +91,33 @@ async function deleteVehicle(vehicleId) {
   }
 }
 
-// Function to retrieve all vehicles for a single customer
-async function getAllVehicles(customerId) {
-  const query = `SELECT *
-  FROM customer_vehicle_info cvi
-  INNER JOIN customer_identifier ci ON ci.customer_id = cvi.customer_id
-  WHERE cvi.customer_id = ?`;
-  
-
+async function editVehicleById(req, res, next) {
+  const vehicle = req.body;
   try {
-    const results = await conn.query(query, [customerId]);
-    console.log ( results); // Handle the retrieved vehicles as needed
-    return results;
-  } catch (error) {
-    console.error('Error retrieving vehicles from the database:', error);
-    throw error;
+  const updatedVehicle = await vehicleService.editVehicleById(vehicle);
+  if (!updatedVehicle) {
+    res.status(400).json({
+      error: "Failed to edit vehicle info!",
+    });
+  } else {
+    res.status(200).json({
+      message: "Vehicle data updated successfully",
+      updatedVehicle,
+    });
   }
+} catch (error) {
+  console.log(error);
+  res.status(400).json({
+    error: "something went wrong!"
+  });
 }
+}
+
 
 
 // Export the vehicle service
 module.exports = {
   checkIfVehicleExists,
-  createVehicle,
-  deleteVehicle,
-  getVehicleById,
-  getAllVehicles,
+  createVehicle, deleteVehicle,
+  editVehicleById
 };

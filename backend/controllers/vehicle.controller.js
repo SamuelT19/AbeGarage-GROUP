@@ -84,38 +84,54 @@ async function deleteVehicle(req, res, next) {
   }
 }
 
-
-// Create the get all vehicles controller
-async function getAllVehicles(req, res, next) {
-    const customerId = req.params.customer_id;
+async function editVehicleById(req, res, next) {
+  const vehicle = req.body;
   try {
-    // Call the getAllVehicles method from the vehicle service
-    const vehicles = await vehicleService.getAllVehicles(customerId);
-    if (!vehicles) {
-      return res.status(400).json({
-        error: "Failed to get all vehicles!",
-      });
-    }
-
-    // Success response
-    res.status(200).json({
-      status: "success",
-      data: vehicles,
-    });
-  } catch (error) {
-    console.error(error);
+  const updatedVehicle = await vehicleService.editVehicleById(vehicle);
+  if (!updatedVehicle) {
     res.status(400).json({
-      error: "Something went wrong!",
+      error: "Failed to edit vehicle info!",
+    });
+  } else {
+    res.status(200).json({
+      message: "Vehicle data updated successfully",
+      updatedVehicle,
     });
   }
+} catch (error) {
+  console.log(error);
+  res.status(400).json({
+    error: "something went wrong!"
+  });
+}
 }
 
+async function editVehicleById(req, res, next) {
+  const vehicle = req.body;
+  try {
+  const updatedVehicle = await vehicleService.editVehicleById(vehicle);
+  if (!updatedVehicle) {
+    res.status(400).json({
+      error: "Failed to edit vehicle info!",
+    });
+  } else {
+    res.status(200).json({
+      message: "Vehicle data updated successfully",
+      updatedVehicle,
+    });
+  }
+} catch (error) {
+  console.log(error);
+  res.status(400).json({
+    error: "something went wrong!"
+  });
+}
+}
 
+// Export the delete vehicle controller
 
-module.exports = {
-  createVehicle,
+module.exports = { createVehicle ,
   deleteVehicle,
-  getVehicleById,
-  getAllVehicles,
+  editVehicleById
 };
 

@@ -26,8 +26,8 @@ router.delete(
   vehicleController.deleteVehicle
 );
 
-//  create a route to get all vehicles by customer
-
-router.get ("/api/all-vehicles/:customer_id",  [authMiddleware.verifyToken, authMiddleware.isAdmin], vehicleController.getAllVehicles);
-
+// Create a route to handle the editVehicle request on editVehicle
+router.put("/api/edit-vehicle",
+   [authMiddleware.verifyToken, authMiddleware.isAdmin],
+   vehicleController.editVehicleById);
 module.exports = router;
