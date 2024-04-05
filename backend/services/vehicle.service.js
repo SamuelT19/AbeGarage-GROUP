@@ -118,6 +118,8 @@ async function editVehicleById(req, res, next) {
 // Export the vehicle service
 module.exports = {
   checkIfVehicleExists,
-  createVehicle, deleteVehicle,
+  createVehicle,
+  getVehicleById,
+  deleteVehicle,
   editVehicleById
 };
