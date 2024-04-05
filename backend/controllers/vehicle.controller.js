@@ -84,10 +84,4 @@ async function editVehicleById(req, res, next) {
 }
 }
 
-// Export the delete vehicle controller
-
-module.exports = { createVehicle ,
-  deleteVehicle,
-  editVehicleById
-};
 
