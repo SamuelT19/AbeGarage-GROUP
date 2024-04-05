@@ -12,6 +12,7 @@ import Orders from './markup/pages/admin/Orders';
 import Customers from './markup/pages/admin/Customers';
 // Import the Employees component 
 import Employees from './markup/pages/admin/Employees';
+import EditEmployee from "./markup/pages/admin/EditEmployee";
 
 // Import the css files 
 import "./assets/template_assets/css/bootstrap.css";
@@ -40,35 +41,39 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         {/* // Add the Orders Route  */}
-        <Route path="/admin/orders"
+        <Route
+          path="/admin/orders"
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
               <Orders />
             </PrivateAuthRoute>
-          } />
+          }
+        />
         {/* // Add the Customers Route  */}
-        <Route path="/admin/customers"
+        <Route
+          path="/admin/customers"
           element={
             <PrivateAuthRoute roles={[2, 3]}>
               <Customers />
             </PrivateAuthRoute>
-          } />
+          }
+        />
         {/* // Add the Employees Route  */}
         <Route path="/admin/employees" element={<Employees />} />
-        <Route path="/admin/add-employee"
+        <Route
+          path="/admin/add-employee"
           element={
             <PrivateAuthRoute roles={[3]}>
               <AddEmployee />
             </PrivateAuthRoute>
-          } />
-        {/* 
-          Customers (/admin/customers) - managers and admins
-          Orders (/admin/orders) - Can be accessed by all employees
-          Add employee (/admin/add-employee) - admins only 
-            - Admin: 3 
-            - Manager: 2 
-            - Employee: 1 
-        */}
+          }
+        />
+
+        <Route
+          path="/admin/edit-employee/:employee_id"
+          element={<EditEmployee />}
+        />
+
       </Routes>
       <Footer />
     </>

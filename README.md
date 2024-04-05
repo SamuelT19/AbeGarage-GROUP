@@ -36,11 +36,14 @@ DONE!!!
 NB: Before pushing your code to the repository create and change your branch by running these commands one by one
 
 on the remote repo:
+
 first create a branch with name of your task <your-branch>
+
 on your local repo:
 git pull
+
 git checkout -b <your-branch>
+
 git pull origin <your-branch>
+
 git push -u origin <your-branch>
-
-

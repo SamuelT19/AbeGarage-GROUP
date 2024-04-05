@@ -1,4 +1,6 @@
-// Import from the env 
+import { axiosBase } from "../util/Axios";
+
+// Import from the env
 const api_url = process.env.REACT_APP_API_URL;
 
 // A function to send post request to create a new employee 
@@ -28,11 +30,58 @@ const getAllEmployees = async (token) => {
   };
   const response = await fetch(`${api_url}/api/employees`, requestOptions);
   return response;
-}
+};
 
-// Export all the functions 
+//* A function to send delete request to delete an employee
+const deleteEmployee = async (employee_id, token) => {
+  console.log(token);
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+
+  const response = await fetch(
+    `${api_url}/api/employee/${employee_id}`,
+    requestOptions
+  );
+  console.log(response);
+  return response.ok;
+};
+
+// *End of function to delete an employee
+
+
+// A function to send get request to get a single employee it is get request
+const getEmployeeById = async (employee_id, token) => {
+  
+    const response = await axiosBase.get(`/api/employee/${employee_id}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+  console.log(response);
+    return response;
+}; 
+  
+const editEmployee = async (formData, token) => {
+  const response = await axiosBase.post(`/api/edit-employee`, formData, {
+    headers: {
+      "x-access-token": token,
+    },
+  });
+  console.log(response);
+  return response;
+};
+
+// Export all the functions
 const employeeService = {
   createEmployee,
-  getAllEmployees
-}
-export default employeeService; 
+  getAllEmployees,
+  getEmployeeById,
+  deleteEmployee,
+  editEmployee,
+};
+export default employeeService;
