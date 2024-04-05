@@ -1,4 +1,84 @@
 const conn = require("../config/db.config");
+
+const getExistingServiceNames = async () => {
+  const query = "SELECT service_name FROM common_services";
+  const rows = await conn.query(query);
+  return rows.map((row) => row.service_name);
+};
+
+const createServices = async () => {
+  const existingServiceNames = await getExistingServiceNames();
+  const newServices = [
+    {
+      name: "Oil change",
+      description:
+        "Every 5,000 kilometers or so, you need to change the oil in your car to keep your engine in the best possible shape.",
+      price: "30.25",
+    },
+    {
+      name: "Spark Plug replacement",
+      description:
+        "Spark plugs are a small part that can cause huge problems. Their job is to ignite the fuel in your engine, helping it start.",
+      price: "43",
+    },
+    {
+      name: "Fuel Cap tightening",
+      description:
+        "Loose fuel caps are actually a main reason why the ''check engine'' light in a car comes on.",
+      price: "12",
+    },
+    {
+      name: "Oxygen Sensor replacement",
+      description:
+        "Oxygen sensors measure the concentration of oxygen in the exhaust gabs in order to optimize engine performance and emissions.",
+      price: "39.5",
+    },
+    {
+      name: "Brake Work",
+      description:
+        "We all know why brake work is important, especially because one quarter of all Canadian car accidents are caused by a failure to stop.",
+      price: "25",
+    },
+    {
+      name: "Tire repairs and changes",
+      description:
+        "Without good, inflated tires, you lose speed, control, and fuel efficiency, hence the need to get them patched if there is a leak (for example, if you run over a nail), or replaced if they''re too worn.",
+      price: "55",
+    },
+    {
+      name: "The ignition system",
+      description:
+        "A car''s ignition system includes its battery, starter, and the ignition itself.",
+      price: "45.5",
+    },
+    {
+      name: "Programming the camera software",
+      description:
+        "Cameras are essential to safer, more convenient, and technologically advanced driving experiences, whether by assisting drivers, enhancing vehicle capabilities, or improving security.",
+      price: "30",
+    },
+  ];
+
+  const servicesToInsert = newServices.filter((newService) => {
+    return !existingServiceNames.includes(newService.name);
+  });
+
+  if (servicesToInsert.length === 0) {
+    console.log("All services already exist in the database.");
+    return;
+  }
+
+  const values = servicesToInsert
+    .map(
+      (service) =>
+        `('${service.name}', '${service.description}','${service.price}')`
+    )
+    .join(", ");
+
+  const query = `INSERT INTO common_services(service_name, service_description,service_price) VALUES ${values}`;
+  const rows = await conn.query(query);
+  return rows;
+};
 async function addService(service) {
   const checkquery =
     "SELECT service_name FROM common_services WHERE service_name = ?";
@@ -60,8 +140,6 @@ const editService = async (service) => {
   return updatedService;
 };
 
-
-
 async function deleteService(serviceId) {
   const query = "DELETE FROM common_services WHERE service_id = ?";
   const rows = await conn.query(query, [serviceId]);
@@ -76,6 +154,7 @@ async function getAllServices() {
 }
 
 module.exports = {
+  createServices,
   addService,
   getSingleService,
   editService,

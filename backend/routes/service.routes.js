@@ -4,6 +4,8 @@ const router = express.Router();
 
 const serviceController = require("../controllers/service.controller");
 
+router.post("/api/service/common", serviceController.createServices);
+
 router.post("/api/service/add", serviceController.addService);
 
 router.get(
