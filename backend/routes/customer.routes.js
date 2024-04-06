@@ -6,13 +6,13 @@ const authMiddleware = require("../middlewares/auth.middleware");
 
 // Create a route to handle the add customer request on post
 router.post(
-  "/api/customers",
+  "/api/customer/add",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.addCustomer
 );
 // Create a route to handle the get all customers request on get
 router.get(
-  "/api/customers",
+  "/api/customer/all",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.getAllCustomers
 );
@@ -26,13 +26,13 @@ router.get(
 
 // Create a route to handle the edit customer request on post
 router.put(
-  "/api/edit-customer",
+  "/api/customer/edit",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.editCustomer
 );
 // Create a route to handle the delete customer request on delete
 router.delete(
-  "/api/customer/:customer_id",
+  "/api/customer/delete/:customer_id",
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.deleteCustomerById
 );
