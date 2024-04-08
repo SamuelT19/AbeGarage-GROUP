@@ -13,6 +13,7 @@ async function checkIfCustomerExists(email) {
 
 async function addCustomer(customer) {
   const customer_hash = uuidv4();
+  console.log(customer_hash);
   try {
     // Insert customer data into the database
     const query =
@@ -88,17 +89,32 @@ async function deleteCustomerById(customerId) {
 }
 
 // edit customer
-
 async function editCustomer(updatedCustomerData) {
-  const query =
-    "UPDATE customer_info SET customer_first_name = ?, customer_last_name = ?, active_customer_status = ? WHERE customer_id = ?";
-  const rows = await conn.query(query, [
-    updatedCustomerData.customer_first_name,
-    updatedCustomerData.customer_last_name,
-    updatedCustomerData.active_customer_status,
-    updatedCustomerData.customer_id,
-  ]);
-  return rows;
+  if (
+    updatedCustomerData.customer_first_name ||
+    updatedCustomerData.customer_last_name ||
+    updatedCustomerData.active_customer_status
+  ) {
+    const query = `UPDATE customer_info SET
+  ${updatedCustomerData.customer_first_name ? "customer_first_name = ?," : ""} 
+  ${updatedCustomerData.customer_last_name ? "customer_last_name = ?," : ""}
+  ${
+    updatedCustomerData.active_customer_status
+      ? "active_customer_status = ?"
+      : ""
+  }
+   WHERE customer_id = ? `;
+
+    const queryParams = [
+      updatedCustomerData.customer_first_name,
+      updatedCustomerData.customer_last_name,
+      updatedCustomerData.active_customer_status,
+      updatedCustomerData.customer_id,
+    ].filter((param) => param !== undefined);
+
+    const rows = await conn.query(query, queryParams);
+    return rows;
+  }
 }
 
 module.exports = {
