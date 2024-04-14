@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const conn = require("../config/db.config");
-
+// Check if customer exists
 async function checkIfCustomerExists(email) {
   const query = "SELECT * FROM employee WHERE employee_email = ? ";
   const rows = await conn.query(query, [email]);
@@ -10,7 +10,7 @@ async function checkIfCustomerExists(email) {
   }
   return false;
 }
-
+// Add customer
 async function addCustomer(customer) {
   const customer_hash = uuidv4();
   console.log(customer_hash);
