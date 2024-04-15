@@ -8,7 +8,7 @@ router.post("/api/order/new", orderController.createOrder);
 router.get("/api/order/single/:order_id", orderController.orderedServices);
 
 //route for get all orders
-router.get("/api/orders/all", orderController.getAllOrdersData);
+router.get("/api/order/all", orderController.getAllOrdersData);
 
 //route for edit by id a single order
 router.put("/api/order/edit", orderController.editOrder);
