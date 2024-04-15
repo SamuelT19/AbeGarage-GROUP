@@ -13,6 +13,7 @@ const dbConfig = {
 };
 // Create the connection pool
 const pool = mysql.createPool(dbConfig);
+
 // Prepare a function that will execute the SQL queries asynchronously
 
 async function withTransaction(callback) {
