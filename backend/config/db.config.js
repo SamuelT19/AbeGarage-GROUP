@@ -9,11 +9,13 @@ const dbConfig = {
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
+  namedPlaceholders: true,
 };
 // Create the connection pool
 const pool = mysql.createPool(dbConfig);
 
 // Prepare a function that will execute the SQL queries asynchronously
+
 async function withTransaction(callback) {
   const connection = await pool.getConnection();
   await connection.beginTransaction();
