@@ -14,7 +14,7 @@ const createEmployee = async (formData, loggedInEmployeeToken) => {
     body: JSON.stringify(formData)
   };
   console.log(requestOptions);
-  const response = await fetch(`${api_url}/api/employee`, requestOptions);
+  const response = await fetch(`${api_url}/api/employee/add`, requestOptions);
   return response;
 }
 
@@ -28,7 +28,7 @@ const getAllEmployees = async (token) => {
       'x-access-token': token
     }
   };
-  const response = await fetch(`${api_url}/api/employees`, requestOptions);
+  const response = await fetch(`${api_url}/api/employee/all`, requestOptions);
   return response;
 };
 
@@ -67,7 +67,7 @@ const getEmployeeById = async (employee_id, token) => {
 }; 
   
 const editEmployee = async (formData, token) => {
-  const response = await axiosBase.post(`/api/edit-employee`, formData, {
+  const response = await axiosBase.post(`/api/employee/edit`, formData, {
     headers: {
       "x-access-token": token,
     },

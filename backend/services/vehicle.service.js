@@ -60,10 +60,9 @@ async function getAllVehicles(customerId) {
   INNER JOIN customer_identifier ci ON ci.customer_id = cvi.customer_id
   WHERE cvi.customer_id = ?`;
 
-
-    const results = await conn.query(query, [customerId]);
-    console.log(results); // Handle the retrieved vehicles as needed
-    return results;
+  const results = await conn.query(query, [customerId]);
+  console.log(results); // Handle the retrieved vehicles as needed
+  return results;
 }
 
 // get vehicle by id
@@ -77,27 +76,22 @@ async function getVehicleById(vehicle_id) {
 
 // Function to delete a vehicle by its ID
 async function deleteVehicle(vehicleId) {
-  try {
-    // Check if the vehicleId is defined
-    if (!vehicleId) {
-      throw new Error("Vehicle ID must be provided");
-    }
-
-    // Execute the DELETE query
-    const result = await conn.query(
-      "DELETE FROM customer_vehicle_info WHERE vehicle_id = ?",
-      [vehicleId]
-    );
-    // Check if the query was successful
-    return result.affectedRows === 1;
-  } catch (error) {
-    // Handle any errors
-    console.error("Error deleting vehicle:", error);
-    throw error;
+  // Check if the vehicleId is defined
+  if (!vehicleId) {
+    throw new Error("Vehicle ID must be provided");
   }
+
+  // Execute the DELETE query
+  const result = await conn.query(
+    "DELETE FROM customer_vehicle_info WHERE vehicle_id = ?",
+    [vehicleId]
+  );
+  // Check if the query was successful
+  if (result.affectedRows === 1) return result;
 }
 
 //edit vehicle by id
+
 async function editVehicleById(vehicleData) {
   const {
     vehicle_id,
@@ -111,38 +105,40 @@ async function editVehicleById(vehicleData) {
     vehicle_color,
   } = vehicleData;
 
-  try {
-    // Construct the SQL query
-    const query = `
+  // Construct the SQL query
+  const query = `
       UPDATE customer_vehicle_info 
-      SET vehicle_year = ?, vehicle_make = ?, vehicle_model = ?, vehicle_type = ?, vehicle_mileage = ?, vehicle_tag = ?, vehicle_serial = ?, vehicle_color = ?
+      SET 
+        ${vehicle_year != null ? "vehicle_year = ?," : ""}
+        ${vehicle_make != null ? "vehicle_make = ?," : ""}
+        ${vehicle_model != null ? "vehicle_model = ?," : ""}
+        ${vehicle_type != null ? "vehicle_type = ?," : ""}
+        ${vehicle_mileage != null ? "vehicle_mileage = ?," : ""}
+        ${vehicle_tag != null ? "vehicle_tag = ?," : ""}
+        ${vehicle_serial != null ? "vehicle_serial = ?," : ""}
+        ${vehicle_color != null ? "vehicle_color = ?" : ""}
       WHERE vehicle_id = ?`;
 
-    // Execute the query
-    const result = await conn.query(query, [
-      vehicle_year,
-      vehicle_make,
-      vehicle_model,
-      vehicle_type,
-      vehicle_mileage,
-      vehicle_tag,
-      vehicle_serial,
-      vehicle_color,
-      vehicle_id,
-    ]);
+  // Prepare parameters for the query
+  const queryParams = [
+    vehicle_year,
+    vehicle_make,
+    vehicle_model,
+    vehicle_type,
+    vehicle_mileage,
+    vehicle_tag,
+    vehicle_serial,
+    vehicle_color,
+    vehicle_id,
+  ].filter((param) => param !== undefined);
 
-    // Check if the query was successful
-    if (result.affectedRows === 1) {
-      // Vehicle successfully updated in the database
-      return { success: true };
-    } else {
-      // Handle the case where no rows were affected (e.g., query failed)
-      return { success: false, error: "Failed to update vehicle" };
-    }
-  } catch (error) {
-    // Handle any errors that occurred during the execution of the function
-    console.error("Error updating vehicle:", error);
-    return { success: false, error: "Internal server error" };
+  // Execute the query
+  const result = await conn.query(query, queryParams);
+
+  // Check if the query was successful
+  if (result.affectedRows === 1) {
+    // Vehicle successfully updated in the database
+    return result;
   }
 }
 
