@@ -1,48 +1,49 @@
-// Import react 
-import React from 'react';
-// Import the Routes and Route components from react-router 
+// Import react
+import React from "react";
+// Import the Routes and Route components from react-router
 import { Routes, Route } from "react-router";
-// Import the page components 
+// Import the page components
 import Home from "./markup/pages/Home";
 import Login from "./markup/pages/Login";
-import AddEmployee from './markup/pages/admin/AddEmployee';
-import Unauthorized from './markup/pages/Unauthorized';
-// Import the Orders and Customers components 
-import Orders from './markup/pages/admin/Orders';
-import Customers from './markup/pages/admin/Customers';
-// Import the Employees component 
-import Employees from './markup/pages/admin/Employees';
+import AddEmployee from "./markup/pages/admin/AddEmployee";
+import Unauthorized from "./markup/pages/Unauthorized";
+// Import the Orders and Customers components
+import Orders from "./markup/pages/admin/Orders";
+import Customers from "./markup/pages/admin/Customers";
+// Import the Employees component
+import Employees from "./markup/pages/admin/Employees";
 import EditEmployee from "./markup/pages/admin/EditEmployee";
 
-// Import the css files 
+// Import the css files
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
 
-// Import the custom css file 
+// Import the custom css file
 import "./assets/styles/custom.css";
 
-// Import the Header component 
-import Header from './markup/components/Header/Header';
+// Import the Header component
+import Header from "./markup/components/Header/Header";
 // Import the Footer component
-import Footer from './markup/components/Footer/Footer';
+import Footer from "./markup/components/Footer/Footer";
 
-// Import the PrivateAuthRoute component 
-import PrivateAuthRoute from './markup/components/Auth/PrivateAuthRoute';
-
+// Import the PrivateAuthRoute component
+import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
+//improt customer profile
+import CustomerProfile from "./markup/pages/admin/CustomerProfile";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/unauthorized' element={<Unauthorized />} />
         {/* // Add the Orders Route  */}
         <Route
-          path="/admin/orders"
+          path='/admin/orders'
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
               <Orders />
@@ -51,7 +52,7 @@ function App() {
         />
         {/* // Add the Customers Route  */}
         <Route
-          path="/admin/customers"
+          path='/admin/customers'
           element={
             <PrivateAuthRoute roles={[2, 3]}>
               <Customers />
@@ -59,9 +60,9 @@ function App() {
           }
         />
         {/* // Add the Employees Route  */}
-        <Route path="/admin/employees" element={<Employees />} />
+        <Route path='/admin/employees' element={<Employees />} />
         <Route
-          path="/admin/add-employee"
+          path='/admin/add-employee'
           element={
             <PrivateAuthRoute roles={[3]}>
               <AddEmployee />
@@ -70,10 +71,18 @@ function App() {
         />
 
         <Route
-          path="/admin/edit-employee/:employee_id"
+          path='/admin/edit-employee/:employee_id'
           element={<EditEmployee />}
         />
 
+        <Route
+          path='/admin/customer/profile/:customerId'
+          element={
+            <PrivateAuthRoute roles={[3, 2]}>
+              <CustomerProfile />
+            </PrivateAuthRoute>
+          }
+        />
       </Routes>
       <Footer />
     </>
