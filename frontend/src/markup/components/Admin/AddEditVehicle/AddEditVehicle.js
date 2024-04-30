@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function AddVehicle({
+function AddEditVehicle({
   renderType,
   handleSubmit,
   vehicle_year,
@@ -20,19 +20,9 @@ function AddVehicle({
   vehicle_color,
   setVehicleColor,
   serverError,
-  active_Vehicle,
-  setActive_Vehicle,
-  isChecked,
-  setIsChecked,
+  showForm,
+  setShowForm,
 }) {
-  useEffect(() => {
-    if (isChecked === true) {
-      setActive_Vehicle(1);
-    } else if (isChecked === false) {
-      setActive_Vehicle(2);
-    }
-  }, [isChecked]);
-
   return (
     <section className='contact-section'>
       <div className='auto-container'>
@@ -164,19 +154,7 @@ function AddVehicle({
                         required
                       />
                     </div>
-                    {renderType === "edit" && (
-                      <>
-                        <input
-                          type='checkbox'
-                          id='checkbox'
-                          name='checkbox'
-                          checked={isChecked}
-                          onChange={(event) =>
-                            setIsChecked(event.target.checked)
-                          }></input>
-                        <label htmlFor='checkbox'> is vehicle active</label>
-                      </>
-                    )}
+
                     <div className='form-group col-md-12'>
                       <button
                         className='theme-btn btn-style-one'
@@ -199,4 +177,4 @@ function AddVehicle({
     </section>
   );
 }
-export default AddVehicle;
+export default AddEditVehicle;

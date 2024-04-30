@@ -24,7 +24,7 @@ function EditEmployeeForm(props) {
   if (employee && employee.employee_token) {
     token = employee.employee_token;
   }
-  console.log(token)
+  console.log(token);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,10 +40,7 @@ function EditEmployeeForm(props) {
       company_role_id,
     };
 
-    const editEmployee = employeeService.editEmployee(
-      formData,
-      token
-    );
+    const editEmployee = employeeService.editEmployee(formData, token);
 
     editEmployee
       .then((data) => {
@@ -71,7 +68,10 @@ function EditEmployeeForm(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await employeeService.getEmployeeById(employee_id,token);
+        const { data } = await employeeService.getEmployeeById(
+          employee_id,
+          token
+        );
         const employee = data.employee;
         setEmail(employee.employee_email);
         setFirstName(employee.employee_first_name);
@@ -87,6 +87,7 @@ function EditEmployeeForm(props) {
 
     fetchData();
   }, [employee_id]);
+
   useEffect(() => {
     if (active_employee === 1) {
       setIsChecked(true);
@@ -97,7 +98,7 @@ function EditEmployeeForm(props) {
   console.log(isChecked);
   return (
     <AddEditEmployee
-      renderType="edit"
+      renderType='edit'
       handleSubmit={handleSubmit}
       employee_email={employee_email}
       setEmail={setEmail}

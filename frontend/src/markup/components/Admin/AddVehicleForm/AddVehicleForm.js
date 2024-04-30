@@ -5,7 +5,7 @@ import vehicleService from "../../../../services/vehicle.service";
 import { useAuth } from "../../../../Contexts/AuthContext";
 import { useNavigate } from "react-router";
 // Import the AddVehicle component
-import AddVehicle from "../AddVehicle/AddVehicle";
+import AddEditVehicle from "../AddEditVehicle/AddEditVehicle";
 
 function AddVehicleForm(props) {
   const [vehicle_year, setVehicleYear] = useState("");
@@ -29,16 +29,14 @@ function AddVehicleForm(props) {
   const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
   //distructure the props customer_id
-  const { customer_id } = props;
+  const { customer_id, renderType, setShowForm } = props;
   // Get the renderType from the props
-  const { renderType } = props;
+  const {} = props;
 
-  // Create a variable to hold the user's token
-  let loggedInEmployeeToken = "";
-  // Destructure the auth hook and get the token
   const { employee } = useAuth();
+  let token = "";
   if (employee && employee.employee_token) {
-    loggedInEmployeeToken = employee.employee_token;
+    token = employee.employee_token;
   }
 
   const handleSubmit = (e) => {
@@ -119,14 +117,11 @@ function AddVehicleForm(props) {
       vehicle_color,
     };
     // Pass the form data to the service
-    const newVehicle = vehicleService.createVehicle(
-      formData,
-      loggedInEmployeeToken
-    );
+    const newVehicle = vehicleService.createVehicle(formData, token);
     newVehicle
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         // If Error is returned from the API server, set the error message
         if (data.error) {
           setServerError(data.error);
@@ -134,10 +129,10 @@ function AddVehicleForm(props) {
           // Handle successful response
           setSuccess(true);
           setServerError("");
-          // ? For now, just redirect to the home page?
-          // setTimeout(() => {
-          //   navigate("/admin/vehicle");
-          // }, 2000);
+          // clsed the form after 2 seconds
+          setTimeout(() => {
+            setShowForm(false);
+          }, 2000);
         }
       })
       // Handle Catch
@@ -153,7 +148,7 @@ function AddVehicleForm(props) {
   };
 
   return (
-    <AddVehicle
+    <AddEditVehicle
       renderType={renderType}
       handleSubmit={handleSubmit}
       vehicle_year={vehicle_year}

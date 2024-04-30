@@ -36,7 +36,7 @@ router.put(
 // create a route to get all vehicles by customer
 router.get(
   "/api/vehicle/all/:customer_id",
-  // [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
   vehicleController.getAllVehicles
 );
 

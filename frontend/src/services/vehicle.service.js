@@ -16,9 +16,13 @@ const createVehicle = async (formData, loggedInEmployeeToken) => {
 };
 
 // Function to send a GET request to retrieve all vehicles by a customer ID
-const getAllVehiclesBycustomer = async (customerId) => {
+const getAllVehiclesBycustomer = async (customerId, token) => {
   try {
-    const response = await axiosBase.get(`/api/vehicle/all/${customerId}`);
+    const response = await axiosBase.get(`/api/vehicle/all/${customerId}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    });
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch vehicles: ${error.message}`);
@@ -58,7 +62,7 @@ const editVehicle = async (formData, token) => {
 };
 
 //delete vehicle
-const deleteVehicle = async (vehicle_id, token) => {
+const deleteVehicleById = async (vehicle_id, token) => {
   console.log(token);
   const requestOptions = {
     method: "DELETE",
@@ -81,7 +85,7 @@ const vehicleService = {
   getAllVehiclesBycustomer,
   getVehicleById,
   editVehicle,
-  deleteVehicle,
+  deleteVehicleById,
 };
 
 export default vehicleService;
