@@ -107,10 +107,12 @@ const editEmployee = async (employee) => {
   let updatedEmployee = {};
 
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = employee?.employee_password
+  if (employee.employee_password.length > 2) {
+     var hashedPassword = employee?.employee_password
     ? await bcrypt.hash(employee?.employee_password, salt)
     : null;
-
+  }
+ 
 
   if (employee.employee_email || employee.active_employee) {
     const employeeQuery = `
@@ -124,7 +126,6 @@ const editEmployee = async (employee) => {
     const queryParams = [
       employee.employee_email,
       employee.active_employee,
-     
       employee.employee_id,
     ].filter((param) => param !== undefined);
 
