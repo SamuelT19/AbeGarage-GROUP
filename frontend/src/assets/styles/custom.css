@@ -279,3 +279,13 @@ input:disabled {
   cursor: pointer;
   color: #888;
 }
+/* Customer profile section  */
+.history-section {
+  padding-top: 50px;
+}
+
+/* icons  */
+
+.red-icon {
+  color: red;
+}

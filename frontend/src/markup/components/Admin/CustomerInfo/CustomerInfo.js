@@ -20,8 +20,11 @@ function CustomerInfo({ customerInfo }) {
           {customerInfo.active_customer_status === 1 ? "Yes" : "No"}
         </div>
         <div>
-          Edit customer info:
-          <FaEdit className='red-icon' onClick={handleEditClick} />
+          Edit customer info
+          <FaEdit
+            style={{ color: "red", cursor: "pointer" }}
+            onClick={handleEditClick}
+          />
         </div>
       </div>
     </>
