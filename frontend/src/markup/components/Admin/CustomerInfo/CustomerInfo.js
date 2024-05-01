@@ -3,9 +3,9 @@ import { FaEdit } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
 
-function CustomerInfo({ customerId, customerInfo }) {
+function CustomerInfo({ customerInfo }) {
   const navigate = useNavigate();
-
+  const customerId = customerInfo.customer_id;
   const handleEditClick = () => {
     navigate(`/admin/customer/edit/${customerId}`);
   };

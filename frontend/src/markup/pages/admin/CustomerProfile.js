@@ -4,24 +4,25 @@ import AdminMenu from "../../components/Admin/AdminMenu/AdminMenu";
 import VehicleInfo from "../../components/Admin/Vehicles/VehicleInfo";
 import CustomerInfo from "../../components/Admin/CustomerInfo/CustomerInfo";
 import { useParams } from "react-router-dom";
-import vehicleService from "../../../../src/services/vehicle.service";
+import vehicleService from "../../../services/vehicle.service";
 import AddVehicleForm from "../../components/Admin/AddVehicleForm/AddVehicleForm";
 import EditVehicleForm from "../../components/Admin/EditVehicleForm/EditVehicleForm";
-import { useAuth } from "../../../../src/Contexts/AuthContext";
-import customerService from "../../../../src/services/customer.service";
+import { useAuth } from "../../../Contexts/AuthContext";
+import customerService from "../../../services/customer.service";
 
 function CustomerProfile() {
   const [showForm, setShowForm] = useState(false);
   const [renderType, setRenderType] = useState("add");
   const [vehiclesInfo, setVehiclesInfo] = useState([]);
-  const { customerId } = useParams();
   const [selectedVehicleId, setSelectedVehicleId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingVehicles, setLoadingVehicles] = useState(true);
   const [customerInfo, setCustomerInfo] = useState({});
+  const [loadingCustomer, setLoadingCustomer] = useState(true);
   const [error, setError] = useState(null);
+  const { customerId } = useParams();
   const { employee } = useAuth();
-
   let token = "";
+
   if (employee && employee.employee_token) {
     token = employee.employee_token;
   }
@@ -58,7 +59,6 @@ function CustomerProfile() {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        console.log(token);
         const data = await vehicleService.getAllVehiclesBycustomer(
           customerId,
           token
@@ -67,37 +67,33 @@ function CustomerProfile() {
       } catch (error) {
         console.error("Error fetching vehicles:", error);
       } finally {
-        setLoading(false); // Set loading to false after fetching data
+        setLoadingVehicles(false); // Set loadingVehicles to false after fetching data
       }
     };
 
     fetchVehicles();
   }, [customerId, token]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   //Customer Info
+  // Fetch customer information
   useEffect(() => {
     const fetchCustomerInfo = async () => {
       try {
         const data = await customerService.getCustomerById(customerId, token);
         setCustomerInfo(data.customer[0]);
-        setLoading(false);
       } catch (error) {
         setError(error.message);
-        setLoading(false);
+      } finally {
+        setLoadingCustomer(false); // Set loadingCustomer to false after fetching data
       }
     };
 
     fetchCustomerInfo();
   }, [customerId, token]);
 
-  if (loading) {
+  if (loadingVehicles || loadingCustomer) {
     return <div>Loading...</div>;
   }
-
   return (
     <>
       <div className='container-fluid admin-pages'>
@@ -113,7 +109,7 @@ function CustomerProfile() {
                   <div className='content'>
                     <h4>Customer: {customerInfo.customer_first_name}</h4>
                     <CustomerInfo
-                      customerId={customerId}
+                      // customerId={customerId}
                       customerInfo={customerInfo}
                     />
                   </div>

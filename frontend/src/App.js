@@ -30,8 +30,7 @@ import Footer from "./markup/components/Footer/Footer";
 
 // Import the PrivateAuthRoute component
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
-//improt customer profile
-import CustomerProfile from "./markup/pages/admin/CustomerProfile";
+import CustomerProfile from "./markup/pages/admin/customerProfile";
 
 function App() {
   return (
