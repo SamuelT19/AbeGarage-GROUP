@@ -161,7 +161,10 @@ function CustomerProfile() {
                         <button
                           className='theme-btn btn-style-one'
                           type='submit'
-                          onClick={() => setShowForm(true)}>
+                          onClick={() => {
+                            setShowForm(true);
+                            setRenderType("add");
+                          }}>
                           ADD VEHICLE
                         </button>
                       </div>

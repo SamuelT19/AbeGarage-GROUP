@@ -1,8 +1,10 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-function VehicleInfo({ vehiclesInfo, handleEditClick, handleDeleteClick }) {
+function VehicleInfo(props) {
 
+  const { vehiclesInfo, handleEditClick, handleDeleteClick } = props;
+  
   return (
     <>
       {vehiclesInfo.map((vehicle) => (

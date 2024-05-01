@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import vehicleService from "../../../../services/vehicle.service";
 import { useAuth } from "../../../../Contexts/AuthContext";
 import AddEditVehicle from "../AddEditVehicle/AddEditVehicle";
+import { useParams } from "react-router";
+// Import the react-icons
+import { FaTimes } from "react-icons/fa";
 
 function EditVehicleForm(props) {
   // Destructure the props
-  const { vehicle_id, showForm, setShowForm, renderType } = props;
-  //   console.log(showForm);
-  //   console.log(vehicle_id);
+  const { vehicle_id, showForm, setShowForm, renderType, setRenderType } =
+    props;
 
   const [vehicle_year, setVehicleYear] = useState("");
   const [vehicle_make, setVehicleMake] = useState("");
@@ -19,6 +22,9 @@ function EditVehicleForm(props) {
   const [vehicle_color, setVehicleColor] = useState("");
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(true); // Add loading state
+
+  const navigate = useNavigate();
+  const { customerId } = useParams();
 
   const { employee } = useAuth();
   let token = "";
@@ -42,15 +48,17 @@ function EditVehicleForm(props) {
     };
 
     const editVehicle = vehicleService.editVehicle(formData, token);
-
     editVehicle
       .then((data) => {
         if (data.error) {
           setServerError(data.error);
         } else {
           setServerError("");
+
           setTimeout(() => {
+            setRenderType(" ");
             setShowForm(false);
+            window.location.reload(); // Reload the page
           }, 2000);
         }
       })
@@ -96,29 +104,34 @@ function EditVehicleForm(props) {
   }
 
   return (
-    <AddEditVehicle
-      renderType={renderType}
-      handleSubmit={handleSubmit}
-      vehicle_year={vehicle_year}
-      setVehicleYear={setVehicleYear}
-      vehicle_make={vehicle_make}
-      setVehicleMake={setVehicleMake}
-      vehicle_model={vehicle_model}
-      setVehicleModel={setVehicleModel}
-      vehicle_type={vehicle_type}
-      setVehicleType={setVehicleType}
-      vehicle_mileage={vehicle_mileage}
-      setVehicleMileage={setVehicleMileage}
-      vehicle_tag={vehicle_tag}
-      setVehicleTag={setVehicleTag}
-      vehicle_serial={vehicle_serial}
-      setVehicleSerial={setVehicleSerial}
-      vehicle_color={vehicle_color}
-      setVehicleColor={setVehicleColor}
-      serverError={serverError}
-      showForm={showForm}
-      setShowForm={setShowForm}
-    />
+    <div className='vehicle-form-content'>
+      <span className='close-icon' onClick={() => setShowForm(false)}>
+        <FaTimes style={{ color: "red" }} />
+      </span>
+      <AddEditVehicle
+        renderType={renderType}
+        handleSubmit={handleSubmit}
+        vehicle_year={vehicle_year}
+        setVehicleYear={setVehicleYear}
+        vehicle_make={vehicle_make}
+        setVehicleMake={setVehicleMake}
+        vehicle_model={vehicle_model}
+        setVehicleModel={setVehicleModel}
+        vehicle_type={vehicle_type}
+        setVehicleType={setVehicleType}
+        vehicle_mileage={vehicle_mileage}
+        setVehicleMileage={setVehicleMileage}
+        vehicle_tag={vehicle_tag}
+        setVehicleTag={setVehicleTag}
+        vehicle_serial={vehicle_serial}
+        setVehicleSerial={setVehicleSerial}
+        vehicle_color={vehicle_color}
+        setVehicleColor={setVehicleColor}
+        serverError={serverError}
+        showForm={showForm}
+        setShowForm={setShowForm}
+      />
+    </div>
   );
 }
 

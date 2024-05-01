@@ -7,6 +7,9 @@ import { useNavigate } from "react-router";
 // Import the AddVehicle component
 import AddEditVehicle from "../AddEditVehicle/AddEditVehicle";
 
+// Import the react-icons
+import { FaTimes } from "react-icons/fa";
+
 function AddVehicleForm(props) {
   const [vehicle_year, setVehicleYear] = useState("");
   const [vehicle_make, setVehicleMake] = useState("");
@@ -29,7 +32,8 @@ function AddVehicleForm(props) {
   const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
   //distructure the props customer_id
-  const { customer_id, renderType, setShowForm } = props;
+  const { customer_id, renderType, setShowForm, showForm, setRenderType } =
+    props;
   // Get the renderType from the props
   const {} = props;
 
@@ -119,7 +123,6 @@ function AddVehicleForm(props) {
     // Pass the form data to the service
     const newVehicle = vehicleService.createVehicle(formData, token);
     newVehicle
-      .then((response) => response.json())
       .then((data) => {
         console.log(data);
         // If Error is returned from the API server, set the error message
@@ -129,9 +132,10 @@ function AddVehicleForm(props) {
           // Handle successful response
           setSuccess(true);
           setServerError("");
-          // clsed the form after 2 seconds
+          // close the form after 2 seconds
           setTimeout(() => {
             setShowForm(false);
+            window.location.reload(); // Reload the page
           }, 2000);
         }
       })
@@ -148,27 +152,32 @@ function AddVehicleForm(props) {
   };
 
   return (
-    <AddEditVehicle
-      renderType={renderType}
-      handleSubmit={handleSubmit}
-      vehicle_year={vehicle_year}
-      setVehicleYear={setVehicleYear}
-      vehicle_make={vehicle_make}
-      setVehicleMake={setVehicleMake}
-      vehicle_model={vehicle_model}
-      setVehicleModel={setVehicleModel}
-      vehicle_type={vehicle_type}
-      setVehicleType={setVehicleType}
-      vehicle_mileage={vehicle_mileage}
-      setVehicleMileage={setVehicleMileage}
-      vehicle_tag={vehicle_tag}
-      setVehicleTag={setVehicleTag}
-      vehicle_serial={vehicle_serial}
-      setVehicleSerial={setVehicleSerial}
-      vehicle_color={vehicle_color}
-      setVehicleColor={setVehicleColor}
-      serverError={serverError}
-    />
+    <div className='vehicle-form-content'>
+      <span className='close-icon' onClick={() => setShowForm(false)}>
+        <FaTimes style={{ color: "red" }} />
+      </span>
+      <AddEditVehicle
+        renderType={renderType}
+        handleSubmit={handleSubmit}
+        vehicle_year={vehicle_year}
+        setVehicleYear={setVehicleYear}
+        vehicle_make={vehicle_make}
+        setVehicleMake={setVehicleMake}
+        vehicle_model={vehicle_model}
+        setVehicleModel={setVehicleModel}
+        vehicle_type={vehicle_type}
+        setVehicleType={setVehicleType}
+        vehicle_mileage={vehicle_mileage}
+        setVehicleMileage={setVehicleMileage}
+        vehicle_tag={vehicle_tag}
+        setVehicleTag={setVehicleTag}
+        vehicle_serial={vehicle_serial}
+        setVehicleSerial={setVehicleSerial}
+        vehicle_color={vehicle_color}
+        setVehicleColor={setVehicleColor}
+        serverError={serverError}
+      />
+    </div>
   );
 }
 
