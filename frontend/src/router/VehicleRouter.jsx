@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import { Routes } from "react-router";
 
 function VehicleRouter() {
-  return (
-    <div>VehicleRouter</div>
-  )
+  return <Routes></Routes>;
 }
 
-export default VehicleRouter
+export default VehicleRouter;
