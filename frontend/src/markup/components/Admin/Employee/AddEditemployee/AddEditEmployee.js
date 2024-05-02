@@ -4,31 +4,21 @@ import React, { useEffect } from "react";
 function AddEditEmployee({
   renderType,
   handleSubmit,
-  employee_email,
-  setEmail,
-  emailError,
-  employee_first_name,
-  setFirstName,
+  handleChange,
+  employeeData,
+  setEmployee,
   firstNameRequired,
-  employee_last_name,
-  setLastName,
-  employee_phone,
-  setPhoneNumber,
-  company_role_id,
-  setCompany_role_id,
-  employee_password,
-  setPassword,
+  emailError,
   passwordError,
   serverError,
-  setActive_employee,
   isChecked,
   setIsChecked,
 }) {
   useEffect(() => {
     if (isChecked === true) {
-      setActive_employee(1);
+      setEmployee((prev) => ({ ...prev, active_employee: 1 }));
     } else if (isChecked === false) {
-      setActive_employee(2);
+      setEmployee((prev) => ({ ...prev, active_employee: 2 }));
     }
   }, [isChecked]);
 
@@ -42,7 +32,8 @@ function AddEditEmployee({
           {renderType === "edit" && (
             <>
               <h4>
-                Full Name: {employee_first_name} {employee_last_name}
+                Full Name: {employeeData.employee_first_name}{" "}
+                {employeeData.employee_last_name}
               </h4>
             </>
           )}
@@ -64,8 +55,8 @@ function AddEditEmployee({
                         type="email"
                         name="employee_email"
                         id="email"
-                        value={employee_email}
-                        onChange={(event) => setEmail(event.target.value)}
+                        value={employeeData.employee_email}
+                        onChange={handleChange}
                         placeholder="Employee email"
                       />
                       {emailError && (
@@ -83,10 +74,8 @@ function AddEditEmployee({
                             type="text"
                             name="employee_first_name"
                             id="first-name"
-                            value={employee_first_name}
-                            onChange={(event) =>
-                              setFirstName(event.target.value)
-                            }
+                            value={employeeData.employee_first_name}
+                            onChange={handleChange}
                             placeholder="Employee first name"
                           />
                           {firstNameRequired && (
@@ -102,10 +91,8 @@ function AddEditEmployee({
                             type="text"
                             name="employee_last_name"
                             id="last-name"
-                            value={employee_last_name}
-                            onChange={(event) =>
-                              setLastName(event.target.value)
-                            }
+                            value={employeeData.employee_last_name}
+                            onChange={handleChange}
                             placeholder="Employee last name"
                             required
                           />
@@ -119,8 +106,8 @@ function AddEditEmployee({
                         type="text"
                         name="employee_phone"
                         id="phone-number"
-                        value={employee_phone}
-                        onChange={(event) => setPhoneNumber(event.target.value)}
+                        value={employeeData.employee_phone}
+                        onChange={handleChange}
                         placeholder="Employee phone (555-555-5555)"
                         required
                       />
@@ -129,10 +116,8 @@ function AddEditEmployee({
                     <div className="form-group col-md-12">
                       <select
                         name="employee_role"
-                        value={company_role_id}
-                        onChange={(event) =>
-                          setCompany_role_id(event.target.value)
-                        }
+                        value={employeeData.company_role_id}
+                        onChange={handleChange}
                         className="custom-select-box"
                       >
                         <option value="1">Employee</option>
@@ -147,8 +132,8 @@ function AddEditEmployee({
                         type="password"
                         name="employee_password"
                         id="password"
-                        value={employee_password}
-                        onChange={(event) => setPassword(event.target.value)}
+                        value={employeeData.employee_password}
+                        onChange={handleChange}
                         placeholder="Employee password"
                       />
                       {passwordError && (
