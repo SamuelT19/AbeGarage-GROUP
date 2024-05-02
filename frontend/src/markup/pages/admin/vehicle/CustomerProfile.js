@@ -78,7 +78,8 @@ function CustomerProfile() {
   useEffect(() => {
     const fetchCustomerInfo = async () => {
       try {
-        const data = await customerService.getCustomerById(customerId, token);
+        const {data} = await customerService.getCustomerById(customerId, token);
+        console.log(data)
         setCustomerInfo(data.customer[0]);
       } catch (error) {
         setError(error.message);

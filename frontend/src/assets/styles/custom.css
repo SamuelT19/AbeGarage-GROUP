@@ -283,3 +283,15 @@ input:disabled {
 .history-section {
   padding-top: 50px;
 }
+
+a .page-link.first-page-button {
+  background-color: white;
+}
+ul .pagination {
+ background-color: #a2a5ad;
+}
+.search{
+  padding: 10px;
+  font-size: 20px;
+  width: 100%;
+}
