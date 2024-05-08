@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Routes, Route } from "react-router";
+import Orders from "../markup/pages/admin/order/Orders";
 
 function OrderRouter() {
   return (
-    <div>OrderRouter</div>
-  )
+    <Routes>
+      <Route path='/orders' element={<Orders />} />
+    </Routes>
+  );
 }
 
-export default OrderRouter
+export default OrderRouter;
