@@ -1,8 +1,9 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu/AdminMenu";
+import CustomerEditForm from "../../../components/Admin/Customer/CustomerEdit/CustomerEditForm";
 
 
-function EditCustomer(props) {
+function EditCustomer() {
   return (
     <div>
       <div className="container-fluid admin-pages">
@@ -11,7 +12,7 @@ function EditCustomer(props) {
             <AdminMenu />
           </div>
           <div className="col-md-9 admin-right-side">
-            <h1>Edit customer</h1>
+            <CustomerEditForm/>
           </div>
         </div>
       </div>
