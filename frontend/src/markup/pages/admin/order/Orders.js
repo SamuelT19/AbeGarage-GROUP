@@ -1,6 +1,6 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu/AdminMenu";
-import OrdersList from "../../../components/Admin/Orders/OrdersList/OrdersList";
+import OrdersList from "../../../components/Admin/Order/Orders/OrdersList";
 const Orders = () => {
   return (
     <>

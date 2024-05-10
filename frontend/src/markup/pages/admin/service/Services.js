@@ -1,8 +1,8 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu/AdminMenu";
-import ServiceList from "../../../components/Admin/Services/ServiceList";
+import Services from "../../../components/Admin/Service/CommonServices/CommonServices";
 
-function Services() {
+function ServicesPage() {
   return (
     <>
       <div className='container-fluid admin-pages'>
@@ -11,7 +11,7 @@ function Services() {
             <AdminMenu />
           </div>
           <div className='col-md-9 admin-right-side'>
-            <ServiceList />
+            <Services />
           </div>
         </div>
       </div>
@@ -19,4 +19,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default ServicesPage;
