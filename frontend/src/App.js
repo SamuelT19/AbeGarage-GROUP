@@ -1,35 +1,22 @@
-// Import react 
-import React from 'react';
-// Import the Routes and Route components from react-router 
+import React from "react";
 import { Routes, Route } from "react-router";
-// Import the page components 
 import Home from "./markup/pages/Home";
 import Login from "./markup/pages/Login";
-import AddEmployee from './markup/pages/admin/AddEmployee';
-import Unauthorized from './markup/pages/Unauthorized';
-// Import the Orders and Customers components 
-import Orders from './markup/pages/admin/Orders';
-import Customers from './markup/pages/admin/Customers';
-// Import the Employees component 
-import Employees from './markup/pages/admin/Employees';
-import EditEmployee from "./markup/pages/admin/EditEmployee";
+import Unauthorized from "./markup/pages/Unauthorized";
 
-// Import the css files 
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
 
-// Import the custom css file 
 import "./assets/styles/custom.css";
 
-// Import the Header component 
-import Header from './markup/components/Header/Header';
-// Import the Footer component
-import Footer from './markup/components/Footer/Footer';
+import Header from "./markup/components/Header/Header";
+import Footer from "./markup/components/Footer/Footer";
 
-// Import the PrivateAuthRoute component 
-import PrivateAuthRoute from './markup/components/Auth/PrivateAuthRoute';
+import EmployeeRouter from "./router/EmployeeRouter";
+import CustomerRouter from "./router/CustomerRouter";
+import OrderRouter from "./router/OrderRouter";
 
 
 function App() {
@@ -40,40 +27,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
-        {/* // Add the Orders Route  */}
-        <Route
-          path="/admin/orders"
-          element={
-            <PrivateAuthRoute roles={[1, 2, 3]}>
-              <Orders />
-            </PrivateAuthRoute>
-          }
-        />
-        {/* // Add the Customers Route  */}
-        <Route
-          path="/admin/customers"
-          element={
-            <PrivateAuthRoute roles={[2, 3]}>
-              <Customers />
-            </PrivateAuthRoute>
-          }
-        />
-        {/* // Add the Employees Route  */}
-        <Route path="/admin/employees" element={<Employees />} />
-        <Route
-          path="/admin/add-employee"
-          element={
-            <PrivateAuthRoute roles={[3]}>
-              <AddEmployee />
-            </PrivateAuthRoute>
-          }
-        />
-
-        <Route
-          path="/admin/edit-employee/:employee_id"
-          element={<EditEmployee />}
-        />
-
+        
+        <Route path="/admin/employee/*" element={<EmployeeRouter />} />
+        <Route path="/admin/customer/*" element={<CustomerRouter />} />
+        <Route path="/admin/order/*" element={<OrderRouter />} />
       </Routes>
       <Footer />
     </>

@@ -1,7 +1,7 @@
 const { query, withTransaction } = require("../config/db.config");
 const { v4: uuidv4 } = require("uuid");
- 
-  const createOrder = async (orderData) => {
+
+const createOrder = async (orderData) => {
   try {
     let success = false;
     await withTransaction(async (connection) => {
@@ -23,22 +23,18 @@ const { v4: uuidv4 } = require("uuid");
       const order_id = rows1.insertId;
 
       // Insert into the order_services table
-        const orderServicesValues = orderData.order_services
-          .map(
-            (service) =>
-              `(${order_id}, ${service.service_id}, ${service.service_completed})`
-          )
-          .join(",");
-        const orderServicesQuery = `INSERT INTO order_services (order_id, service_id, service_completed) VALUES ${orderServicesValues}`;
-        const [orderServicesRows] = await connection.execute(
-          orderServicesQuery
-        );
+      const orderServicesValues = orderData.order_services
+        .map(
+          (service) =>
+            `(${order_id}, ${service.service_id}, ${service.service_completed})`
+        )
+        .join(",");
+      const orderServicesQuery = `INSERT INTO order_services (order_id, service_id, service_completed) VALUES ${orderServicesValues}`;
+      const [orderServicesRows] = await connection.execute(orderServicesQuery);
 
-        if (
-          orderServicesRows.affectedRows !== orderData.order_services.length
-        ) {
-          throw new Error("Failed to insert into order_services table");
-        }
+      if (orderServicesRows.affectedRows !== orderData.order_services.length) {
+        throw new Error("Failed to insert into order_services table");
+      }
 
       // Insert into the order_info table
       const query4 =
@@ -59,7 +55,7 @@ const { v4: uuidv4 } = require("uuid");
       }
 
       // Insert into the order_status table
-      
+
       const orderStatusQuery =
         "INSERT INTO order_status (order_id, order_status) VALUES (?, ?)";
       const [orderStatusRows] = await connection.execute(orderStatusQuery, [
@@ -174,6 +170,7 @@ async function getAllOrders() {
 }
 
 //edit order service
+
 const editOrder = async (orderData) => {
   try {
     let success = false;
@@ -182,60 +179,91 @@ const editOrder = async (orderData) => {
       console.log(order_id);
 
       // Update orders table
-      const query1 = `UPDATE orders SET active_order = ? WHERE order_id = ?`;
-      const rows1 = await connection.execute(query1, [
-        orderData.active_order,
-        order_id,
-      ]);
-      console.log(rows1);
-      if (rows1.affectedRows !== 1) {
-        throw new Error("Failed to update active_order in orders table");
+      if (orderData.active_order) {
+        const query1 = `UPDATE orders SET ${
+          orderData.active_order ? "active_order = ?" : ""
+        } WHERE order_id = ?`;
+        const [rows1] = await connection.execute(query1, [
+          orderData.active_order,
+          order_id,
+        ]);
+        console.log(rows1);
+        if (!rows1) {
+          throw new Error("Failed to update active_order in orders table");
+        }
       }
 
       // Update order_info table
-      const query2 = `UPDATE order_info SET order_total_price = ?, estimated_completion_date = ?, completion_date = ?,
-additional_request = ?, additional_requests_completed = ? WHERE order_id = ?`;
-      const rows2 = await connection.execute(query2, [
-        orderData.order_total_price,
-        orderData.estimated_completion_date,
-        orderData.completion_date,
-        orderData.additional_request,
-        orderData.additional_requests_completed,
-        order_id,
-      ]);
-      console.log(rows2);
-      if (rows2.affectedRows !== 1) {
-        throw new Error("Failed to update order_info table");
+      if (
+        orderData.order_total_price ||
+        orderData.estimated_completion_date ||
+        orderData.completion_date ||
+        orderData.additional_request ||
+        orderData.notes_for_internal_use ||
+        orderData.notes_for_customer ||
+        orderData.additional_requests_completed
+      ) {
+        const query2 = `UPDATE order_info SET
+              order_total_price = ?,
+              estimated_completion_date = ?,
+              completion_date = ?,
+              additional_request = ?,
+              notes_for_internal_use = ?,
+              notes_for_customer = ?,
+              additional_requests_completed = ?
+              WHERE order_id = ?`;
+
+        const [rows2] = await connection.execute(query2, [
+          orderData.order_total_price,
+          orderData.estimated_completion_date,
+          orderData.completion_date,
+          orderData.additional_request,
+          orderData.notes_for_internal_use,
+          orderData.notes_for_customer,
+          orderData.additional_requests_completed,
+          order_id,
+        ]);
+        console.log(rows2);
+        if (!rows2) {
+          throw new Error("Failed to update order_info table");
+        }
       }
 
       // Update order_status table
-      const query3 = `UPDATE order_status SET order_status = ? WHERE order_id = ?`;
-      const rows3 = await connection.execute(query3, [
-        orderData.order_status,
-        order_id,
-      ]);
-      console.log(rows3);
-      if (rows3.affectedRows !== 1) {
-        throw new Error("Failed to update order_status table");
+      if (orderData.order_status) {
+        const query3 = `UPDATE order_status SET 
+      ${orderData.order_status ? "order_status = ?" : ""} WHERE order_id = ?`;
+        const [rows3] = await connection.execute(query3, [
+          orderData.order_status,
+          order_id,
+        ]);
+        console.log(rows3);
+        if (!rows3) {
+          throw new Error("Failed to update order_status table");
+        }
       }
 
       // Update order_services table
       if (orderData.order_services && orderData.order_services.length > 0) {
         for (const service of orderData.order_services) {
-          const updateServiceQuery = `UPDATE order_services SET service_completed = ? WHERE order_id = ? AND service_id = ?`;
-          const rows4 = await connection.execute(updateServiceQuery, [
-            service.service_completed,
-            order_id,
-            service.service_id,
-          ]);
+          if (service.service_completed) {
+            const updateServiceQuery = `UPDATE order_services SET 
+             ${
+               service.service_completed ? "service_completed = ?" : ""
+             } WHERE order_id = ? AND service_id = ?`;
+            const [rows4] = await connection.execute(updateServiceQuery, [
+              service.service_completed,
+              order_id,
+              service.service_id,
+            ]);
 
-          console.log(rows4);
-          if (!rows4.affectedRows) {
-            throw new Error("Failed to update order_services table");
+            console.log(rows4);
+            if (!rows4) {
+              throw new Error("Failed to update order_services table");
+            }
           }
         }
       }
-
       success = true;
     });
     return success; // Return true if everything is successful
@@ -244,6 +272,7 @@ additional_request = ?, additional_requests_completed = ? WHERE order_id = ?`;
     throw error; // Throw the error to trigger the rollback
   }
 };
+
 module.exports = {
   createOrder,
   orderedServices,
@@ -251,4 +280,3 @@ module.exports = {
   editOrder,
   getAllOrders,
 };
-

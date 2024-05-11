@@ -1,12 +1,10 @@
 // Import the necessary components
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
-// Import the auth hook
-import { useAuth } from "../../../../Contexts/AuthContext";
-// Import the date-fns library
-import { format } from "date-fns"; // To properly format the date on the table
-// Import the getAllEmployees function
-import employeeService from "../../../../services/employee.service";
+
+import { useAuth } from "../../../../../Contexts/AuthContext";
+import { format } from "date-fns"; 
+import employeeService from "../../../../../services/employee.service";
 
 //import the icons
 import { FaEdit, FaTrash } from "react-icons/fa";
@@ -142,7 +140,7 @@ const EmployeesList = () => {
                       <td>
                         {/* <div className='edit-delete-icons'>edit | delete</div> */}
                         <Link
-                          to={`/admin/edit-employee/${employee.employee_id}`}
+                          to={`/admin/employee/edit-employee/${employee.employee_id}`}
                         >
                           <FaEdit
                             className="edit-icon"

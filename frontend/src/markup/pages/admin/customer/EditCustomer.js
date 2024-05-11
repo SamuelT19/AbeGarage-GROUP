@@ -1,8 +1,9 @@
 import React from "react";
-import AdminMenu from "../../components/Admin/AdminMenu/AdminMenu";
-import EditEmployeeForm from "../../components/Admin/EditEmployeeForm/EditEmployeeForm";
+import AdminMenu from "../../../components/Admin/AdminMenu/AdminMenu";
+import CustomerEditForm from "../../../components/Admin/Customer/CustomerEdit/CustomerEditForm";
 
-function EditEmployee(props) {
+
+function EditCustomer() {
   return (
     <div>
       <div className="container-fluid admin-pages">
@@ -11,7 +12,7 @@ function EditEmployee(props) {
             <AdminMenu />
           </div>
           <div className="col-md-9 admin-right-side">
-            <EditEmployeeForm/>
+            <CustomerEditForm/>
           </div>
         </div>
       </div>
@@ -19,4 +20,4 @@ function EditEmployee(props) {
   );
 }
 
-export default EditEmployee;
+export default EditCustomer;
