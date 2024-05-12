@@ -39,7 +39,7 @@ async function getAllOrdersData(req, res) {
 async function editOrder(req, res, next) {
   const updatedOrderData = req.body;
 
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     const editOrderResult = await orderService.editOrder(updatedOrderData);
