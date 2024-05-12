@@ -1,6 +1,6 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu/AdminMenu";
-import ServiceList from "../../../components/Admin/Services/ServiceList";
+import ServiceList from "../../../components/Admin/Service/Services/Services";
 
 function Services() {
   return (
