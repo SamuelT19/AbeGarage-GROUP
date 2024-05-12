@@ -17,20 +17,20 @@ import Footer from "./markup/components/Footer/Footer";
 import EmployeeRouter from "./router/EmployeeRouter";
 import CustomerRouter from "./router/CustomerRouter";
 import OrderRouter from "./router/OrderRouter";
-
+import ServiceRouter from "./router/ServiceRouter";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
-        
-        <Route path="/admin/employee/*" element={<EmployeeRouter />} />
-        <Route path="/admin/customer/*" element={<CustomerRouter />} />
-        <Route path="/admin/order/*" element={<OrderRouter />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/unauthorized' element={<Unauthorized />} />
+        <Route path='/admin/employee/*' element={<EmployeeRouter />} />
+        <Route path='/admin/customer/*' element={<CustomerRouter />} />
+        <Route path='/admin/order/*' element={<OrderRouter />} />
+        <Route path='/admin/services/*' element={<ServiceRouter />} />
       </Routes>
       <Footer />
     </>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 
 import { useAuth } from "../../../../../Contexts/AuthContext";
-import { format } from "date-fns"; 
+import { format } from "date-fns";
 import employeeService from "../../../../../services/employee.service";
 
 //import the icons
@@ -95,18 +95,18 @@ const EmployeesList = () => {
   return (
     <>
       {apiError ? (
-        <section className="contact-section">
-          <div className="auto-container">
-            <div className="contact-title">
+        <section className='contact-section'>
+          <div className='auto-container'>
+            <div className='contact-title'>
               <h2>{apiErrorMessage}</h2>
             </div>
           </div>
         </section>
       ) : (
         <>
-          <section className="contact-section">
-            <div className="auto-container">
-              <div className="contact-title">
+          <section className='contact-section'>
+            <div className='auto-container'>
+              <div className='contact-title'>
                 <h2>Employees</h2>
               </div>
               <Table striped bordered hover>
@@ -129,7 +129,7 @@ const EmployeesList = () => {
                       <td>{employee.employee_first_name}</td>
                       <td>{employee.employee_last_name}</td>
                       <td>{employee.employee_email}</td>
-                      <td>{employee.employee_phone}</td>
+                      <td>{employee.employee_phone} </td>
                       <td>
                         {format(
                           new Date(employee.added_date),
@@ -140,17 +140,16 @@ const EmployeesList = () => {
                       <td>
                         {/* <div className='edit-delete-icons'>edit | delete</div> */}
                         <Link
-                          to={`/admin/employee/edit-employee/${employee.employee_id}`}
-                        >
+                          to={`/admin/employee/edit-employee/${employee.employee_id}`}>
                           <FaEdit
-                            className="edit-icon"
+                            className='edit-icon'
                             style={{ cursor: "pointer" }}
                           />
                         </Link>
                         &nbsp; &nbsp;
                         {/* // *Delet icon and event listnere  */}
                         <FaTrash
-                          className="delete-icon"
+                          className='delete-icon'
                           style={{ cursor: "pointer" }}
                           onClick={() => confirmDeleteEmployee(employee)}
                         />
