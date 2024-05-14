@@ -288,10 +288,66 @@ a .page-link.first-page-button {
   background-color: white;
 }
 ul .pagination {
- background-color: #a2a5ad;
+  background-color: #a2a5ad;
 }
-.search{
+.search {
   padding: 10px;
   font-size: 20px;
   width: 100%;
+}
+
+/* orderlist icons */
+.center {
+  text-align: center;
+}
+
+.icon-link {
+  margin-right: 10px;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+/*  order status label */
+.status-label {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  line-height: 1;
+  height: auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.received {
+  background-color: darkgray;
+  color: white;
+}
+
+.in-progress {
+  background-color: orange;
+  color: white;
+}
+
+.completed {
+  background-color: green;
+  color: white;
+}
+
+.canceled {
+  background-color: red;
+  color: white;
+}
+
+.unknown {
+  background-color: black;
+  color: white;
+}
+
+/* order list customer and vehicle bold text  */
+
+.bold-text {
+  font-weight: bold;
+  color: #001659;
 }

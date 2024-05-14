@@ -6,6 +6,7 @@ import { IoOpenOutline } from "react-icons/io5";
 import { useAuth } from "../../../../../Contexts/AuthContext";
 import Orderservice from "../../../../../services/order.service";
 import { format } from "date-fns";
+import OrderStatusLabel from "./OrderStatusLabel";
 
 function OrdersList() {
   const [orderData, setOrderData] = useState([]);
@@ -25,51 +26,6 @@ function OrdersList() {
     };
     fetchOrders();
   }, [token]);
-
-  function getOrderStatusLabel(statusCode) {
-    let color;
-    let statusText;
-
-    switch (statusCode) {
-      case 1:
-        color = "darkgray";
-        statusText = "Received";
-        break;
-      case 2:
-        color = "orange";
-        statusText = "In progress";
-        break;
-      case 3:
-        color = "green";
-        statusText = "Completed";
-        break;
-      case 0:
-        color = "red";
-        statusText = "Canceled";
-        break;
-      default:
-        color = "black";
-        statusText = "Unknown";
-        break;
-    }
-
-    return (
-      <span
-        style={{
-          display: "inline-block",
-          borderRadius: "20px",
-          padding: "5px 10px",
-          backgroundColor: color,
-          color: "white",
-          lineHeight: "1",
-          height: "auto",
-          textAlign: "center",
-          verticalAlign: "middle",
-        }}>
-        {statusText}
-      </span>
-    );
-  }
 
   return (
     <>
@@ -95,14 +51,19 @@ function OrdersList() {
                 <tr key={order.order.order_id}>
                   <td>{order.order.order_id}</td>
                   <td>
-                    {order.customer.customer_first_name}{" "}
-                    {order.customer.customer_last_name} <br />
+                    <span className='bold-text'>
+                      {order.customer.customer_first_name}{" "}
+                      {order.customer.customer_last_name}
+                    </span>
+                    <br />
                     {order.customer.customer_email}
                     <br />
                     {order.customer.customer_phone_number}
                   </td>
                   <td>
-                    {order.vehicle.vehicle_make} {order.vehicle.vehicle_model}{" "}
+                    <span className='bold-text'>
+                      {order.vehicle.vehicle_make} {order.vehicle.vehicle_model}
+                    </span>
                     <br />
                     {order.vehicle.vehicle_year} <br />
                     {order.vehicle.vehicle_tag}
@@ -118,14 +79,14 @@ function OrdersList() {
                     {order.employee.employee_last_name}
                   </td>
 
-                  <td style={{ verticalAlign: "middle", textAlign: "center" }}>
-                    {getOrderStatusLabel(order.order.order_status)}
+                  <td className='align-middle center'>
+                    <OrderStatusLabel statusCode={order.order.order_status} />
                   </td>
 
-                  <td style={{ textAlign: "center" }}>
+                  <td className='center align-middle'>
                     <Link
                       to={`/admin/order/edit/${order.order.order_id}`}
-                      style={{ marginRight: "10px" }}>
+                      className='icon-link'>
                       <FaEdit />
                     </Link>
                     <Link to={`/admin/order/${order.order.order_id}`}>
