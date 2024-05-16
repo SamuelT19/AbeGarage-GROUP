@@ -1,10 +1,10 @@
 import React from "react";
-import OrderSummary from "../components/OrderDetail/OrderSummary";
+import OrderDetails from "../components/OrderDetail/OrderSummary";
 
 function OrderDtail() {
   return (
     <div>
-      <OrderSummary/>
+      <OrderDetails />
     </div>
   );
 }
