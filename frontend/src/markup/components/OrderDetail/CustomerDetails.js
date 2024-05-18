@@ -9,7 +9,7 @@ function CustomerDetails({ singleOrder }) {
       <h2>Customer Details</h2>
       <div className='customer-details'>
         <p>
-          <strong>Name:</strong> {customer.customer_first_name}
+          <strong>Name:</strong> {singleOrder.customer.customer_first_name}
         </p>
         <p>
           <strong>Email:</strong> {customer.customer_email}
