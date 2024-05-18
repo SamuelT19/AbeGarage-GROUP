@@ -176,7 +176,7 @@ const editOrder = async (orderData) => {
     let success = false;
     await withTransaction(async (connection) => {
       const order_id = orderData.order_id;
-      console.log(order_id);
+      // console.log(order_id);
 
       // Update orders table
       if (orderData.active_order) {
@@ -187,7 +187,7 @@ const editOrder = async (orderData) => {
           orderData.active_order,
           order_id,
         ]);
-        console.log(rows1);
+        // console.log(rows1);
         if (!rows1) {
           throw new Error("Failed to update active_order in orders table");
         }
