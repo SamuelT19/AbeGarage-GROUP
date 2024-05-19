@@ -89,7 +89,9 @@ function OrdersList() {
                       className='icon-link'>
                       <FaEdit />
                     </Link>
-                    <Link to={`/admin/order/${order.order.order_id}`}>
+                    <Link
+                      key={order.order.order_id}
+                      to={`/admin/order/${order.order.order_id}/status/${order.order.order_status}`}>
                       <IoOpenOutline />
                     </Link>
                   </td>

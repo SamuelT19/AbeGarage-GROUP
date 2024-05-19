@@ -5,11 +5,14 @@ import CustomerDetails from "./CustomerDetails";
 import SelectedServies from "./SelectedServices";
 import VehicleInSerivices from "./VehicleInService";
 import { useParams } from "react-router-dom";
+import OrderStatusLabel from "../../components/Admin/Order/OrdersList/OrderStatusLabel";
 
 function OrderDetails() {
   //intialize the state
   const [singleOrder, setsingleOrder] = useState([]);
-  const { order_id } = useParams();
+  const { order_id, order_status } = useParams();
+
+  console.log(order_status);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -30,20 +33,34 @@ function OrderDetails() {
     <>
       <section className='contact-section'>
         <div className='auto-container'>
-          <div className='contact-title'>
-            <h2 className='title'>{customerVehicle.customer_last_name}</h2>
-            <div className='text22'>
-              You can track the progress of your order using this page.
+          <div className='tracker-title'>
+            <div className='order_tracker'>
+              <h2 className='customer_name'>
+                {customerVehicle.customer_first_name}
+                {customerVehicle.customer_last_name}
+              </h2>
+              <OrderStatusLabel statusCode={Number(order_status)} />
             </div>
+            <p>
+              You can track the progress of your order using this page. We will
+              constantly update this page to let you know how we are
+              progressing. As soon as we are done wiht the order, the staus will
+              turn green. That means, your order is ready for pick up. If you
+              have any questions, please feel free to contact us.
+            </p>
           </div>
-          <section className='service-section'>
+          <section className='order-service'>
             <div className='auto-container'>
               <div className='wrapper-box'>
-                <div className='left-column'>
-                  <CustomerDetails singleOrder={singleOrder} />
-                  <VehicleInSerivices singleOrder={singleOrder} />
-                  <SelectedServies singleOrder={singleOrder} />
+                <div className='customer-vehicle'>
+                  <div className='order-customer'>
+                    <CustomerDetails singleOrder={singleOrder} />
+                  </div>
+                  <div className='order-vehicle'>
+                    <VehicleInSerivices singleOrder={singleOrder} />
+                  </div>
                 </div>
+                <SelectedServies singleOrder={singleOrder} />
               </div>
             </div>
           </section>

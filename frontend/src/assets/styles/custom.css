@@ -385,8 +385,6 @@ ul .pagination {
   width: 100%;
   height: 150px;
   padding: 10px;
-  /* margin-top: 10px;
-  margin-bottom: 10px; */
   border: 1px solid #ccc;
   border-radius: 8px;
 }
@@ -411,7 +409,6 @@ ul .pagination {
 .service-price input {
   width: 100%;
   padding: 10px;
-  /* margin-top: 10px; */
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -419,4 +416,114 @@ ul .pagination {
 
 .contact-section {
   background-color: #ebedef;
+}
+
+/* Orderdetaisl page css starts here*/
+
+.order_tracker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order_tracker > div {
+  margin-top: 20px;
+}
+
+.tracker-title {
+  margin-bottom: 50px;
+  margin-left: 2%;
+}
+
+.tracker-title h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-left: 0;
+}
+.background {
+  background-color: white;
+  padding: 20px;
+}
+/* vehicle and customer component */
+
+.customer-vehicle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.customer-vehicle > * {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.customer-vehicle > *:last-child {
+  margin-right: 0;
+}
+
+.customer_details h4,
+.vehicle_in_services h4 {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+/* selected services components css starts here */
+.order-service {
+  width: 100%;
+}
+
+.services-title {
+  margin-bottom: 0px;
+}
+.selected-services {
+  margin-top: 20px;
+}
+
+.service-box h2 {
+  margin-bottom: 15px;
+}
+
+/* Adjust spacing for the .selected-services section */
+.selected-services {
+  padding-bottom: 20px;
+}
+
+.services-list:last-child {
+  margin-bottom: 0;
+}
+
+.services-title {
+  margin-bottom: 0px;
+  margin-left: 3%;
+}
+.services-title h4 {
+  font-size: 24px;
+  margin-bottom: 0px;
+}
+
+.services-title h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.services {
+  background-color: #fff;
+  padding: 0px, 20px;
+  border-radius: 5px;
+}
+
+/* Orderdetaisl page css ends here*/
+
+.services-list {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
 }
