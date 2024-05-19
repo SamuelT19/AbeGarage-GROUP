@@ -9,7 +9,7 @@ const getAllOrders = async (token) => {
       },
     });
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch orders: ${error.message}`);
@@ -20,6 +20,7 @@ const getAllOrders = async (token) => {
 const orderedServices = async (order_id) => {
   try {
     const response = await axiosBase.get(`/api/order/single/${order_id}`);
+    console.log(response);
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch ordered services: ${error.message}`);

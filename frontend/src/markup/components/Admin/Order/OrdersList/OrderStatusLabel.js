@@ -14,11 +14,11 @@ function OrderStatusLabel({ statusCode }) {
       color = "in-progress";
       statusText = "In progress";
       break;
-    case 3:
+    case 0:
       color = "completed";
       statusText = "Completed";
       break;
-    case 0:
+    case 3:
       color = "canceled";
       statusText = "Canceled";
       break;

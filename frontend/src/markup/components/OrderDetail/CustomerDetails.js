@@ -2,18 +2,23 @@ import React from "react";
 
 function CustomerDetails({ singleOrder }) {
   //distracture the singleOrder object
-  const { customer } = singleOrder;
+  const customerInfo = singleOrder?.customerVehicle || {};
 
   return (
     <div>
-      <h2>Customer Details</h2>
-      <div className='customer-details'>
-        <p>
-          <strong>Name:</strong> {singleOrder.customer.customer_first_name}
-        </p>
-        <p>
-          <strong>Email:</strong> {customer.customer_email}
-        </p>
+      <div>
+        <div>
+          <h4>
+            {customerInfo.customer_first_name} {customerInfo.customer_last_name}
+          </h4>
+          <div>Phone: {customerInfo.customer_email}</div>
+          <div>Email: {customerInfo.customer_phone_number}</div>
+          <div>
+            {" "}
+            Active Customer:
+            {customerInfo.active_customer_status === 1 ? "Yes" : "No"}
+          </div>
+        </div>
       </div>
     </div>
   );

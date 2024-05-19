@@ -1,21 +1,22 @@
-import React from 'react'
+import React from "react";
 
-function VehicleInService(setsingleOrder) {
+function VehicleInService({ singleOrder }) {
+  const vehicleInfo = singleOrder?.customerVehicle || {};
+  console.log(vehicleInfo);
 
-    //distructuring the singleOrder
-    const { vehicle } = setsingleOrder;
-
-    return <div>
-        <div className="order-detail">
-            <h3>Vehicle In Service</h3>
-            <div className="order-detail__content">
-                <div className="order-detail__content__item">
-                    <h4>Vehicle</h4>
-                    <p>{vehicle}</p>
-                </div>
-            </div>
-        </div>
-  </div>;
+  return (
+    <>
+      <div key={vehicleInfo.vehicle_id} className='text'>
+        <h4>
+          {vehicleInfo.vehicle_make} {vehicleInfo.vehicle_model} (
+          {vehicleInfo.vehicle_color})
+        </h4>
+        <div>Vehicle Tag: {vehicleInfo.vehicle_tag}</div>
+        <div>Vehicle Year: {vehicleInfo.vehicle_year}</div>
+        <div>Vehicle Mileage: {vehicleInfo.vehicle_mileage}</div>
+      </div>
+    </>
+  );
 }
 
-export default VehicleInService
+export default VehicleInService;
