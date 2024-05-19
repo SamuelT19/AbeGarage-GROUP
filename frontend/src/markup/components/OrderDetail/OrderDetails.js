@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import OrderStatusLabel from "../../components/Admin/Order/OrdersList/OrderStatusLabel";
 
 function OrderDetails() {
-  //intialize the state
+  //initialize the state
   const [singleOrder, setsingleOrder] = useState([]);
   const { order_id, order_status } = useParams();
 
