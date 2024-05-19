@@ -411,7 +411,6 @@ ul .pagination {
 .service-price input {
   width: 100%;
   padding: 10px;
-  /* margin-top: 10px; */
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -419,4 +418,56 @@ ul .pagination {
 
 .contact-section {
   background-color: #ebedef;
+}
+
+/* Order Detail section */
+.service-section2{
+  background-color: rgb(252, 250, 250);
+  width: auto;
+  margin-top: 2px;
+  margin-right: 1px;
+}
+.service-list2 {
+  background-color: white;
+  display: flex;
+  padding-top: 5px;
+  padding-left: 4%;
+  margin-right: 2px;
+  height: 90px;
+}
+.description {
+margin-top: -50px;
+}
+.order-label {
+  margin-right: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-left: 2px;
+}
+.contact-title {
+  padding-right: 50px;
+}
+
+.service-name12 {
+  width: 900px;
+  height: 10px;
+  font-size: small;
+}
+
+.order-detail{
+  display: flex;
+  gap: -10px;
+}
+
+.customer-detail, .vehicle-detail {
+  flex: 1; 
+  width: 4000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px;
+} 
+.customer-detail {
+  width: 4000px;
 }
