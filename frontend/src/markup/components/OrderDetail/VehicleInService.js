@@ -10,7 +10,7 @@ function VehicleInService({ singleOrder }) {
         <div>
           <div className='col-lg-20 service-block-one'>
             <div className='inner-box hvr-float-shadow'>
-              <h6 className='bold-text'>VEHICLE IN SERVICES</h6>
+              <h6 className='bold-text'>CAR IN SERVICES</h6>
               <h4>
                 {vehicleInfo.vehicle_make} {vehicleInfo.vehicle_model} (
                 {vehicleInfo.vehicle_color})

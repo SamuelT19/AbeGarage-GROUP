@@ -44,7 +44,7 @@ function OrderDetails() {
             <p>
               You can track the progress of your order using this page. We will
               constantly update this page to let you know how we are
-              progressing. As soon as we are done wiht the order, the staus will
+              progressing. As soon as we are done with the order, the status will
               turn green. That means, your order is ready for pick up. If you
               have any questions, please feel free to contact us.
             </p>

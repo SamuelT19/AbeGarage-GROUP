@@ -1,7 +1,7 @@
 import React from "react";
 
 function CustomerDetails({ singleOrder }) {
-  //distracture the singleOrder object
+  //destructure the singleOrder object
   const customerInfo = singleOrder?.customerVehicle || {};
 
   return (
@@ -16,11 +16,11 @@ function CustomerDetails({ singleOrder }) {
                 {customerInfo.customer_last_name}
               </h4>
               <div>
-                <span className='bold-text'>Phone:</span>{" "}
+                <span className='bold-text'>Email:</span>{" "}
                 {customerInfo.customer_email}
               </div>
               <div>
-                <span className='bold-text'>Email:</span>{" "}
+                <span className='bold-text'>Phone Number:</span>{" "}
                 {customerInfo.customer_phone_number}
               </div>
               <div>
