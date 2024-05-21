@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Orderservice from "../../../services/order.service";
 import CustomerDetails from "./CustomerDetails";
-import SelectedServies from "./SelectedServices";
-import VehicleInSerivices from "./VehicleInService";
+import SelectedServices from "./SelectedServices";
+import VehicleInServices from "./VehicleInService";
 import { useParams } from "react-router-dom";
 import OrderStatusLabel from "../../components/Admin/Order/OrdersList/OrderStatusLabel";
 
@@ -57,10 +57,10 @@ function OrderDetails() {
                     <CustomerDetails singleOrder={singleOrder} />
                   </div>
                   <div className='order-vehicle'>
-                    <VehicleInSerivices singleOrder={singleOrder} />
+                    <VehicleInServices singleOrder={singleOrder} />
                   </div>
                 </div>
-                <SelectedServies singleOrder={singleOrder} />
+                <SelectedServices singleOrder={singleOrder} />
               </div>
             </div>
           </section>

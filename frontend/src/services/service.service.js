@@ -52,6 +52,40 @@ const getAllServices = async (token) => {
   }
 };
 
+const getSingleService = async (service_id, token) => {
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+
+  const response = await axiosBase.get(
+    `${api_url}/api/service/single/${service_id}`,
+    requestOptions
+  );
+  console.log(response.data);  // Log the service data
+  return response.data;  // Return the data part of the response
+};
+
+const editService = async (serviceData, token) => {
+  const requestOptions = {
+    method: "EDIT",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  const response = await axiosBase.put(
+    `${api_url}/api/service/edit`,
+    serviceData,
+    requestOptions
+  );
+  console.log(response);
+  return response;
+};
+
+
 const deleteServiceById = async (service_id, token) => {
   console.log(token);
   const requestOptions = {
@@ -71,6 +105,8 @@ const deleteServiceById = async (service_id, token) => {
 const serviceService = {
   addService,
   getAllServices,
+  getSingleService,
+  editService,
   deleteServiceById,
 };
 

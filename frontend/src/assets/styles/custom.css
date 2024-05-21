@@ -380,7 +380,12 @@ ul .pagination {
   font-weight: 600;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+.Add-new_title{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: xx-large;
+  font-weight: 900;
+}
 .service-description textarea {
   width: 100%;
   height: 150px;
@@ -526,4 +531,18 @@ ul .pagination {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
+}
+
+/* Edit service we provide page css starts here */
+.edit-service-section {
+  background-color: white;
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-left: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.edit_title {
+font-size: xx-large;
+font-weight: 900;
 }
