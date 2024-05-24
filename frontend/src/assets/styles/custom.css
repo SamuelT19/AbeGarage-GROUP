@@ -546,3 +546,14 @@ ul .pagination {
 font-size: xx-large;
 font-weight: 900;
 }
+.image, .image-box{
+  background-color: #dbcdcd;
+  height: 400px;
+}
+.image1{
+  background-color: #dbcdcd;
+  height: 450px;
+}
+.video-section, .page-title{
+  background-color: #dbcdcd;
+}

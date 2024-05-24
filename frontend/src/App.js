@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 import Home from "./markup/pages/Home";
+import Services from "./markup/pages/Services";
+import About from "./markup/pages/About"
 import Login from "./markup/pages/Login";
 import Unauthorized from "./markup/pages/Unauthorized";
 
@@ -19,12 +21,15 @@ import CustomerRouter from "./router/CustomerRouter";
 import OrderRouter from "./router/OrderRouter";
 import ServiceRouter from "./router/ServiceRouter";
 
+
 function App() {
   return (
     <>
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/Services' element={<Services />} />
+        <Route path='/About' element={<About />} />
         <Route path='/login' element={<Login />} />
         <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/admin/employee/*' element={<EmployeeRouter />} />
