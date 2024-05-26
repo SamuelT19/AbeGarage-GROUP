@@ -38,8 +38,7 @@ const getAllCustomer = async (token) => {
     },
   };
   const response = await axiosBase.get(
-    `${api_url}/api/customer/all`,
-    requestOptions
+    `${api_url}/api/customer/all`,requestOptions
   );
   console.log(response);
   return response;
