@@ -38,6 +38,19 @@ const getOrderByID = async (order_id) => {
   }
 };
 
+// Update order progress
+const updateOrderProgress = async (order_id, updatedOrder) => {
+  try {
+    const response = await axiosBase.put(
+      `/api/order/${order_id}`,
+      updatedOrder
+    );
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to update order progress: ${error.message}`);
+  }
+};
 //export all functions
 
 const orderService = {
