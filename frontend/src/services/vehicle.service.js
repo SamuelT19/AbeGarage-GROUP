@@ -16,9 +16,9 @@ const createVehicle = async (formData, loggedInEmployeeToken) => {
 };
 
 // Function to send a GET request to retrieve all vehicles by a customer ID
-const getAllVehiclesBycustomer = async (customerId, token) => {
+const getAllVehiclesBycustomer = async (customer_id, token) => {
   try {
-    const response = await axiosBase.get(`/api/vehicle/all/${customerId}`, {
+    const response = await axiosBase.get(`/api/vehicle/all/${customer_id}`, {
       headers: {
         "x-access-token": token,
       },

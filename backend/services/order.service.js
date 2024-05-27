@@ -38,7 +38,7 @@ const createOrder = async (orderData) => {
 
       // Insert into the order_info table
       const query4 =
-        "INSERT INTO order_info (order_id, order_total_price, estimated_completion_date, completion_date, additional_request, notes_for_internal_use, notes_for_customer, additional_requests_completed) VALUES (?,?,?,?,?,?,?,?) ";
+        "INSERT INTO order_info (order_id, order_total_price, estimated_completion_date, completion_date, additional_request, notes_for_internal_use, notes_for_customer, additional_requests_completed, additional_request_price) VALUES (?,?,?,?,?,?,?,?,?) ";
       const [rows4] = await connection.execute(query4, [
         order_id,
         orderData.order_total_price,
@@ -48,6 +48,7 @@ const createOrder = async (orderData) => {
         orderData.notes_for_internal_use,
         orderData.notes_for_customer,
         orderData.additional_requests_completed,
+        orderData.additional_request_price,
       ]);
 
       if (rows4.affectedRows !== 1) {
@@ -201,7 +202,8 @@ const editOrder = async (orderData) => {
         orderData.additional_request ||
         orderData.notes_for_internal_use ||
         orderData.notes_for_customer ||
-        orderData.additional_requests_completed
+        orderData.additional_requests_completed ||
+        orderData.additional_request_price
       ) {
         const query2 = `UPDATE order_info SET
               order_total_price = ?,
@@ -211,6 +213,7 @@ const editOrder = async (orderData) => {
               notes_for_internal_use = ?,
               notes_for_customer = ?,
               additional_requests_completed = ?
+              orderData.additional_request_price = ?
               WHERE order_id = ?`;
 
         const [rows2] = await connection.execute(query2, [
@@ -221,6 +224,7 @@ const editOrder = async (orderData) => {
           orderData.notes_for_internal_use,
           orderData.notes_for_customer,
           orderData.additional_requests_completed,
+          orderData.additional_request_price,
           order_id,
         ]);
         console.log(rows2);

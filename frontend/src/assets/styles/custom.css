@@ -91,40 +91,7 @@ input:disabled {
   font-weight: 600;
   font-size: 1.5em;
 }
-/* Pagination */
-.pagination-wrapper {
-  margin-top: 30px;
-}
-.page-link {
-  padding: 0.5rem 1.75rem;
-  color: #fff;
-  background-color: #222b48;
-  border: 1px solid #dee2e6;
-}
-.page-link:hover {
-  color: #ffffff;
-  background-color: #ee0c0a;
-}
-.page-link span {
-  padding: 0 5px;
-}
-/* Search */
-.search-box {
-  margin-bottom: 20px;
-}
-.search-box input {
-  padding: 30px;
-}
-/* Table style */
-.table a {
-  color: #0a1436;
-  font-weight: 600;
-}
-/* Customer page */
-.history-block .text span {
-  font-weight: 600;
-  color: #000821;
-}
+
 
 /* Vehicles */
 .external-container {
@@ -294,4 +261,260 @@ ul .pagination {
   padding: 10px;
   font-size: 20px;
   width: 100%;
+}
+
+/* customer card */
+.card {
+  position: relative;
+  width: 95%;
+  border: 2px solid rgb(236, 233, 233);
+  border-radius: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+ 
+ 
+ 
+}
+
+.card-customer-section{
+  margin-top: -40px;
+}
+.card .card-title{
+  font-family: Arial, sans-serif;
+  margin: 0;
+ color: hsl(0, 0%, 20%)
+}
+.card-text p{
+  font-family: Arial, sans-serif;
+   color: hsl(0, 0%, 30%);
+   margin: 0;
+   padding: 0;
+   font-size: 16px;
+   line-height: 1.5
+   
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color:red;
+  
+
+}
+
+.close-icon i {
+  font-size: 15px;
+}
+
+/* vehicle table */
+.card-table {
+  position: relative;
+  width: 92%;
+  border: 2px solid rgb(236, 233, 233);
+  border-radius: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 80px;
+  margin-left: 20px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  font-size: 12px;
+ 
+}
+
+.table-title {
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+}
+
+.card-table .no-border {
+  border: none;
+}
+
+/* vehicle card */
+.card-vehicle{
+
+  margin-top: -190px;
+}
+
+/* service card */
+.card-service{
+  height: 90px;
+  margin-bottom: -10px;
+  border: 2px solid rgb(243, 240, 240);
+  border-radius: 1px;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  margin-right: 50px;
+  padding-bottom: 400px;
+  cursor: pointer;
+  user-select: none;
+ width: 50px;
+    height: 50px;
+  
+  
+  
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 25px;
+  width: 100px;
+  background-color: rgb(230, 224, 224);
+  border: solid rgba(6, 6, 6, 0);
+  border-width: 0 5px 1px 0;
+  margin-bottom: -80px;
+}
+
+/* .checkbox-container input:checked ~ .checkmark {
+  background-color: #2196f3;
+} */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  
+  transform: rotate(45deg);
+}
+
+/* additional request order */
+
+.card-addional  {
+  position: relative;
+  width: 95%;
+  border: 2px solid rgb(227, 223, 223);
+  border-radius: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  background-color: #fdfcfc;
+ 
+}
+.bordered {
+  border: 1px solid rgb(238, 232, 232);
+  padding: 1px;
+  width: 60%;
+  background-color:white;
+  margin-bottom: 10px;
+}
+
+.card-additioanl div{
+  border: hsl(180, 1%, 13%);
+  background-color: rgb(245, 244, 244);
+  border-radius: 1px;
+  width: 95%;
+  margin-left: 15px;
+  height: auto;
+  margin-top: -35px;
+
+}
+
+
+.card-service {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  height: 80px;
+}
+
+.checkbox-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.card-addional input {
+border: 2px solid #e3dfdf;
+ background-color: #f5f4f4;
+ border-radius: 1px;
+box-sizing: border-box;
+padding:20px 20px;
+margin-bottom: 10px;
+margin-top: -1px;
+}
+
+.card-addional p{
+  margin: 0;
+  padding: 0;
+}
+.addionalrequest{
+  margin-bottom: 10px;
+}
+
+.choose-service{
+  margin-top: -100px;
+}
+
+
+.chooseService {
+  position: relative;
+  width: 94%;
+  border: 2px solid #e3dfdf;
+  border-radius: 1px;
+  margin-top: -100px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  background-color: white;
+}
+
+textarea {
+  width: 80%;
+  height: 100px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #e4e2e2;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+/* order table */
+.order-table{
+  margin-top: -50px;
+}
+
+/* on order add vehicle */
+.add-vehicle{
+  margin-left: 22px;
+  margin-top: 20px;
 }

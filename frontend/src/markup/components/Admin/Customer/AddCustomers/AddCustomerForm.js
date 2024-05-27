@@ -15,6 +15,7 @@ function AddCustomerForm(props) {
   // Errors
   const [emailError, setEmailError] = useState("");
   const [firstNameRequired, setFirstNameRequired] = useState("");
+  const [lastNameRequired, setLastNameRequired] = useState("");
   const navigate = useNavigate();
   
   const [success, setSuccess] = useState(false);
@@ -40,6 +41,14 @@ function AddCustomerForm(props) {
     } else {
       setFirstNameRequired("");
     }
+
+    // Last name is required
+    if (!customer_last_name) {
+      setLastNameRequired("Last name is required");
+      valid = false;
+    } else {
+      setLastNameRequired("");
+    }
     // Email is required
     if (!customer_email) {
       setEmailError("Email is required");
@@ -55,7 +64,7 @@ function AddCustomerForm(props) {
         setEmailError("");
       }
     }
-    
+
     // If the form is not valid, do not submit
     if (!valid) {
       return;
@@ -65,7 +74,6 @@ function AddCustomerForm(props) {
       customer_first_name,
       customer_last_name,
       customer_phone_number,
-      
     };
 
     // Pass the form data to the service
@@ -75,27 +83,27 @@ function AddCustomerForm(props) {
     );
     newCustomer
       .then((response) => {
-    if (!response) {
-      throw new Error('Network response was not ok');
-    }
-    return response;
-  })
-  .then((data) => {
-    console.log(data);
-    // If Error is returned from the API server, set the error message
-    if (data.error) {
-      setServerError(data.error);
-    } else {
-      // Handle successful response
-      setSuccess(true);
-      setServerError("");
-      // Redirect to the home page after 2 seconds
-      setTimeout(() => {
-        // window.location.href = "/admin/customers";
-        navigate("/admin/customer/customers");
-      }, 2000);
-    }
-  })
+        if (!response) {
+          throw new Error("Network response was not ok");
+        }
+        return response;
+      })
+      .then((data) => {
+        console.log(data);
+        // If Error is returned from the API server, set the error message
+        if (data.error) {
+          setServerError(data.error);
+        } else {
+          // Handle successful response
+          setSuccess(true);
+          setServerError("");
+          // Redirect to the home page after 2 seconds
+          setTimeout(() => {
+            // window.location.href = "/admin/customers";
+            navigate("/admin/customer/customers");
+          }, 2000);
+        }
+      })
       // Handle Catch
       .catch((error) => {
         const resMessage =
