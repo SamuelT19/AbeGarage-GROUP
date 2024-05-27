@@ -128,6 +128,7 @@ function OrderDetails() {
         order_status: orderStatus,
         services: singleOrder.services,
       };
+      console.log(updatedOrder);
       await OrderService.updateOrderProgress(order_id, updatedOrder);
       alert("Order progress submitted successfully.");
     } catch (error) {

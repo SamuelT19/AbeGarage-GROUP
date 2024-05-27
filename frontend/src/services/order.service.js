@@ -57,6 +57,7 @@ const orderService = {
   getAllOrders,
   orderedServices,
   getOrderByID,
+  updateOrderProgress,
 };
 
 export default orderService;
