@@ -21,7 +21,7 @@ function OrderService() {
     additional_request_price: "",
   });
   const { employee } = useAuth();
-  const token = employee?.employee_token; 
+  const token = employee?.employee_token;
 
   const { customer_id } = useParams();
   const navigate = useNavigate();
@@ -122,7 +122,7 @@ function OrderService() {
       setServerError("");
       // Redirect to the order page after successful creation
       setTimeout(() => {
-        navigate("/admin/order/all");
+        navigate("/admin/order/orders");
       }, 2000);
     } catch (error) {
       console.error("Error creating order:", error);
@@ -139,7 +139,7 @@ function OrderService() {
         <div>
           <form onSubmit={handleSubmit}>
             <div>
-              <div className="chooseService">
+              <div className='chooseService'>
                 <p style={{ color: "navy", fontSize: "20px" }}>
                   <strong>Choose Services </strong>
                 </p>
@@ -156,29 +156,30 @@ function OrderService() {
                 )}
               </div>
             </div>
-            <div className="card-addional">
+            <div className='card-addional'>
               <div>
                 <p style={{ color: "navy", fontSize: "20px" }}>
                   <strong>
                     Additional Request <span style={{ color: "red" }}>___</span>
                   </strong>
-                </p><br/>
+                </p>
+                <br />
                 <textarea
-                  type="textarea"
-                  name="additional_request"
+                  type='textarea'
+                  name='additional_request'
                   value={order.additional_request}
                   onChange={handleChange}
-                  placeholder="Service description"
+                  placeholder='Service description'
                   style={{ width: "80%", height: "100px" }}
                 />
                 <div>
                   {/* <p>Price</p> */}
                   <input
-                    type="text"
-                    name="additional_request_price"
+                    type='text'
+                    name='additional_request_price'
                     value={order.additional_request_price}
                     onChange={handleChange}
-                    placeholder="Price"
+                    placeholder='Price'
                     style={{ width: "80%", height: "4px" }}
                   />
                 </div>
@@ -186,49 +187,48 @@ function OrderService() {
               <div>
                 <p>Estimated Completion Date: </p>
                 <input
-                  type="datetime-local"
-                  name="estimated_completion_date"
+                  type='datetime-local'
+                  name='estimated_completion_date'
                   value={order.estimated_completion_date}
                   onChange={handleChange}
-                  placeholder="Estimated Completion Date"
+                  placeholder='Estimated Completion Date'
                   style={{ width: "80%", height: "4px" }}
                 />
               </div>
               <div>
                 {/* <h6>Notes for Internal Use:</h6> */}
                 <textarea
-                  type="text"
-                  name="notes_for_internal_use"
+                  type='text'
+                  name='notes_for_internal_use'
                   value={order.notes_for_internal_use}
-                  placeholder="Notes for Internal Use"
+                  placeholder='Notes for Internal Use'
                   onChange={handleChange}
                 />
               </div>
               <div>
                 {/* <h6>Notes for Customer:</h6> */}
                 <textarea
-                  type="text"
-                  name="notes_for_customer"
+                  type='text'
+                  name='notes_for_customer'
                   value={order.notes_for_customer}
-                  placeholder="Notes for Customer"
+                  placeholder='Notes for Customer'
                   onChange={handleChange}
                 />
               </div>
               <div>
                 <p> Total Price: </p>
                 <input
-                  type="number"
+                  type='number'
                   value={totalPrice.toFixed(2)}
                   readOnly
-                  placeholder="Total price"
+                  placeholder='Total price'
                   style={{ width: "80%", height: "4px" }}
                 />
               </div>
               <button
                 style={{ width: "20%", marginBottom: "30px " }}
-                className="theme-btn btn-style-one"
-                type="submit"
-              >
+                className='theme-btn btn-style-one'
+                type='submit'>
                 Create Order
               </button>
             </div>
