@@ -546,7 +546,7 @@ ul .pagination {
 font-size: xx-large;
 font-weight: 900;
 }
-.image, .image-box{
+.image{
   background-color: #dbcdcd;
   height: 400px;
 }

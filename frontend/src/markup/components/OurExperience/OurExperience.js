@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import vban1 from '../../../assets/images/vban1.jpg';
+import vban2 from '../../../assets/images/vban2.jpg';
+
 
 function OurExperience() {
   return (
@@ -9,8 +12,8 @@ function OurExperience() {
           <div className="row">
             <div className="col-lg-5">
               <div className="image-box">
-                <img src="assets/images/resource/image-1.jpg" alt="Experience Image 1" />
-                <img src="assets/images/resource/image-2.jpg" alt="Experience Image 2" />
+               <img src={vban1} alt='Experience Image-1'/>
+                <img src= {vban2} alt="Experience Image 2" />
                 <div className="year-experience" data-parallax='{"y": 30}'>
                   <strong>24</strong> years <br /> Experience
                 </div>
