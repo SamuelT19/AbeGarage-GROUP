@@ -20,6 +20,7 @@ import EmployeeRouter from "./router/EmployeeRouter";
 import CustomerRouter from "./router/CustomerRouter";
 import OrderRouter from "./router/OrderRouter";
 import ServiceRouter from "./router/ServiceRouter";
+import OilChange from "./markup/pages/OilChange/OilChange";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path='/OilChange' element={<OilChange />} />
         <Route path='/' element={<Home />} />
         <Route path='/Services' element={<Services />} />
         <Route path='/About' element={<About />} />

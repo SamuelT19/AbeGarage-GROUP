@@ -557,3 +557,24 @@ font-weight: 900;
 .video-section, .page-title{
   background-color: #dbcdcd;
 }
+
+
+/* oil change page css starts here */
+.service-block-one{
+  padding-right: 8px;
+  padding-left: 1px;
+}
+.oil-change{
+  margin-right: 250px;
+  margin-left: 150px;
+}
+
+.oil-change-titles{
+  margin-left: 90px;
+  font-weight: 800;
+}
+.purpose{
+  margin-left: 60px;
+  font-weight: 600;
+}
+
