@@ -13,5 +13,8 @@ router.get("/api/order/all", orderController.getAllOrdersData);
 //route for edit by id a single order
 router.put("/api/order/edit", orderController.editOrder);
 
+//router for update order status
+router.put("/api/order/status", orderController.updateOrderProgress);
+
 //export router
 module.exports = router;

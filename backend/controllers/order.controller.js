@@ -87,9 +87,35 @@ const orderedServices = async (req, res) => {
   }
 };
 
+// implement orderprogress function
+
+const updateOrderProgress = async (req, res) => {
+  try {
+    const order_id = req.params.order_id;
+    const progress = req.body.progress;
+    console.log(order_id, progress);
+
+    const response = await orderService.updateOrderProgress(order_id, progress);
+
+    if (response) {
+      res.status(200).json({
+        message: "Order progress updated successfully",
+      });
+    } else {
+      res.status(400).json({
+        error: "Failed to update order progress",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 module.exports = {
   createOrder,
   getAllOrdersData,
   editOrder,
   orderedServices,
+  updateOrderProgress,
 };

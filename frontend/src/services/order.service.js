@@ -42,7 +42,7 @@ const getOrderByID = async (order_id) => {
 const updateOrderProgress = async (order_id, updatedOrder) => {
   try {
     const response = await axiosBase.put(
-      `/api/order/${order_id}`,
+      `/api/order/status/${order_id}`,
       updatedOrder
     );
     console.log(response);

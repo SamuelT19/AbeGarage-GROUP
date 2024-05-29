@@ -16,7 +16,7 @@ function OrderRouter() {
         }
       />
       <Route
-        path=':order_id/status/:order_status'
+        path=':orderId/status/:orderStatus/:orderHash?'
         element={
           <PrivateAuthRoute roles={[3, 2]}>
             <OrderDtail />

@@ -273,10 +273,52 @@ const editOrder = async (orderData) => {
   }
 };
 
+// Update order progress in the order_status table
+const updateOrderProgress = async (orderData) => {
+  try {
+    const order_id = orderData.order_id;
+
+    // Update order_status table
+    if (orderData.order_status) {
+      const query = `UPDATE order_status SET order_status = ? WHERE order_id = ?`;
+      const [rows] = await connection.execute(query, [
+        orderData.order_status,
+        order_id,
+      ]);
+      console.log(rows);
+      if (!rows) {
+        throw new Error("Failed to update order_status table");
+      }
+    }
+
+    // Update order_services table if necessary
+    if (orderData.order_services && orderData.order_services.length > 0) {
+      for (const service of orderData.order_services) {
+        if (service.service_completed !== undefined) {
+          const updateServiceQuery = `UPDATE order_services SET service_completed = ? WHERE order_id = ? AND service_id = ?`;
+          const [rows] = await connection.execute(updateServiceQuery, [
+            service.service_completed,
+            order_id,
+            service.service_id,
+          ]);
+
+          console.log(rows);
+          if (!rows) {
+            throw new Error("Failed to update order_services table");
+          }
+        }
+      }
+    }
+  } catch (error) {
+    throw new Error(`Failed to update order progress: ${error.message}`);
+  }
+};
+
 module.exports = {
   createOrder,
   orderedServices,
   getVehicleByOrderId,
   editOrder,
   getAllOrders,
+  updateOrderProgress,
 };
