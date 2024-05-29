@@ -2,7 +2,7 @@
 const mysql = require("mysql2/promise");
 // Prepare connection parameters we use to connect to the database
 const dbConfig = {
-  port: 8889,
+  // port: 8889,
   connectionLimit: 10,
   // socketPath: process.env.DB_SOCKET_PATH,
   password: process.env.DB_PASS,
