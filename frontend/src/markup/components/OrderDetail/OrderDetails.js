@@ -338,7 +338,9 @@ function OrderDetails() {
           </section>
           {!isReadOnly && (isEmployee || isAdmin || isManager) && (
             <div className='submit-progress'>
-              <button onClick={handleSubmitProgress} className='submit-button'>
+              <button
+                onClick={handleSubmitProgress}
+                className='theme-btn btn-style-one'>
                 Submit Progress
               </button>
             </div>

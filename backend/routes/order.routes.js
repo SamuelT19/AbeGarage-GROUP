@@ -14,7 +14,7 @@ router.get("/api/order/all", orderController.getAllOrdersData);
 router.put("/api/order/edit", orderController.editOrder);
 
 //router for update order status
-router.put("/api/order/status", orderController.updateOrderProgress);
+router.put("/api/order/status/:order_id", orderController.updateOrderProgress);
 
 //export router
 module.exports = router;
