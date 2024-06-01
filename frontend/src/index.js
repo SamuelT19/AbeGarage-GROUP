@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 // Import the AuthContext Provider
 import { AuthProvider } from './Contexts/AuthContext';
+import { CustomerProvider } from './Contexts/CustomerContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <CustomerProvider>
+          <App />
+        </CustomerProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -9,7 +9,6 @@ import { IoOpenOutline } from "react-icons/io5";
 import { MdNavigateNext } from "react-icons/md";
 import { ImLast, ImFirst } from "react-icons/im";
 import { GrFormPrevious } from "react-icons/gr";
-import { FaCircle } from "react-icons/fa"; // Import the circle icon from react-icons
 import CustomStatusIcon from "./CustomStatusIcon";
 
 const AllOrderList = () => {
@@ -51,8 +50,6 @@ const AllOrderList = () => {
 
     fetchOrders();
   }, [token]);
-  
-
 
   const filteredOrders = orders.filter((order) =>
     [
@@ -170,11 +167,16 @@ const AllOrderList = () => {
 
                         <td>
                           <div className="edit-delete-icons">
-                            <Link
-                              to={`/admin/order/edit/${data.customer.customer_id}`}
-                            >
-                              <FaEdit />
-                            </Link>
+                            {data.order.order_status === "complete" ||
+                            data.order.order_status === 3 ? (
+                              <FaEdit style={{ color: "gray" }} />
+                            ) : (
+                              <Link
+                                to={`/admin/order/edit/${data.order.order_id}`}
+                              >
+                                <FaEdit />
+                              </Link>
+                            )}
                             <Link to={`/admin/order/${data.order.order_id}`}>
                               <IoOpenOutline />
                             </Link>

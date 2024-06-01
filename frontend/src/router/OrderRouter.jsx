@@ -7,6 +7,7 @@ import OrderCustomersList from "../markup/pages/admin/order/OrderCustomerList";
 import OrderCustomerDetailInfo from "../markup/pages/admin/order/OrderCustomerDetailInfo";
 import AddNewOrder from "../markup/pages/admin/order/AddNewOrder";
 import Orders from "../markup/pages/admin/order/Orders";
+import EditOrder from "../markup/pages/admin/order/EditOrder";
 
 
 
@@ -19,7 +20,8 @@ function OrderRouter() {
         element={<OrderCustomerDetailInfo />}
       />
       <Route path="/new-order/vehicle/:customer_id" element={<AddNewOrder />} />
-      <Route path="/all" element={<Orders/>} />
+      <Route path="/all" element={<Orders />} />
+      <Route path="/edit/:order_id" element={<EditOrder />} />
     </Routes>
   );
 }

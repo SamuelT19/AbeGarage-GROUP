@@ -53,8 +53,7 @@ const getCustomerById = async (customer_id, token) => {
     },
   };
 
-  const response = await axiosBase.get(
-    `${api_url}/api/customer/${customer_id}`,
+  const response = await axiosBase.get(`${api_url}/api/customer/${customer_id}`,
     requestOptions
   );
   console.log(response);

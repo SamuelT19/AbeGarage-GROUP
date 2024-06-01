@@ -162,7 +162,8 @@ function OrderService() {
                   <strong>
                     Additional Request <span style={{ color: "red" }}>___</span>
                   </strong>
-                </p><br/>
+                </p>
+                <br />
                 <textarea
                   type="textarea"
                   name="additional_request"

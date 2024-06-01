@@ -30,7 +30,7 @@ router.get(
 // Create a route to handle the edit customer request on post
 router.put(
   "/api/customer/edit",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  // [authMiddleware.verifyToken, authMiddleware.isAdmin],
   customerController.editCustomer
 );
 // Create a route to handle the delete customer request on delete

@@ -1,19 +1,22 @@
-import React, { createContext, useState, useContext } from "react";
+// CustomerContext.js
+import { createContext, useState } from "react";
 
-export const CustomerContext = createContext();
+const CustomerContext = createContext();
 
 export const CustomerProvider = ({ children }) => {
-  const [customerData, setCustomerData] = useState(null);
-
-  const updateCustomerData = (data) => {
-    setCustomerData(data);
-  };
+  const [customerData, setCustomerData] = useState({
+    customer_email: "",
+    customer_first_name: "",
+    customer_last_name: "",
+    customer_phone_number: "",
+    active_customer_status: 1,
+  });
 
   return (
-    <CustomerContext.Provider value={{ customerData, updateCustomerData }}>
+    <CustomerContext.Provider value={{ customerData, setCustomerData }}>
       {children}
     </CustomerContext.Provider>
   );
 };
 
-export const useCustomerContext = () => useContext(CustomerContext);
+export default CustomerContext;

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
-import OrderCustomerInfo from "../OrderCustomerDetail/OrderCustomerInfo";
+
 import CustomerCard from "../OrderCustomerCard/CustomerCard";
-import customerContext from "../../../../../../src/Contexts/CustomerContext";
-import { CustomerProvider } from "../../../../../../src/Contexts/CustomerContext";
+
 import OrderVehicleCard from "../OrderVehicleCard/OrderVehicleCard";
 import { Link, useParams, useLocation } from "react-router-dom";
 import OrderService from "../OrderService/OrderService";

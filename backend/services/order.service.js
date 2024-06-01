@@ -81,7 +81,7 @@ const createOrder = async (orderData) => {
 
 const orderedServices = async (order_id) => {
   const sql =
-    "SELECT * FROM order_services JOIN common_services ON order_services.service_id = common_services.service_id WHERE order_services.order_id = ?";
+    "SELECT * FROM order_services JOIN common_services ON order_services.service_id = common_services.service_id JOIN order_info ON order_info.order_id = order_services.order_id WHERE order_services.order_id = ?";
   const rows = await query(sql, [order_id]);
   console.log(rows);
   return rows;
@@ -172,6 +172,111 @@ async function getAllOrders() {
 
 //edit order service
 
+// const editOrder = async (orderData) => {
+//   try {
+//     let success = false;
+//     await withTransaction(async (connection) => {
+//       const order_id = orderData.order_id;
+//       console.log(order_id);
+
+//       // Update orders table
+//       if (orderData.active_order) {
+//         const query1 = `UPDATE orders SET ${
+//           orderData.active_order ? "active_order = ?" : ""
+//         } WHERE order_id = ?`;
+//         const [rows1] = await connection.execute(query1, [
+//           orderData.active_order,
+//           order_id,
+//         ]);
+//         console.log(rows1);
+//         if (!rows1) {
+//           throw new Error("Failed to update active_order in orders table");
+//         }
+//       }
+
+//       // Update order_info table
+//       if (
+//         orderData.order_total_price ||
+//         orderData.estimated_completion_date ||
+//         orderData.completion_date ||
+//         orderData.additional_request ||
+//         orderData.notes_for_internal_use ||
+//         orderData.notes_for_customer ||
+//         orderData.additional_requests_completed ||
+//         orderData.additional_request_price 
+//       ) {
+//         const query2 = `UPDATE order_info SET
+//               order_total_price = ?,
+//               estimated_completion_date = ?,
+//               completion_date = ?,
+//               additional_request = ?,
+//               notes_for_internal_use = ?,
+//               notes_for_customer = ?,
+//               additional_requests_completed = ?,
+//               additional_request_price = ?,
+//               WHERE order_id = ?`;
+  
+
+//         const [rows2] = await connection.execute(query2, [
+//           orderData.order_total_price,
+//           orderData.estimated_completion_date,
+//           orderData.completion_date,
+//           orderData.additional_request,
+//           orderData.notes_for_internal_use,
+//           orderData.notes_for_customer,
+//           orderData.additional_requests_completed,
+//           orderData.additional_request_price,
+//           order_id,
+//         ]);
+//         console.log(rows2);
+//         if (!rows2) {
+//           throw new Error("Failed to update order_info table");
+//         }
+//       }
+
+//       // Update order_status table
+//       if (orderData.order_status) {
+//         const query3 = `UPDATE order_status SET 
+//       ${orderData.order_status ? "order_status = ?" : ""} WHERE order_id = ?`;
+//         const [rows3] = await connection.execute(query3, [
+//           orderData.order_status,
+//           order_id,
+//         ]);
+//         console.log(rows3);
+//         if (!rows3) {
+//           throw new Error("Failed to update order_status table");
+//         }
+//       }
+
+//       // Update order_services table
+//       if (orderData.order_services && orderData.order_services.length > 0) {
+//         for (const service of orderData.order_services) {
+//           if (service.service_completed) {
+//             const updateServiceQuery = `UPDATE order_services SET 
+//              ${
+//                service.service_completed ? "service_completed = ?" : ""
+//              } WHERE order_id = ? AND service_id = ?`;
+//             const [rows4] = await connection.execute(updateServiceQuery, [
+//               service.service_completed,
+//               order_id,
+//               service.service_id,
+//             ]);
+
+//             console.log(rows4);
+//             if (!rows4) {
+//               throw new Error("Failed to update order_services table");
+//             }
+//           }
+//         }
+//       }
+//       success = true;
+//     });
+//     return success; // Return true if everything is successful
+//   } catch (error) {
+//     console.log("Transaction error:", error);
+//     throw error; // Throw the error to trigger the rollback
+//   }
+// };
 const editOrder = async (orderData) => {
   try {
     let success = false;
@@ -180,69 +285,88 @@ const editOrder = async (orderData) => {
       console.log(order_id);
 
       // Update orders table
-      if (orderData.active_order) {
-        const query1 = `UPDATE orders SET ${
-          orderData.active_order ? "active_order = ?" : ""
-        } WHERE order_id = ?`;
+      if (orderData.active_order !== undefined) {
+        const query1 = `UPDATE orders SET active_order = ? WHERE order_id = ?`;
         const [rows1] = await connection.execute(query1, [
           orderData.active_order,
           order_id,
         ]);
         console.log(rows1);
-        if (!rows1) {
+        if (!rows1.affectedRows) {
           throw new Error("Failed to update active_order in orders table");
         }
       }
 
       // Update order_info table
       if (
-        orderData.order_total_price ||
-        orderData.estimated_completion_date ||
-        orderData.completion_date ||
-        orderData.additional_request ||
-        orderData.notes_for_internal_use ||
-        orderData.notes_for_customer ||
-        orderData.additional_requests_completed ||
-        orderData.additional_request_price
+        orderData.order_total_price !== undefined ||
+        orderData.estimated_completion_date !== undefined ||
+        orderData.completion_date !== undefined ||
+        orderData.additional_request !== undefined ||
+        orderData.notes_for_internal_use !== undefined ||
+        orderData.notes_for_customer !== undefined ||
+        orderData.additional_requests_completed !== undefined ||
+        orderData.additional_request_price !== undefined
       ) {
-        const query2 = `UPDATE order_info SET
-              order_total_price = ?,
-              estimated_completion_date = ?,
-              completion_date = ?,
-              additional_request = ?,
-              notes_for_internal_use = ?,
-              notes_for_customer = ?,
-              additional_requests_completed = ?
-              orderData.additional_request_price = ?
-              WHERE order_id = ?`;
+        let query2 = `UPDATE order_info SET `;
+        const values2 = [];
 
-        const [rows2] = await connection.execute(query2, [
-          orderData.order_total_price,
-          orderData.estimated_completion_date,
-          orderData.completion_date,
-          orderData.additional_request,
-          orderData.notes_for_internal_use,
-          orderData.notes_for_customer,
-          orderData.additional_requests_completed,
-          orderData.additional_request_price,
-          order_id,
-        ]);
+        if (orderData.order_total_price !== undefined) {
+          query2 += `order_total_price = ?, `;
+          values2.push(orderData.order_total_price);
+        }
+        if (orderData.estimated_completion_date !== undefined) {
+          query2 += `estimated_completion_date = ?, `;
+          values2.push(orderData.estimated_completion_date);
+        }
+        if (orderData.completion_date !== undefined) {
+          query2 += `completion_date = ?, `;
+          values2.push(orderData.completion_date);
+        }
+        if (orderData.additional_request !== undefined) {
+          query2 += `additional_request = ?, `;
+          values2.push(orderData.additional_request);
+        }
+        if (orderData.notes_for_internal_use !== undefined) {
+          query2 += `notes_for_internal_use = ?, `;
+          values2.push(orderData.notes_for_internal_use);
+        }
+        if (orderData.notes_for_customer !== undefined) {
+          query2 += `notes_for_customer = ?, `;
+          values2.push(orderData.notes_for_customer);
+        }
+        if (orderData.additional_requests_completed !== undefined) {
+          query2 += `additional_requests_completed = ?, `;
+          values2.push(orderData.additional_requests_completed);
+        }
+        if (orderData.additional_request_price !== undefined) {
+          query2 += `additional_request_price = ?, `;
+          values2.push(orderData.additional_request_price);
+        }
+
+        // Remove the trailing comma and space
+        query2 = query2.slice(0, -2);
+
+        // Add WHERE clause
+        query2 += ` WHERE order_id = ?`;
+        values2.push(order_id);
+
+        const [rows2] = await connection.execute(query2, values2);
         console.log(rows2);
-        if (!rows2) {
+        if (!rows2.affectedRows) {
           throw new Error("Failed to update order_info table");
         }
       }
 
       // Update order_status table
-      if (orderData.order_status) {
-        const query3 = `UPDATE order_status SET 
-      ${orderData.order_status ? "order_status = ?" : ""} WHERE order_id = ?`;
+      if (orderData.order_status !== undefined) {
+        const query3 = `UPDATE order_status SET order_status = ? WHERE order_id = ?`;
         const [rows3] = await connection.execute(query3, [
           orderData.order_status,
           order_id,
         ]);
         console.log(rows3);
-        if (!rows3) {
+        if (!rows3.affectedRows) {
           throw new Error("Failed to update order_status table");
         }
       }
@@ -250,11 +374,8 @@ const editOrder = async (orderData) => {
       // Update order_services table
       if (orderData.order_services && orderData.order_services.length > 0) {
         for (const service of orderData.order_services) {
-          if (service.service_completed) {
-            const updateServiceQuery = `UPDATE order_services SET 
-             ${
-               service.service_completed ? "service_completed = ?" : ""
-             } WHERE order_id = ? AND service_id = ?`;
+          if (service.service_completed !== undefined) {
+            const updateServiceQuery = `UPDATE order_services SET service_completed = ? WHERE order_id = ? AND service_id = ?`;
             const [rows4] = await connection.execute(updateServiceQuery, [
               service.service_completed,
               order_id,
@@ -262,7 +383,7 @@ const editOrder = async (orderData) => {
             ]);
 
             console.log(rows4);
-            if (!rows4) {
+            if (!rows4.affectedRows) {
               throw new Error("Failed to update order_services table");
             }
           }
@@ -276,6 +397,7 @@ const editOrder = async (orderData) => {
     throw error; // Throw the error to trigger the rollback
   }
 };
+
 
 module.exports = {
   createOrder,

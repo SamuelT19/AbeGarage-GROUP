@@ -61,7 +61,40 @@ const getAllOrder = async (token) => {
   return response;
 };
 
+// A function to send get request to get order by order id
+const getOrderByOrderId = async (order_id, token) => {
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
 
+  const response = await axiosBase.get(
+    `${api_url}/api/order/single/${order_id}`,
+    requestOptions
+  );
+  console.log(response);
+  return response;
+};
+
+const updateOrder = async (formData, token) => {
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+
+  const response = await axiosBase.put(
+    `${api_url}/api/order/edit`,
+  
+    formData,
+    requestOptions
+  );
+  console.log(response);
+  return response;
+};
 
 
 // Export all the functions
@@ -69,5 +102,7 @@ const orderService = {
   getAllServices,
   createOrder,
   getAllOrder,
+  getOrderByOrderId,
+  updateOrder,
 };
 export default orderService;
