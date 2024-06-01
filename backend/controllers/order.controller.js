@@ -61,10 +61,12 @@ async function editOrder(req, res, next) {
   }
 }
 
-const orderedServices = async (req, res) => {
+const singleOrder = async (req, res) => {
   try {
     const order_id = req.params.order_id;
     console.log(order_id);
+    //
+    const orderData = await orderService.getOrderByID(order_id);
 
     const services = await orderService.orderedServices(order_id);
 
@@ -79,6 +81,7 @@ const orderedServices = async (req, res) => {
         message: "single order fetched successfully",
         services,
         customerVehicle,
+        orderData,
       });
     }
   } catch (error) {
@@ -88,27 +91,17 @@ const orderedServices = async (req, res) => {
 };
 
 // implement orderprogress function
-
 const updateOrderProgress = async (req, res) => {
+  const { order_id } = req.params;
+  const orderData = req.body;
+
+  console.log("Received payload:", orderData);
+
   try {
-    const order_id = req.params.order_id;
-    const progress = req.body.progress;
-    console.log(order_id, progress);
-
-    const response = await orderService.updateOrderProgress(order_id, progress);
-
-    if (response) {
-      res.status(200).json({
-        message: "Order progress updated successfully",
-      });
-    } else {
-      res.status(400).json({
-        error: "Failed to update order progress",
-      });
-    }
+    const result = await updateOrderProgress(order_id, orderData);
+    res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    return error;
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -116,6 +109,6 @@ module.exports = {
   createOrder,
   getAllOrdersData,
   editOrder,
-  orderedServices,
+  singleOrder,
   updateOrderProgress,
 };

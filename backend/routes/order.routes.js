@@ -5,7 +5,7 @@ const orderController = require("../controllers/order.controller");
 //route for create new order
 router.post("/api/order/new", orderController.createOrder);
 
-router.get("/api/order/single/:order_id", orderController.orderedServices);
+router.get("/api/order/single/:order_id", orderController.singleOrder);
 
 //route for get all orders
 router.get("/api/order/all", orderController.getAllOrdersData);

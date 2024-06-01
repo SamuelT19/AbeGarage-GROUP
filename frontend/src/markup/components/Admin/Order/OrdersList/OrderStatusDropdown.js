@@ -3,6 +3,7 @@ import OrderService from "../../../../../services/order.service";
 
 const OrderStatusDropdown = ({ orderStatus, orderId, onUpdateStatus }) => {
   const [status, setStatus] = useState(orderStatus);
+  // const [serviceStatus, setServiceStatus] = useState(statusCode);
 
   useEffect(() => {
     setStatus(orderStatus);
@@ -26,6 +27,7 @@ const OrderStatusDropdown = ({ orderStatus, orderId, onUpdateStatus }) => {
   const handleStatusChange = async (event) => {
     const newStatus = Number(event.target.value);
     setStatus(newStatus);
+    console.log(newStatus);
     try {
       await OrderService.updateOrderStatus(orderId, newStatus);
       onUpdateStatus(newStatus);
@@ -49,3 +51,31 @@ const OrderStatusDropdown = ({ orderStatus, orderId, onUpdateStatus }) => {
 };
 
 export default OrderStatusDropdown;
+
+// // import React from "react";
+
+// import { Dropdown } from "react-bootstrap";
+// import { statusLabels } from "../../../../../util/statusUtils";
+
+// const OrderStatusDropdown = ({ statusCode, onUpdateStatus }) => {
+//   const handleSelect = (eventKey) => {
+//     onUpdateStatus(Number(eventKey));
+//   };
+
+//   return (
+//     <Dropdown onSelect={handleSelect}>
+//       <Dropdown.Toggle variant='success' id='dropdown-basic'>
+//         {statusLabels[statusCode]}
+//       </Dropdown.Toggle>
+//       <Dropdown.Menu>
+//         {Object.entries(statusLabels).map(([key, label]) => (
+//           <Dropdown.Item key={key} eventKey={key}>
+//             {label}
+//           </Dropdown.Item>
+//         ))}
+//       </Dropdown.Menu>
+//     </Dropdown>
+//   );
+// };
+
+// export default OrderStatusDropdown;
