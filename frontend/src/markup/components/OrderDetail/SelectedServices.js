@@ -11,10 +11,10 @@ function SelectedServices({
   const selectedServices = singleOrder?.services || [];
   const customerVehicle = singleOrder?.customerVehicle || {};
 
-  useEffect(() => {
-    // Debugging: Log the selected services and their completion status
-    console.log("Selected Services:", selectedServices);
-  }, [selectedServices]);
+  // useEffect(() => {
+  //   // Debugging: Log the selected services and their completion status
+  //   console.log("Selected Services:", selectedServices);
+  // }, [selectedServices]);
 
   return (
     <div>
@@ -52,13 +52,11 @@ function SelectedServices({
                                 </span>
                               ) : (
                                 <OrderStatusDropdown
+                                  statusType='service'
                                   orderStatus={service.service_completed}
-                                  onUpdateStatus={(status) =>
-                                    handleServiceCompletionChange(
-                                      service.service_id,
-                                      status
-                                    )
-                                  }
+                                  selectedServicesId={service.order_service_id}
+                                  onUpdateStatus={handleServiceCompletionChange}
+                                 
                                 />
                               )}
                             </div>

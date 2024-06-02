@@ -364,17 +364,18 @@ function OrderDetails() {
   const [singleOrder, setSingleOrder] = useState({});
   const [orderStatus, setOrderStatus] = useState(null);
   const [updatedServices, setUpdatedServices] = useState([]);
+  const [updatedOrder, setupdatedOrder] = useState({});
   const { orderId, orderHash } = useParams();
   const { isEmployee, isAdmin, isManager } = useAuth();
 
-  console.log(orderId);
-  console.log(orderHash);
+  // console.log(orderId);
+  // console.log(orderHash);
+
   useEffect(() => {
     const fetchOrder = async () => {
       try {
         const response = await OrderService.getOrderByID(orderId);
         setSingleOrder(response);
-        // setOrderStatus(response.order_status || Number(order_status));
       } catch (error) {
         console.error(error);
       }
@@ -382,26 +383,31 @@ function OrderDetails() {
     fetchOrder();
   }, [orderId]);
 
-  console.log(singleOrder.orderData);
-  const handleStatusUpdate = (status) => {
+  // console.log(singleOrder.orderData);
+  const handleOrderStatusUpdate = (order_id, status) => {
     setOrderStatus(status);
+    setupdatedOrder({ order_id: order_id, order_status: orderStatus });
+    console.log(updatedOrder);
   };
 
-  const handleServiceCompletionChange = (serviceId, completed) => {
+  const handleServiceStatusUpdate = (serviceId, completed) => {
     const updatedService = {
       order_service_id: serviceId,
       service_completed: completed,
     };
 
     setUpdatedServices((prevServices) => {
-      const existingService = prevServices.find(
+      const existingServiceIndex = prevServices.findIndex(
         (service) => service.order_service_id === serviceId
       );
-      if (existingService) {
-        return prevServices.map((service) =>
-          service.order_service_id === serviceId ? updatedService : service
-        );
+
+      if (existingServiceIndex !== -1) {
+        // If the service exists in the state, update its status
+        const updatedServices = [...prevServices];
+        updatedServices[existingServiceIndex] = updatedService;
+        return updatedServices;
       } else {
+        // If the service does not exist, add it to the state
         return [...prevServices, updatedService];
       }
     });
@@ -414,6 +420,8 @@ function OrderDetails() {
         order_services: updatedServices, // Ensure this is an array of objects with service_id and service_completed
       };
 
+      console.log("Submitting order update:", updatedOrder);
+
       await OrderService.updateOrderProgress(orderId, updatedOrder);
       alert("Order progress submitted successfully.");
     } catch (error) {
@@ -423,11 +431,12 @@ function OrderDetails() {
   };
 
   const customerVehicle = singleOrder?.customerVehicle || {};
-  const services = singleOrder?.services || [];
+  // const services = singleOrder?.services || [];
   const order = singleOrder.orderData || {};
+  // const isReadOnly = Boolean(orderHash == order.order_hash);
   const isReadOnly = Boolean(orderHash);
 
-  console.log(services);
+  // console.log(services);
 
   return (
     <section className='contact-section'>
@@ -440,9 +449,10 @@ function OrderDetails() {
             </h2>
             {!isReadOnly && (isEmployee || isAdmin || isManager) ? (
               <OrderStatusDropdown
+                statusType='order'
                 orderStatus={order.order_status}
                 orderId={orderId}
-                onUpdateStatus={handleStatusUpdate}
+                onUpdateStatus={handleOrderStatusUpdate}
               />
             ) : (
               <span
@@ -474,7 +484,7 @@ function OrderDetails() {
               </div>
               <SelectedServices
                 singleOrder={singleOrder}
-                handleServiceCompletionChange={handleServiceCompletionChange}
+                handleServiceCompletionChange={handleServiceStatusUpdate}
                 isReadOnly={isReadOnly}
               />
             </div>

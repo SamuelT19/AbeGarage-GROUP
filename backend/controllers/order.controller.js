@@ -98,7 +98,7 @@ const updateOrderProgress = async (req, res) => {
   console.log("Received payload:", orderData);
 
   try {
-    const result = await updateOrderProgress(order_id, orderData);
+    const result = await orderService.updateOrderProgress(order_id, orderData);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });

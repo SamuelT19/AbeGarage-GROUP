@@ -301,17 +301,19 @@ const updateOrderProgress = async (order_id, orderData) => {
 
       // Update services in the order_services table
       for (const service of orderData.order_services) {
-        if (service.service_completed !== undefined && service.service_id) {
+        if (
+          service.service_completed !== undefined &&
+          service.order_service_id
+        ) {
           const updateServiceQuery =
-            "UPDATE order_services SET service_completed = ? WHERE order_id = ? AND service_id = ?";
+            "UPDATE order_services SET service_completed = ? WHERE order_service_id = ?";
           const [rows2] = await connection.execute(updateServiceQuery, [
             service.service_completed,
-            order_id,
-            service.service_id,
+            service.order_service_id,
           ]);
           if (rows2.affectedRows === 0) {
             throw new Error(
-              `Failed to update service with id ${service.service_id} in order_services table`
+              `Failed to update service with id ${service.order_service_id} in order_services table`
             );
           }
         }
