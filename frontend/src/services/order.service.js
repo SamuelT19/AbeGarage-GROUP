@@ -85,7 +85,7 @@ const orderedServices = async (order_id) => {
   }
 };
 
-//get orere by id
+//get order by id
 const getOrderByID = async (order_id) => {
   try {
     const response = await axiosBase.get(`/api/order/single/${order_id}`);
@@ -93,6 +93,20 @@ const getOrderByID = async (order_id) => {
     return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch order by id: ${error.message}`);
+  }
+};
+
+// Update order progress
+const updateOrderProgress = async (order_id, updatedOrder) => {
+  try {
+    const response = await axiosBase.put(
+      `/api/order/status/${order_id}`,
+      updatedOrder
+    );
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to update order progress: ${error.message}`);
   }
 };
 
@@ -104,5 +118,6 @@ const orderService = {
   getAllOrders,
   orderedServices,
   getOrderByID,
+  updateOrderProgress,
 };
 export default orderService;

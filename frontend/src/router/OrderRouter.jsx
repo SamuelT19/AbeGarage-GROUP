@@ -8,7 +8,7 @@ import OrderCustomerDetailInfo from "../markup/pages/admin/order/OrderCustomerDe
 import AddNewOrder from "../markup/pages/admin/order/AddNewOrder";
 // import Orders from "../markup/pages/admin/order/";
 import Orders from "../markup/pages/admin/order/Orders";
-import OrderDetail from "../markup/pages/OrderDetails/OrderDetails";
+import OrderDtail from "../markup/pages/OrderDetails/OrderDetails";
 
 function OrderRouter() {
   return (
@@ -29,10 +29,10 @@ function OrderRouter() {
         }
       />
       <Route
-        path=':order_id/status/:order_status'
+        path=':orderId/:orderHash?'
         element={
           <PrivateAuthRoute roles={[3, 2]}>
-            <OrderDetail />
+            <OrderDtail />
           </PrivateAuthRoute>
         }
       />

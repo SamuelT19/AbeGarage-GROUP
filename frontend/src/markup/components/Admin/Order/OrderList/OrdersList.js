@@ -6,7 +6,11 @@ import { IoOpenOutline } from "react-icons/io5";
 import { useAuth } from "../../../../../Contexts/AuthContext";
 import Orderservice from "../../../../../services/order.service";
 import { format } from "date-fns";
-import OrderStatusLabel from "./OrderStatusLabel";
+// import OrderStatusLabel from "./OrderStatusLabel";
+import {
+  getStatusClass,
+  orderStatusLabels,
+} from "../../../../../util/statusUtils"; // Adjust the import path if necessary
 
 function OrdersList() {
   const [orderData, setOrderData] = useState([]);
@@ -80,7 +84,13 @@ function OrdersList() {
                   </td>
 
                   <td className='align-middle center'>
-                    <OrderStatusLabel statusCode={order.order.order_status} />
+                    {/* <OrderStatusLabel statusCode={order.order.order_status} /> */}
+                    <span
+                      className={`status-label ${getStatusClass(
+                        order.order.order_status
+                      )}`}>
+                      {orderStatusLabels[order.order.order_status]}
+                    </span>
                   </td>
 
                   <td className='center align-middle'>
@@ -91,7 +101,7 @@ function OrdersList() {
                     </Link>
                     <Link
                       key={order.order.order_id}
-                      to={`/admin/order/${order.order.order_id}/status/${order.order.order_status}`}>
+                      to={`/admin/order/${order.order.order_id}`}>
                       <IoOpenOutline />
                     </Link>
                   </td>

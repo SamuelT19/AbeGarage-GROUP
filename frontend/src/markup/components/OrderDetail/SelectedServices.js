@@ -1,7 +1,14 @@
 import React from "react";
-import OrderStatusLabel from "../../components/Admin/Order/OrderList/OrderStatusLabel";
+// import OrderStatusLabel from "../../components/Admin/Order/OrderList/OrderStatusLabel";
+import { useEffect } from "react";
+import OrderStatusDropdown from "../../components/Admin/Order/OrderList/OrderStatusDropdown";
+import { getStatusClass, orderStatusLabels } from "../../../util/statusUtils";
 
-function SelectedServices({ singleOrder }) {
+function SelectedServices({
+  singleOrder,
+  handleServiceCompletionChange,
+  isReadOnly,
+}) {
   const selectedServices = singleOrder?.services || [];
   const customerVehicle = singleOrder?.customerVehicle || {};
 
@@ -33,9 +40,29 @@ function SelectedServices({ singleOrder }) {
                                 <div>{service.service_description}</div>
                               </div>
                               <div>
-                                <OrderStatusLabel
-                                  statusCode={service.service_completed}
-                                />
+                                {isReadOnly ? (
+                                  <span
+                                    className={`status-label ${getStatusClass(
+                                      service.service_completed
+                                    )}`}>
+                                    {
+                                      orderStatusLabels[
+                                        service.service_completed
+                                      ]
+                                    }
+                                  </span>
+                                ) : (
+                                  <OrderStatusDropdown
+                                    statusType='service'
+                                    orderStatus={service.service_completed}
+                                    selectedServicesId={
+                                      service.order_service_id
+                                    }
+                                    onUpdateStatus={
+                                      handleServiceCompletionChange
+                                    }
+                                  />
+                                )}
                               </div>
                             </div>
                           ))}
