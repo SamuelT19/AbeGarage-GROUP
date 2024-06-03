@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import orderService from "../../../../../services/order.service";
 import { useAuth } from "../../../../../Contexts/AuthContext";
 import ServiceCard from "../ServiceCard/ServiceCard";
 import { useNavigate, useParams } from "react-router-dom";
 import OrderVehicleCard from "../OrderVehicleCard/OrderVehicleCard";
-import CustomerContext from "../../../../../Contexts/CustomerContext";
 import OrderCustomerCard from "../OrderCustomerCard/OrderCustomerCard";
 
 function EditOrderForm() {
-  const { customerData } = useContext(CustomerContext);
   const [services, setServices] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -17,13 +15,13 @@ function EditOrderForm() {
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState(false);
   const [customerVehicle, setCustomerVehicle] = useState({});
-
   const [order, setOrder] = useState({
     additional_request: "",
     estimated_completion_date: "",
     notes_for_internal_use: "",
     notes_for_customer: "",
     additional_request_price: "",
+    
   });
 
   const { employee } = useAuth();
@@ -62,12 +60,14 @@ function EditOrderForm() {
         const data = response.data;
         console.log("Order data:", data);
 
+   
         setOrder({
           additional_request: data.services[0].additional_request,
           estimated_completion_date: data.services[0].estimated_completion_date,
           notes_for_internal_use: data.services[0].notes_for_internal_use,
           notes_for_customer: data.services[0].notes_for_customer,
           additional_request_price: data.services[0].additional_request_price,
+          
         });
 
         setSelectedServices(data.services);
@@ -120,13 +120,19 @@ function EditOrderForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setOrder((prev) => {
-      const updatedOrder = { ...prev, [name]: value };
+      let updatedValue = value;
+      // Parse the value to a number if it's not empty
+      if (name === "additional_request_price" && value !== "") {
+        updatedValue = parseFloat(value.replace(/\$|,/g, ""));
+      }
+      const updatedOrder = { ...prev, [name]: updatedValue };
       if (name === "additional_request_price") {
-        calculateTotalPrice(selectedServices, value);
+        calculateTotalPrice(selectedServices, updatedValue);
       }
       return updatedOrder;
     });
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -139,15 +145,14 @@ function EditOrderForm() {
       active_order: 1,
       order_total_price: totalPrice,
       estimated_completion_date: order.estimated_completion_date || null,
-      completion_date: null,
       additional_request: order.additional_request || "",
       notes_for_internal_use: order.notes_for_internal_use || "",
       notes_for_customer: order.notes_for_customer || "",
       additional_requests_completed: 0,
       order_status: 1,
       order_services: selectedServices.map((service) => ({
-        service_id: service.service_id,
-        service_completed: 1,
+      service_id: service.service_id,
+      service_completed: 1,
       })),
       additional_request_price: order.additional_request_price,
     };
@@ -170,6 +175,12 @@ function EditOrderForm() {
       setApiErrorMessage("Failed to update order. Please try again.");
     }
   };
+    const formatPrice = (price) => {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(price);
+    };
 
   return (
     <div>
@@ -211,104 +222,116 @@ function EditOrderForm() {
                 )}
               </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="additional_request">Additional Request</label>
-              <input
-                type="text"
-                name="additional_request"
-                value={order.additional_request}
-                onChange={handleChange}
-                className="form-control"
-                id="additional_request"
-                placeholder="Enter any additional requests"
-                style={{ width: "80%" }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="additional_request_price">
-                Additional Request Price
-              </label>
-              <input
-                type="number"
-                name="additional_request_price"
-                value={order.additional_request_price}
-                onChange={handleChange}
-                // disabled={!order.additional_request}
-                className="form-control"
-                id="additional_request_price"
-                placeholder="Enter price for additional requests"
-                style={{ width: "80%" }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="estimated_completion_date">
-                Estimated Completion Date
-              </label>
-              <input
-                type="datetime-local"
-                name="estimated_completion_date"
-                value={order.estimated_completion_date}
-                onChange={handleChange}
-                className="form-control"
-                id="estimated_completion_date"
-                style={{ width: "80%" }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="notes_for_internal_use">
-                Notes for Internal Use
-              </label>
-              <textarea
-                type="textarea"
-                name="notes_for_internal_use"
-                value={order.notes_for_internal_use}
-                onChange={handleChange}
-                placeholder="Notes for internal use"
-                className="form-control"
-                id="notes_for_internal_use"
-                style={{ width: "80%", height: "30px" }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="notes_for_customer">Notes for Customer</label>
-              <textarea
-                type="textarea"
-                name="notes_for_customer"
-                value={order.notes_for_customer}
-                onChange={handleChange}
-                placeholder="Notes for customer"
-                className="form-control"
-                id="notes_for_customer"
-                style={{ width: "80%", height: "30px" }}
-              />
-            </div>
-            <div>
-              <p> Total Price: </p>
-              <input
-                type="number"
-                value={totalPrice.toFixed(2)}
-                readOnly
-                placeholder="Total price"
-                style={{ width: "80%", height: "30px" }}
-              />
-            </div>
-            <div>
-              <button
-                style={{
-                  width: "20%",
-                  marginBottom: "100px ",
-                  marginTop: "10px ",
-                }}
-                className="theme-btn btn-style-one"
-                type="submit"
-              >
-                Submit
-              </button>
+            <div className="card-addional edit-card-additional">
+              <div className="form-group">
+                <p
+                  htmlFor="additional_request"
+                  style={{
+                    color: "navy",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Additional Request
+                  <span style={{ color: "red" }}>___</span>
+                </p>
+                <input
+                  type="textarea"
+                  name="additional_request"
+                  value={order.additional_request}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="additional_request"
+                  placeholder="Enter any additional requests"
+                  style={{ width: "80%" }}
+                />
+              </div>
+              <div className="form-group">
+                <p htmlFor="additional_request_price">
+                  Additional Request Price
+                </p>
+                <input
+                  type="text"
+                  name="additional_request_price"
+                  value={formatPrice(order.additional_request_price)}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="additional_request_price"
+                  placeholder="Enter price for additional requests"
+                  style={{ width: "80%" }}
+                />
+                <span></span>
+              </div>
+              <div className="form-group">
+                <p htmlFor="estimated_completion_date">
+                  Estimated Completion Date
+                </p>
+                <input
+                  type="datetime-local"
+                  name="estimated_completion_date"
+                  value={order.estimated_completion_date}
+                  onChange={handleChange}
+                  placeholder="Estimated Completion Date"
+                  style={{ width: "80%", height: "4px" }}
+                />
+              </div>
+              <div className="form-group">
+                <p htmlFor="notes_for_internal_use">Notes for Internal Use</p>
+                <textarea
+                  type="textarea"
+                  name="notes_for_internal_use"
+                  value={order.notes_for_internal_use}
+                  onChange={handleChange}
+                  placeholder="Notes for internal use"
+                  className="form-control"
+                  id="notes_for_internal_use"
+                  style={{ width: "80%", height: "50px" }}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="notes_for_customer">Notes for Customer</label>
+                <textarea
+                  type="textarea"
+                  name="notes_for_customer"
+                  value={order.notes_for_customer}
+                  onChange={handleChange}
+                  placeholder="Notes for customer"
+                  className="form-control"
+                  id="notes_for_customer"
+                  style={{ width: "80%", height: "50px" }}
+                />
+              </div>
+              <div>
+                <p> Total Price: </p>
+                <input
+                  type="text"
+                  value={formatPrice(totalPrice.toFixed(2))}
+                  readOnly
+                  placeholder="Total price"
+                  style={{ width: "80%", height: "30px" }}
+                />
+              </div>
+              <div>
+                <button
+                  style={{
+                    width: "20%",
+                    marginBottom: "100px ",
+                    marginTop: "10px ",
+                  }}
+                  className="theme-btn btn-style-one"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </form>
           {serverError && <p style={{ color: "red" }}>{serverError}</p>}
           {success && (
-            <p style={{ color: "green" }}>Order updated successfully!</p>
+            <p style={{ color: "green", fontSize: "20px" }}>
+              Order updated successfully!
+            </p>
           )}
         </div>
       )}

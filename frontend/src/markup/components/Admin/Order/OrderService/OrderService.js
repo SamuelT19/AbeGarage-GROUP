@@ -21,7 +21,7 @@ function OrderService() {
     additional_request_price: "",
   });
   const { employee } = useAuth();
-  const token = employee?.employee_token; 
+  const token = employee?.employee_token;
 
   const { customer_id } = useParams();
   const navigate = useNavigate();
@@ -74,19 +74,31 @@ function OrderService() {
       selectedServices.reduce(
         (total, service) => total + (parseFloat(service.service_price) || 0),
         0
-      ) + (parseFloat(additionalRequestPrice) || 0);
+      ) + (parseFloat(additionalRequestPrice.replace(/[^0-9.]/g, "")) || 0);
     setTotalPrice(total);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setOrder((prev) => {
-      const updatedOrder = { ...prev, [name]: value };
+      let updatedValue = value;
       if (name === "additional_request_price") {
-        calculateTotalPrice(selectedServices, value);
+        updatedValue = value.replace(/[^0-9.]/g, "");
+        calculateTotalPrice(selectedServices, updatedValue);
       }
-      return updatedOrder;
+      return { ...prev, [name]: updatedValue };
     });
+  };
+
+  //* Format the additional_request_price to currency format only when the input field loses focus.
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === "additional_request_price") {
+      setOrder((prev) => ({
+        ...prev,
+        [name]: formatPrice(value),
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -97,7 +109,7 @@ function OrderService() {
       customer_id: parseInt(customer_id, 10),
       vehicle_id: vehicle?.vehicle_id || 0,
       active_order: 1,
-      order_total_price: totalPrice,
+      order_total_price: totalPrice.toFixed(2),
       estimated_completion_date: order.estimated_completion_date || null,
       completion_date: null,
       additional_request: order.additional_request || "",
@@ -109,18 +121,17 @@ function OrderService() {
         service_id: service.service_id,
         service_completed: 1,
       })),
-      additional_request_price: order.additional_request_price,
+      additional_request_price:
+        parseFloat(order.additional_request_price.replace(/[^0-9.]/g, "")) || 0,
     };
 
     console.log("Order data being sent:", orderData);
 
     try {
       const response = await orderService.createOrder(orderData, token);
-      console.log(response); // Log the response
-      // Handle successful response
+      console.log(response);
       setSuccess(true);
       setServerError("");
-      // Redirect to the order page after successful creation
       setTimeout(() => {
         navigate("/admin/order/all");
       }, 2000);
@@ -129,6 +140,14 @@ function OrderService() {
       setApiError(true);
       setApiErrorMessage("Failed to create order. Please try again.");
     }
+  };
+
+  const formatPrice = (price) => {
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, "")) || 0;
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(numericPrice);
   };
 
   return (
@@ -170,17 +189,17 @@ function OrderService() {
                   value={order.additional_request}
                   onChange={handleChange}
                   placeholder="Service description"
-                  style={{ width: "80%", height: "100px" }}
+                  style={{ width: "80%", height: "80px" }}
                 />
                 <div>
-                  {/* <p>Price</p> */}
                   <input
                     type="text"
                     name="additional_request_price"
                     value={order.additional_request_price}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     placeholder="Price"
-                    style={{ width: "80%", height: "4px" }}
+                    style={{ width: "80%", height: "40px" }}
                   />
                 </div>
               </div>
@@ -196,7 +215,6 @@ function OrderService() {
                 />
               </div>
               <div>
-                {/* <h6>Notes for Internal Use:</h6> */}
                 <textarea
                   type="text"
                   name="notes_for_internal_use"
@@ -206,7 +224,6 @@ function OrderService() {
                 />
               </div>
               <div>
-                {/* <h6>Notes for Customer:</h6> */}
                 <textarea
                   type="text"
                   name="notes_for_customer"
@@ -218,11 +235,11 @@ function OrderService() {
               <div>
                 <p> Total Price: </p>
                 <input
-                  type="number"
-                  value={totalPrice.toFixed(2)}
+                  type="text"
+                  value={formatPrice(totalPrice.toFixed(2))}
                   readOnly
                   placeholder="Total price"
-                  style={{ width: "80%", height: "4px" }}
+                  style={{ width: "80%", height: "40px" }}
                 />
               </div>
               <button
@@ -234,6 +251,12 @@ function OrderService() {
               </button>
             </div>
           </form>
+          {serverError && <p style={{ color: "red" }}>{serverError}</p>}
+          {success && (
+            <p style={{ color: "green", fontSize: "20px" }}>
+              Order placed successfully!
+            </p>
+          )}
         </div>
       )}
     </div>

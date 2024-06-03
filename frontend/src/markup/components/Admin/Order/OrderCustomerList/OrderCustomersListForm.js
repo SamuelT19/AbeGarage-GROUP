@@ -95,9 +95,9 @@ const OrderCustomersListForm = () => {
                 <h2>Create a new order</h2>
                 <div>
                   <input
-                    type="text"
+                    type="search"
                     placeholder="Search by first name, last name, email, or phone number"
-                    className="search"
+                    className="search form-group"
                     value={query}
                     onChange={handleSearch}
                   />

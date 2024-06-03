@@ -50,7 +50,7 @@ function CustomerCard() {
             <p>Phone number: {customerData.customer_phone_number}</p>
             <p>
               Active customer:
-              {customerData.active_customer_status == 1 ? "Yes" : "No"}
+              {customerData?.active_customer_status === 1 ? "Yes" : "No"}
             </p>
 
             <div className="edit-delete-icons"></div>

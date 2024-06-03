@@ -518,3 +518,16 @@ textarea {
   margin-left: 22px;
   margin-top: 20px;
 }
+
+/* order edit  */
+.edit-card-additional{
+  font-size: 13px;
+}
+.edit-card-additional input{
+  font-size: 13px;
+  
+}
+.edit-card-additional textarea{
+  background-color:  #f8f8f8;
+  
+}
