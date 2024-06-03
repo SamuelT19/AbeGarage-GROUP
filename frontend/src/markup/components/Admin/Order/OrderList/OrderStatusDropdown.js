@@ -35,11 +35,17 @@ const OrderStatusDropdown = ({
     if (statusType === "service") {
       onUpdateStatus(selectedServicesId, newStatus);
       console.log(newStatus);
-      return;
+      //   return;
     }
     if (statusType === "order") {
       onUpdateStatus(orderId, newStatus);
       console.log(newStatus);
+      //   return;
+    }
+    if (statusType === "additionalRequest") {
+      onUpdateStatus(newStatus);
+      console.log(newStatus);
+      //   return;
     }
     // onUpdateStatus(orderId, newStatus);
     // console.log(newStatus);

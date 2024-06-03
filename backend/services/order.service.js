@@ -324,6 +324,19 @@ const updateOrderProgress = async (order_id, orderData) => {
           }
         }
       }
+
+      // Update additional_requests_completed in the order_info table
+      const query3 =
+        "UPDATE order_info SET additional_requests_completed = ? WHERE order_id = ?";
+      const [rows3] = await connection.execute(query3, [
+        orderData.additional_requests_completed,
+        order_id,
+      ]);
+      if (rows3.affectedRows === 0) {
+        throw new Error(
+          "Failed to update additional_requests_completed in order_info table"
+        );
+      }
     });
 
     return { message: "Order progress updated successfully" };

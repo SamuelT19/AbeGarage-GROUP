@@ -4,9 +4,11 @@ import OrderService from "../../../services/order.service";
 import CustomerDetails from "./CustomerDetails";
 import SelectedServices from "./SelectedServices";
 import VehicleInServices from "./VehicleInService";
+import AdditionalRequest from "./AdditionalRequest";
 import OrderStatusDropdown from "../../../markup/components/Admin/Order/OrderList/OrderStatusDropdown";
 import { useAuth } from "../../../Contexts/AuthContext"; // Adjust the import path if necessary
 import { getStatusClass, orderStatusLabels } from "../../../util/statusUtils"; // Adjust the import path if necessary
+import { add } from "date-fns";
 
 // function OrderDetails() {
 //   //initialize the state
@@ -75,6 +77,7 @@ import { getStatusClass, orderStatusLabels } from "../../../util/statusUtils"; /
 function OrderDetails() {
   const [singleOrder, setSingleOrder] = useState({});
   const [orderStatus, setOrderStatus] = useState(null);
+  const [additionalRequest, setAdditionalRequest] = useState(null);
   const [updatedServices, setUpdatedServices] = useState([]);
   // const [updatedOrder, setupdatedOrder] = useState({});
   const { orderId, orderHash } = useParams();
@@ -88,12 +91,20 @@ function OrderDetails() {
       try {
         const response = await OrderService.getOrderByID(orderId);
         setSingleOrder(response);
+        setOrderStatus(response.orderData.order_status);
+        setAdditionalRequest(response.orderData.additional_requests_completed);
       } catch (error) {
         console.error(error);
       }
     };
     fetchOrder();
   }, [orderId]);
+
+  const handleAdditionalRequestStatusUpdate = (status) => {
+    console.log(status);
+    setAdditionalRequest(status);
+    console.log(additionalRequest);
+  };
 
   // console.log(singleOrder.orderData);
   const handleOrderStatusUpdate = (order_id, status) => {
@@ -123,9 +134,17 @@ function OrderDetails() {
     });
   };
 
+  // console.log(singleOrder.orderData);
+  // const handleAdditionalRequestStatusUpdate = (order_id, status) => {
+  //   setAdditionalRequest(status);
+  // };
+
+  console.log(additionalRequest);
+
   const handleSubmitProgress = async () => {
     try {
       const updatedOrder = {
+        additional_requests_completed: additionalRequest,
         order_status: orderStatus,
         order_services: updatedServices, // Ensure this is an array of objects with service_id and service_completed
       };
@@ -197,6 +216,13 @@ function OrderDetails() {
               <SelectedServices
                 singleOrder={singleOrder}
                 handleServiceCompletionChange={handleServiceStatusUpdate}
+                isReadOnly={isReadOnly}
+              />
+              <AdditionalRequest
+                singleOrder={singleOrder}
+                handleAdditionalRequestCompletionChange={
+                  handleAdditionalRequestStatusUpdate
+                }
                 isReadOnly={isReadOnly}
               />
             </div>

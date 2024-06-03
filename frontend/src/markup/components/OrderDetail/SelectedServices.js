@@ -1,6 +1,4 @@
 import React from "react";
-// import OrderStatusLabel from "../../components/Admin/Order/OrderList/OrderStatusLabel";
-import { useEffect } from "react";
 import OrderStatusDropdown from "../../components/Admin/Order/OrderList/OrderStatusDropdown";
 import { getStatusClass, orderStatusLabels } from "../../../util/statusUtils";
 
