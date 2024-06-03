@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
 import { FaEdit } from "react-icons/fa";
 import customerService from "../../../../../services/customer.service";
@@ -9,6 +9,7 @@ function CustomerCard() {
   const { customer_id } = useParams();
   const { employee } = useAuth();
   const loggedInEmployeeToken = employee?.employee_token || "";
+  const [customerData, setCustomerData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
