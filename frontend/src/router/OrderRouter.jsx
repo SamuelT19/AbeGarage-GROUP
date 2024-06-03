@@ -9,6 +9,7 @@ import AddNewOrder from "../markup/pages/admin/order/AddNewOrder";
 // import Orders from "../markup/pages/admin/order/";
 import Orders from "../markup/pages/admin/order/Orders";
 import OrderDtail from "../markup/pages/OrderDetails/OrderDetails";
+import EditOrder from "../markup/pages/admin/order/EditOrder";
 
 function OrderRouter() {
   return (
@@ -36,6 +37,7 @@ function OrderRouter() {
           </PrivateAuthRoute>
         }
       />
+      <Route path='/edit/:order_id' element={<EditOrder />} />
     </Routes>
   );
 }
