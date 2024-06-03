@@ -91,40 +91,6 @@ input:disabled {
   font-weight: 600;
   font-size: 1.5em;
 }
-/* Pagination */
-.pagination-wrapper {
-  margin-top: 30px;
-}
-.page-link {
-  padding: 0.5rem 1.75rem;
-  color: #fff;
-  background-color: #222b48;
-  border: 1px solid #dee2e6;
-}
-.page-link:hover {
-  color: #ffffff;
-  background-color: #ee0c0a;
-}
-.page-link span {
-  padding: 0 5px;
-}
-/* Search */
-.search-box {
-  margin-bottom: 20px;
-}
-.search-box input {
-  padding: 30px;
-}
-/* Table style */
-.table a {
-  color: #0a1436;
-  font-weight: 600;
-}
-/* Customer page */
-.history-block .text span {
-  font-weight: 600;
-  color: #000821;
-}
 
 /* Vehicles */
 .external-container {
@@ -288,10 +254,640 @@ a .page-link.first-page-button {
   background-color: white;
 }
 ul .pagination {
- background-color: #a2a5ad;
+  background-color: #a2a5ad;
 }
-.search{
+.search {
   padding: 10px;
   font-size: 20px;
   width: 100%;
+}
+
+/* customer card */
+.card {
+  position: relative;
+  width: 95%;
+  border: 2px solid rgb(236, 233, 233);
+  border-radius: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+}
+
+.card-customer-section {
+  margin-top: -40px;
+}
+.card .card-title {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: hsl(0, 0%, 20%);
+}
+.card-text p {
+  font-family: Arial, sans-serif;
+  color: hsl(0, 0%, 30%);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: red;
+}
+
+.close-icon i {
+  font-size: 15px;
+}
+
+/* vehicle table */
+.card-table {
+  position: relative;
+  width: 92%;
+  border: 2px solid rgb(236, 233, 233);
+  border-radius: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 80px;
+  margin-left: 20px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  font-size: 12px;
+}
+
+.table-title {
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+}
+
+.card-table .no-border {
+  border: none;
+}
+
+/* vehicle card */
+.card-vehicle {
+  margin-top: -190px;
+}
+
+/* service card */
+.card-service {
+  height: 90px;
+  margin-bottom: -10px;
+  border: 2px solid rgb(243, 240, 240);
+  border-radius: 1px;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  margin-right: 50px;
+  padding-bottom: 400px;
+  cursor: pointer;
+  user-select: none;
+  width: 50px;
+  height: 50px;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 25px;
+  width: 100px;
+  background-color: rgb(230, 224, 224);
+  border: solid rgba(6, 6, 6, 0);
+  border-width: 0 5px 1px 0;
+  margin-bottom: -80px;
+}
+
+/* .checkbox-container input:checked ~ .checkmark {
+  background-color: #2196f3;
+} */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+
+  transform: rotate(45deg);
+}
+
+/* additional request order */
+
+.card-addional {
+  position: relative;
+  width: 95%;
+  border: 2px solid rgb(227, 223, 223);
+  border-radius: 1px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  background-color: #fdfcfc;
+}
+.bordered {
+  border: 1px solid rgb(238, 232, 232);
+  padding: 1px;
+  width: 60%;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.card-additioanl div {
+  border: hsl(180, 1%, 13%);
+  background-color: rgb(245, 244, 244);
+  border-radius: 1px;
+  width: 95%;
+  margin-left: 15px;
+  height: auto;
+  margin-top: -35px;
+}
+
+.card-service {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  height: 80px;
+}
+
+.checkbox-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.card-addional input {
+  border: 2px solid #e3dfdf;
+  background-color: #f5f4f4;
+  border-radius: 1px;
+  box-sizing: border-box;
+  padding: 20px 20px;
+  margin-bottom: 10px;
+  margin-top: -1px;
+}
+
+.card-addional p {
+  margin: 0;
+  padding: 0;
+}
+.addionalrequest {
+  margin-bottom: 10px;
+}
+
+.choose-service {
+  margin-top: -100px;
+}
+
+.chooseService {
+  position: relative;
+  width: 94%;
+  border: 2px solid #e3dfdf;
+  border-radius: 1px;
+  margin-top: -100px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  background-color: white;
+}
+
+textarea {
+  width: 80%;
+  height: 100px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #e4e2e2;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+/* order table */
+.order-table {
+  margin-top: -50px;
+}
+
+/* on order add vehicle */
+.add-vehicle {
+  margin-left: 22px;
+  margin-top: 20px;
+}
+
+/* Services */
+.services-wrapper {
+  margin-bottom: 20px;
+}
+.service-item {
+  background: #fff;
+  padding: 20px 20px 5px;
+  margin-bottom: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.service-item .edit-delete {
+  float: right;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+.service-item .edit-delete span {
+  padding: 15px;
+}
+.service-item h3 {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+/* Order page */
+.faq-section.order-page .sear-form {
+  position: relative;
+  margin-bottom: 0px;
+}
+.order-page .search-box {
+  margin-bottom: 0px;
+}
+.filter-customers-wrapper {
+  padding: 20px;
+  background: #f8f8f8;
+  border: 1px solid #ced4da;
+  border-top: 0;
+}
+.selected-customer {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-top: 0;
+  margin-bottom: 20px;
+}
+.selected-customer h3 {
+  font-weight: 600;
+}
+.vehicles-to-choose {
+  margin-top: 40px;
+}
+.service-item.checkbox-holder {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 5px;
+}
+.checkbox-holder input[type="checkbox"] {
+  width: 40px;
+  height: 40px;
+}
+.theme-btn a {
+  color: #fff;
+}
+.no-customer {
+  margin-top: 20px;
+}
+.selected-customer .sec-title {
+  margin-bottom: 25px;
+}
+.selected-customer .form-close {
+  float: right;
+}
+.selected-customer .text span {
+  color: #000821;
+}
+.service-block-one .text span {
+  color: #000821;
+}
+.contact-form input[type="number"] {
+  display: block;
+  width: 100%;
+  line-height: 28px;
+  height: 56px;
+  font-size: 16px;
+  padding: 10px 22px;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #dddddd;
+  transition: all 500ms ease;
+  -webkit-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+}
+.single-order .service-block-one h2 {
+  margin-bottom: 20px;
+}
+.order-status {
+  float: right;
+}
+.order-status span {
+  padding: 10px 25px;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+.change-status {
+  cursor: pointer;
+}
+
+/* Vehicle edit and add forms outer container */
+.vehicle-form-content {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #888;
+}
+/* Customer profile section  */
+.history-section {
+  padding-top: 50px;
+}
+
+a .page-link.first-page-button {
+  background-color: white;
+}
+ul .pagination {
+  background-color: #a2a5ad;
+}
+.search {
+  padding: 10px;
+  font-size: 20px;
+  width: 100%;
+}
+
+/* orderlist icons */
+.center {
+  text-align: center;
+}
+
+.icon-link {
+  margin-right: 10px;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+/*  order status label */
+.status-label {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  line-height: 1;
+  height: auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.received {
+  background-color: darkgray;
+  color: white;
+}
+
+.in-progress {
+  background-color: orange;
+  color: white;
+}
+
+.completed {
+  background-color: green;
+  color: white;
+}
+
+.canceled {
+  background-color: red;
+  color: white;
+}
+
+.unknown {
+  background-color: black;
+  color: white;
+}
+
+/* order list customer and vehicle bold text  */
+
+.bold-text {
+  font-weight: bold;
+  color: #001659;
+}
+
+/* service we provide section */
+.title {
+  margin-left: 5%;
+}
+.text22 {
+  margin-left: 50px;
+  margin-right: 15%;
+}
+.service-section {
+  width: 80%;
+  margin-left: 3%;
+}
+
+.service-name input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.Name,
+.new_title {
+  font-size: x-large;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Add-new_title {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: xx-large;
+  font-weight: 900;
+}
+.service-description textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.service-section1 {
+  background-color: white;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.service-list {
+  background-color: white;
+  display: flex;
+  padding-top: 1%;
+  padding-left: 4%;
+  height: 90px;
+}
+.service-name1 {
+  width: 900px;
+  font-size: small;
+}
+
+.service-price input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.contact-section {
+  background-color: #ebedef;
+}
+
+/* Order details page css starts here*/
+
+.order_tracker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order_tracker > div {
+  margin-top: 20px;
+}
+
+.tracker-title {
+  margin-bottom: 50px;
+  margin-left: 2%;
+}
+
+.tracker-title h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-left: 0;
+}
+.background {
+  background-color: white;
+  padding: 20px;
+}
+/* vehicle and customer component */
+
+.customer-vehicle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.customer-vehicle > * {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.customer-vehicle > *:last-child {
+  margin-right: 0;
+}
+
+.customer_details h4,
+.vehicle_in_services h4 {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+/* selected services components css starts here */
+.order-service {
+  width: 100%;
+}
+
+.services-title {
+  margin-bottom: 0px;
+}
+.selected-services {
+  margin-top: 20px;
+}
+
+.service-box h2 {
+  margin-bottom: 15px;
+}
+
+/* Adjust spacing for the .selected-services section */
+.selected-services {
+  padding-bottom: 20px;
+}
+
+.services-list:last-child {
+  margin-bottom: 0;
+}
+
+.services-title {
+  margin-bottom: 0px;
+  margin-left: 3%;
+}
+.services-title h4 {
+  font-size: 24px;
+  margin-bottom: 0px;
+}
+
+.services-title h2 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.services {
+  background-color: #fff;
+  padding: 0px, 20px;
+  border-radius: 5px;
+}
+
+/* Order details page css ends here*/
+
+.services-list {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+/* Edit service we provide page css starts here */
+.edit-service-section {
+  background-color: white;
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-left: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.edit_title {
+  font-size: xx-large;
+  font-weight: 900;
 }

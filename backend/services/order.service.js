@@ -38,7 +38,7 @@ const createOrder = async (orderData) => {
 
       // Insert into the order_info table
       const query4 =
-        "INSERT INTO order_info (order_id, order_total_price, estimated_completion_date, completion_date, additional_request, notes_for_internal_use, notes_for_customer, additional_requests_completed) VALUES (?,?,?,?,?,?,?,?) ";
+        "INSERT INTO order_info (order_id, order_total_price, estimated_completion_date, completion_date, additional_request, notes_for_internal_use, notes_for_customer, additional_requests_completed, additional_request_price) VALUES (?,?,?,?,?,?,?,?,?) ";
       const [rows4] = await connection.execute(query4, [
         order_id,
         orderData.order_total_price,
@@ -48,6 +48,7 @@ const createOrder = async (orderData) => {
         orderData.notes_for_internal_use,
         orderData.notes_for_customer,
         orderData.additional_requests_completed,
+        orderData.additional_request_price,
       ]);
 
       if (rows4.affectedRows !== 1) {
@@ -86,10 +87,22 @@ const orderedServices = async (order_id) => {
   return rows;
 };
 
+const getOrderByID = async (order_id) => {
+  const sql = `
+    SELECT o.*, oi.*, os.* FROM orders o LEFT JOIN order_info oi ON o.order_id = oi.order_id
+    LEFT JOIN order_status os ON o.order_id = os.order_id
+    WHERE o.order_id = ?
+  `;
+  const rows = await query(sql, [order_id]);
+  console.log(rows);
+  return rows; // Return the first row or null if no rows found
+};
+
 const getVehicleByOrderId = async (order_id) => {
   const sql =
     "SELECT * FROM orders JOIN customer_vehicle_info ON customer_vehicle_info.vehicle_id = orders.vehicle_id JOIN customer_identifier ON customer_identifier.customer_id = orders.customer_id JOIN customer_info ON customer_info.customer_id = customer_identifier.customer_id  WHERE orders.order_id = ?";
   const rows = await query(sql, [order_id]);
+  console.log(rows);
   return rows;
 };
 
@@ -201,7 +214,8 @@ const editOrder = async (orderData) => {
         orderData.additional_request ||
         orderData.notes_for_internal_use ||
         orderData.notes_for_customer ||
-        orderData.additional_requests_completed
+        orderData.additional_requests_completed ||
+        orderData.additional_request_price
       ) {
         const query2 = `UPDATE order_info SET
               order_total_price = ?,
@@ -211,6 +225,7 @@ const editOrder = async (orderData) => {
               notes_for_internal_use = ?,
               notes_for_customer = ?,
               additional_requests_completed = ?
+              orderData.additional_request_price = ?
               WHERE order_id = ?`;
 
         const [rows2] = await connection.execute(query2, [
@@ -221,6 +236,7 @@ const editOrder = async (orderData) => {
           orderData.notes_for_internal_use,
           orderData.notes_for_customer,
           orderData.additional_requests_completed,
+          orderData.additional_request_price,
           order_id,
         ]);
         console.log(rows2);
@@ -273,10 +289,69 @@ const editOrder = async (orderData) => {
   }
 };
 
+// Update order progress in the order_status table
+
+const updateOrderProgress = async (order_id, orderData) => {
+  try {
+    await withTransaction(async (connection) => {
+      // Update order_status in the order_status table
+      const query1 =
+        "UPDATE order_status SET order_status = ? WHERE order_id = ?";
+      const [rows1] = await connection.execute(query1, [
+        orderData.order_status,
+        order_id,
+      ]);
+      if (rows1.affectedRows === 0) {
+        throw new Error("Failed to update order_status table");
+      }
+
+      // Update services in the order_services table
+      for (const service of orderData.order_services) {
+        if (
+          service.service_completed !== undefined &&
+          service.order_service_id
+        ) {
+          const updateServiceQuery =
+            "UPDATE order_services SET service_completed = ? WHERE order_service_id = ?";
+          const [rows2] = await connection.execute(updateServiceQuery, [
+            service.service_completed,
+            service.order_service_id,
+          ]);
+          if (rows2.affectedRows === 0) {
+            throw new Error(
+              `Failed to update service with id ${service.order_service_id} in order_services table`
+            );
+          }
+        }
+      }
+
+      // Update additional_requests_completed in the order_info table
+      const query3 =
+        "UPDATE order_info SET additional_requests_completed = ? WHERE order_id = ?";
+      const [rows3] = await connection.execute(query3, [
+        orderData.additional_requests_completed,
+        order_id,
+      ]);
+      if (rows3.affectedRows === 0) {
+        throw new Error(
+          "Failed to update additional_requests_completed in order_info table"
+        );
+      }
+    });
+
+    return { message: "Order progress updated successfully" };
+  } catch (error) {
+    console.error("Error updating order progress:", error);
+    throw new Error(`Failed to update order progress: ${error.message}`);
+  }
+};
+
 module.exports = {
   createOrder,
   orderedServices,
   getVehicleByOrderId,
   editOrder,
   getAllOrders,
+  getOrderByID,
+  updateOrderProgress,
 };

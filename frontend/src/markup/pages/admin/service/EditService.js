@@ -1,7 +1,8 @@
 import React from "react";
 import AdminMenu from "../../../components/Admin/AdminMenu/AdminMenu";
-import OrdersList from "../../../components/Admin/Order/OrderList/OrdersList";
-const Orders = () => {
+import EditService from "../../../components/Admin/Services/EditService/EditService";
+
+function Services() {
   return (
     <>
       <div className='container-fluid admin-pages'>
@@ -10,12 +11,12 @@ const Orders = () => {
             <AdminMenu />
           </div>
           <div className='col-md-9 admin-right-side'>
-            <OrdersList />
+            <EditService />
           </div>
         </div>
       </div>
     </>
   );
-};
+}
 
-export default Orders;
+export default Services;

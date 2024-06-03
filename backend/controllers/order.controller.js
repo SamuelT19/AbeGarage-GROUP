@@ -61,10 +61,38 @@ async function editOrder(req, res, next) {
   }
 }
 
-const orderedServices = async (req, res) => {
+// const orderedServices = async (req, res) => {
+//   try {
+//     const order_id = req.params.order_id;
+//     console.log(order_id);
+
+//     const services = await orderService.orderedServices(order_id);
+
+//     const [customerVehicle] = await orderService.getVehicleByOrderId(order_id);
+
+//     if (!services) {
+//       res.status(400).json({
+//         error: "Failed to fetch order",
+//       });
+//     } else {
+//       res.status(200).json({
+//         message: "single order fetched successfully",
+//         services,
+//         customerVehicle,
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return error;
+//   }
+// };
+
+const singleOrder = async (req, res) => {
   try {
-    const order_id = req.params.order_id;
+    const { order_id } = req.params;
     console.log(order_id);
+    //
+    const [orderData] = await orderService.getOrderByID(order_id);
 
     const services = await orderService.orderedServices(order_id);
 
@@ -79,6 +107,7 @@ const orderedServices = async (req, res) => {
         message: "single order fetched successfully",
         services,
         customerVehicle,
+        orderData,
       });
     }
   } catch (error) {
@@ -87,9 +116,26 @@ const orderedServices = async (req, res) => {
   }
 };
 
+// console.log(singleOrder);
+// implement orderprogress function
+const updateOrderProgress = async (req, res) => {
+  const { order_id } = req.params;
+  const orderData = req.body;
+
+  console.log("Received payload:", orderData);
+
+  try {
+    const result = await orderService.updateOrderProgress(order_id, orderData);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createOrder,
   getAllOrdersData,
   editOrder,
-  orderedServices,
+  singleOrder,
+  updateOrderProgress,
 };
