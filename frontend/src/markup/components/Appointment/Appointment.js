@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Appointment() {
   return (
@@ -12,8 +13,8 @@ function Appointment() {
                     </div>
                     <div className="right-column">
                         <div className="phone">1800.456.7890</div>
-                        <div className="btn"><a href="#" className="theme-btn btn-style-one"><span>Appointment</span><i
-                                    className="flaticon-right"></i></a></div>
+                        <div className="btn"><Link to="/Contact" className="theme-btn btn-style-one"><span>Appointment</span><i
+                                    className="flaticon-right"></i></Link></div>
                     </div>
                 </div>
             </div>

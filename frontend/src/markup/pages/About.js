@@ -4,11 +4,13 @@ import OurExperience from '../components/OurExperience/OurExperience';
 import AdditionalServices from '../components/AdditionalServices/AdditionalServices';
 import WorkingSince from '../components/WorkingSince/WorkingSince';
 import Appointment from '../components/Appointment/Appointment';
+import Leader from "../../assets/images/Leaders.jpg";
+import Image2 from "../../assets/images/image2.jpg";
 
 function About() {
   return (
     <div>
-      <section className="page-title" style={{ backgroundImage: 'url(assets/images/background/bg-3.jpg)' }}>
+      <section className="page-title" style={{ backgroundImage: `url(${Image2})` }}>
         <div className="auto-container">
           <h2>About us</h2>
           <ul className="page-breadcrumb">
@@ -31,7 +33,7 @@ function About() {
               </div>
             </div>
             <div className="col-lg-5">
-              <div className="image"><img src="assets/images/resource/image-8.jpg" alt="" /></div>
+              <div className="imageI"><img src={Leader} alt="" /></div>
             </div>
           </div>
         </div>

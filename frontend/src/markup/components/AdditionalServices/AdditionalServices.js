@@ -1,4 +1,5 @@
 import React from 'react';
+import Additional from "../../../assets/images/Additional.jpg"
 
 function AdditionalServices() {
   return (
@@ -42,13 +43,13 @@ function AdditionalServices() {
               <h2>Additional Services</h2>
             </div>
             <div className="row">
-              <div className="col-md-5">
+              <div className="col-md">
                 <div className="image">
-                  <img src="assets/images/image-4.jpg" alt="" />
+                  <img src={Additional} alt="" />
                 </div>
               </div>
-              <div className="col-md-7">
-                <ul className="list">
+              <div className="col-md-8">
+                <ul className=" col-md- list">
                   <li>General Auto Repair & Maintenance</li>
                   <li>Transmission Repair & Replacement</li>
                   <li>Tire Repair and Replacement</li>

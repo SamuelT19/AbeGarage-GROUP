@@ -1,4 +1,5 @@
 import React from 'react';
+import BackgroundImage from "../../../assets/images/banner/banner.jpg"
 
 function Banner() {
   return (
@@ -7,7 +8,7 @@ function Banner() {
         <div
           data-parallax='{"y": 50}'
           className="sec-bg"
-          style={{ backgroundImage: 'url(assets/images/banner/banner.jpg)' }}
+          style={{ backgroundImage: `url(${BackgroundImage})` }}
         ></div>
         <div className="auto-container">
           <h5>Working since 1992</h5>

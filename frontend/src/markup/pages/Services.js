@@ -4,11 +4,12 @@ import OurServices from '../components/OurServices/OurServices';
 import AdditionalServices from '../components/AdditionalServices/AdditionalServices';
 import WorkingSince from '../components/WorkingSince/WorkingSince';
 import Appointment from '../components/Appointment/Appointment';
+import Image3 from "../../assets/images/image3.jpg"
 
 function Services() {
   return (
     <div>
-      <section className="page-title" style={{ backgroundImage: 'url(assets/images/background/bg-3.jpg)' }}>
+      <section className="page-title" style={{ backgroundImage: `url(${Image3})` }}>
         <div className="auto-container">
           <h2>Services</h2>
           <ul className="page-breadcrumb">

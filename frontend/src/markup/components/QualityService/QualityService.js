@@ -1,4 +1,5 @@
 import React from 'react';
+import Quality from "../../../assets/images/Quality.jpg"
 
 function QualityService() {
   return (
@@ -20,7 +21,7 @@ function QualityService() {
             </div>
             <div className="col-lg-6">
               <div className="image1">
-                <img src="assets/images/resource/image-3.jpg" alt="Quality Service" />
+                <img src={Quality} alt="Quality Service" />
               </div>
             </div>
           </div>

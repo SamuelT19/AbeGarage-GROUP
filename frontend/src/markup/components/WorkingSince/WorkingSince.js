@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Image1 from "../../../assets/images/image1.jpg"
 
 function WorkingSince() {
   return (
@@ -8,7 +9,7 @@ function WorkingSince() {
         <div
           data-parallax='{"y": 50}'
           className="sec-bg"
-          style={{ backgroundImage: 'url(assets/images/background/bg-1.jpg)' }}
+          style={{ backgroundImage: `url(${Image1})` }}
         ></div>
         <div className="auto-container">
           <h5>Working since 1992</h5>
