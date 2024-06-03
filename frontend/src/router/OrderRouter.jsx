@@ -28,3 +28,5 @@ function OrderRouter() {
 }
 
 export default OrderRouter;
+
+export default OrderRouter;

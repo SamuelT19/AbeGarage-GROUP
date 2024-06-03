@@ -10,9 +10,10 @@ const vehicleController = require("../controllers/vehicle.controller");
 //create a route to add a new vehicle
 router.post(
   "/api/vehicle/add",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  
   vehicleController.createVehicle
 );
+//[authMiddleware.verifyToken, authMiddleware.isAdmin],
 // Create a route to handle the get vehicle by ID request on get
 router.get(
   "/api/vehicle/single/:vehicle_id",
@@ -36,8 +37,9 @@ router.put(
 // create a route to get all vehicles by customer
 router.get(
   "/api/vehicle/all/:customer_id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+ 
   vehicleController.getAllVehicles
 );
+// [authMiddleware.verifyToken, authMiddleware.isAdmin],
 
 module.exports = router;

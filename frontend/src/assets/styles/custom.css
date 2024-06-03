@@ -91,40 +91,6 @@ input:disabled {
   font-weight: 600;
   font-size: 1.5em;
 }
-/* Pagination */
-.pagination-wrapper {
-  margin-top: 30px;
-}
-.page-link {
-  padding: 0.5rem 1.75rem;
-  color: #fff;
-  background-color: #222b48;
-  border: 1px solid #dee2e6;
-}
-.page-link:hover {
-  color: #ffffff;
-  background-color: #ee0c0a;
-}
-.page-link span {
-  padding: 0 5px;
-}
-/* Search */
-.search-box {
-  margin-bottom: 20px;
-}
-.search-box input {
-  padding: 30px;
-}
-/* Table style */
-.table a {
-  color: #0a1436;
-  font-weight: 600;
-}
-/* Customer page */
-.history-block .text span {
-  font-weight: 600;
-  color: #000821;
-}
 
 /* Vehicles */
 .external-container {
@@ -288,6 +254,7 @@ a .page-link.first-page-button {
   background-color: white;
 }
 ul .pagination {
+  background-color: #a2a5ad;
   background-color: #a2a5ad;
 }
 .search {

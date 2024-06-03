@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../../../Contexts/AuthContext";
 import serviceService from "../../../../../services/service.service";
-import {  useParams, useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 function NewService(props) {
-    const { service_id } = useParams();
+  const { service_id } = useParams();
   const [service_name, setServiceName] = useState("");
   const [service_description, setServiceDescription] = useState("");
   const [service_price, setServicePrice] = useState("");
@@ -16,7 +16,7 @@ function NewService(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const serviceData = {
       service_id,
       service_name,
@@ -52,7 +52,7 @@ function NewService(props) {
       });
   };
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await serviceService.getSingleService(service_id, token);
@@ -60,7 +60,8 @@ useEffect(() => {
 
         if (data && data.singleService) {
           console.log("Service data:", data.singleService);
-          const { service_name, service_description, service_price } = data.singleService;
+          const { service_name, service_description, service_price } =
+            data.singleService;
           setServiceName(service_name);
           setServiceDescription(service_description);
           setServicePrice(service_price);
@@ -100,7 +101,6 @@ useEffect(() => {
                     onChange={(event) => setServiceName(event.target.value)}
                     placeholder='Service name'
                   />
-                
                 </div>
                 <div className='service-description form-group col-md-10 left-side'>
                   <textarea
@@ -112,10 +112,8 @@ useEffect(() => {
                     }
                     placeholder='Service description'
                   />
-                
                 </div>
                 <div className='service-price form-group col-md-10'>
-                
                   <input
                     type='number'
                     name='service_price'
@@ -123,7 +121,6 @@ useEffect(() => {
                     onChange={(event) => setServicePrice(event.target.value)}
                     placeholder='price'
                   />
-                 
                 </div>
                 <div className='form-group col-md-12'>
                   <button className='theme-btn btn-style-one' type='submit'>

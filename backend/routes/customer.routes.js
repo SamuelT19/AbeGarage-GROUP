@@ -7,23 +7,26 @@ const authMiddleware = require("../middlewares/auth.middleware");
 // Create a route to handle the add customer request on post
 router.post(
   "/api/customer/add",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  
   customerController.addCustomer
 );
+//[authMiddleware.verifyToken, authMiddleware.isAdmin],
 // Create a route to handle the get all customers request on get
 router.get(
   "/api/customer/all",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+ 
   customerController.getAllCustomers
 );
+// [authMiddleware.verifyToken, authMiddleware.isAdmin]
 // Create a route to handle the get customer by ID request on get
 
 router.get(
   "/api/customer/:customer_id",
-  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  
   customerController.getCustomerById
 );
 
+//[authMiddleware.verifyToken, authMiddleware.isAdmin],
 // Create a route to handle the edit customer request on post
 router.put(
   "/api/customer/edit",

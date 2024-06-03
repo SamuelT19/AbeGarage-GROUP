@@ -1,22 +1,21 @@
 import React from 'react';
-import AdditionalServices from '../components/AdditionalServices/AdditionalServices';
-import OurExperience from '../components/OurExperience/OurExperience';
-import OurServices from '../components/OurServices/OurServices';
-import QualityService from '../components/QualityService/QualityService';
-import WorkingSince from '../components/WorkingSince/WorkingSince';
-import Appointment from '../components/Appointment/Appointment';
-import Banner from '../components/Banner/Banner';
+import AdminMenu from '../components/Admin/AdminMenu/AdminMenu';
+
 
 function Home(props) {
   return (
     <div>
-        <Banner />
-        <OurExperience />
-        <OurServices />
-        <QualityService/>
-        <AdditionalServices />
-        <WorkingSince />
-        <Appointment />
+      <div className="container-fluid admin-pages">
+        <div className="row">
+          <div className="col-md-3 admin-left-side">
+            <AdminMenu/>
+          </div>
+          <div className="col-md-9 admin-right-side">
+            <h1>HOME</h1>
+          </div>
+          
+        </div>
+      </div>
     </div>
   );
 }

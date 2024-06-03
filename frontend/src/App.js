@@ -5,7 +5,7 @@ import Services from "./markup/pages/Services";
 import About from "./markup/pages/About"
 import Login from "./markup/pages/Login";
 import Unauthorized from "./markup/pages/Unauthorized";
-
+import AdminDashboard from "./markup/pages/admin/adminpage/AdminDashboard";
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";

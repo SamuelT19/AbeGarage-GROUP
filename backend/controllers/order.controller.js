@@ -82,6 +82,7 @@ const singleOrder = async (req, res) => {
         services,
         customerVehicle,
         orderData,
+        orderData,
       });
     }
   } catch (error) {
@@ -109,6 +110,8 @@ module.exports = {
   createOrder,
   getAllOrdersData,
   editOrder,
+  singleOrder,
+  updateOrderProgress,
   singleOrder,
   updateOrderProgress,
 };

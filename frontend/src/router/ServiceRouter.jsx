@@ -7,7 +7,7 @@ import PrivateAuthRoute from "../markup/components/Auth/PrivateAuthRoute";
 function ServiceRouter() {
   return (
     <Routes>
-      <Route path="/edit-service/:service_id" element={<EditService />} />
+      <Route path='/edit-service/:service_id' element={<EditService />} />
       <Route
         path='/services'
         element={

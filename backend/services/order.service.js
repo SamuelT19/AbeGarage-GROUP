@@ -38,7 +38,7 @@ const createOrder = async (orderData) => {
 
       // Insert into the order_info table
       const query4 =
-        "INSERT INTO order_info (order_id, order_total_price, estimated_completion_date, completion_date, additional_request, notes_for_internal_use, notes_for_customer, additional_requests_completed) VALUES (?,?,?,?,?,?,?,?) ";
+        "INSERT INTO order_info (order_id, order_total_price, estimated_completion_date, completion_date, additional_request, notes_for_internal_use, notes_for_customer, additional_requests_completed, additional_request_price) VALUES (?,?,?,?,?,?,?,?,?) ";
       const [rows4] = await connection.execute(query4, [
         order_id,
         orderData.order_total_price,
@@ -48,6 +48,7 @@ const createOrder = async (orderData) => {
         orderData.notes_for_internal_use,
         orderData.notes_for_customer,
         orderData.additional_requests_completed,
+        orderData.additional_request_price,
       ]);
 
       if (rows4.affectedRows !== 1) {
@@ -100,6 +101,7 @@ const getVehicleByOrderId = async (order_id) => {
   const sql =
     "SELECT * FROM orders JOIN customer_vehicle_info ON customer_vehicle_info.vehicle_id = orders.vehicle_id JOIN customer_identifier ON customer_identifier.customer_id = orders.customer_id JOIN customer_info ON customer_info.customer_id = customer_identifier.customer_id  WHERE orders.order_id = ?";
   const rows = await query(sql, [order_id]);
+  console.log(rows);
   return rows;
 };
 
@@ -207,30 +209,32 @@ const editOrder = async (orderData) => {
       if (
         orderData.order_total_price ||
         orderData.estimated_completion_date ||
-        orderData.completion_date ||
+        // orderData.completion_date ||
         orderData.additional_request ||
         orderData.notes_for_internal_use ||
         orderData.notes_for_customer ||
-        orderData.additional_requests_completed
+        orderData.additional_requests_completed ||
+        orderData.additional_request_price
       ) {
         const query2 = `UPDATE order_info SET
               order_total_price = ?,
               estimated_completion_date = ?,
-              completion_date = ?,
               additional_request = ?,
               notes_for_internal_use = ?,
               notes_for_customer = ?,
-              additional_requests_completed = ?
+              additional_requests_completed = ?,
+              additional_request_price = ?
               WHERE order_id = ?`;
 
         const [rows2] = await connection.execute(query2, [
           orderData.order_total_price,
           orderData.estimated_completion_date,
-          orderData.completion_date,
-          orderData.additional_request,
+          // orderData.completion_date,
+          orderData.additional_request || "",
           orderData.notes_for_internal_use,
           orderData.notes_for_customer,
           orderData.additional_requests_completed,
+          orderData.additional_request_price || 0,
           order_id,
         ]);
         console.log(rows2);

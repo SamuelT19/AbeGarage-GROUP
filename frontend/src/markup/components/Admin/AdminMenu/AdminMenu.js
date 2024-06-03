@@ -1,36 +1,37 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function AdminMenu(props) {
   return (
     <div>
-      <div className="admin-menu">
+      <div className='admin-menu'>
         <h2>Admin Menu</h2>
       </div>
-      <div className="list-group">
-        <a href="/admin" className="list-group-item">
+      <div className='list-group'>
+        <Link to={"/admin"} className='list-group-item'>
           Dashboard
-        </a>
-        <a href="/admin/order/orders" className="list-group-item">
+        </Link>
+        <Link to={"/admin/order/orders"} className='list-group-item'>
           Orders
-        </a>
-        <a href="/admin/order/new-order" className="list-group-item">
+        </Link>
+        <Link to={"/admin/order/new-order"} className='list-group-item'>
           New order
-        </a>
-        <a href="/admin/employee/add-employee" className="list-group-item">
+        </Link>
+        <Link to={"/admin/employee/add-employee"} className='list-group-item'>
           Add employee
-        </a>
-        <a href="/admin/employee/employees" className="list-group-item">
+        </Link>
+        <Link to={"/admin/employee/employees"} className='list-group-item'>
           Employees
-        </a>
-        <a href="/admin/customer/add-customer" className="list-group-item">
+        </Link>
+        <Link to={"/admin/customer/add-customer"} className='list-group-item'>
           Add customer
-        </a>
-        <a href="/admin/customer/customers" className="list-group-item">
+        </Link>
+        <Link to={"/admin/customer/customers"} className='list-group-item'>
           Customers
-        </a>
-        <a href="/admin/services/services" className="list-group-item">
+        </Link>
+        <Link to={"/admin/services/services"} className='list-group-item'>
           Services
-        </a>
+        </Link>
       </div>
     </div>
   );
