@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router";
 import Home from "./markup/pages/Home";
 import Login from "./markup/pages/Login";
 import Unauthorized from "./markup/pages/Unauthorized";
-
+import AdminDashboard from "./markup/pages/admin/adminpage/AdminDashboard";
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
@@ -24,13 +24,14 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/unauthorized' element={<Unauthorized />} />
-        <Route path='/admin/employee/*' element={<EmployeeRouter />} />
-        <Route path='/admin/customer/*' element={<CustomerRouter />} />
-        <Route path='/admin/order/*' element={<OrderRouter />} />
-        <Route path='/admin/services/*' element={<ServiceRouter />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/admin/employee/*" element={<EmployeeRouter />} />
+        <Route path="/admin/customer/*" element={<CustomerRouter />} />
+        <Route path="/admin/order/*" element={<OrderRouter />} />
+        <Route path="/admin/services/*" element={<ServiceRouter />} />
       </Routes>
       <Footer />
     </>

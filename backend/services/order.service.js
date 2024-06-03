@@ -210,7 +210,7 @@ const editOrder = async (orderData) => {
       if (
         orderData.order_total_price ||
         orderData.estimated_completion_date ||
-        orderData.completion_date ||
+        // orderData.completion_date ||
         orderData.additional_request ||
         orderData.notes_for_internal_use ||
         orderData.notes_for_customer ||
@@ -220,23 +220,22 @@ const editOrder = async (orderData) => {
         const query2 = `UPDATE order_info SET
               order_total_price = ?,
               estimated_completion_date = ?,
-              completion_date = ?,
               additional_request = ?,
               notes_for_internal_use = ?,
               notes_for_customer = ?,
-              additional_requests_completed = ?
-              orderData.additional_request_price = ?
+              additional_requests_completed = ?,
+              additional_request_price = ?
               WHERE order_id = ?`;
 
         const [rows2] = await connection.execute(query2, [
           orderData.order_total_price,
           orderData.estimated_completion_date,
-          orderData.completion_date,
-          orderData.additional_request,
+          // orderData.completion_date,
+          orderData.additional_request || "",
           orderData.notes_for_internal_use,
           orderData.notes_for_customer,
           orderData.additional_requests_completed,
-          orderData.additional_request_price,
+          orderData.additional_request_price || 0,
           order_id,
         ]);
         console.log(rows2);
@@ -288,7 +287,6 @@ const editOrder = async (orderData) => {
     throw error; // Throw the error to trigger the rollback
   }
 };
-
 // Update order progress in the order_status table
 
 const updateOrderProgress = async (order_id, orderData) => {
