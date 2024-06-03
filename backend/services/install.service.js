@@ -1,4 +1,5 @@
 // Import the query function from the db.config.js file 
+const { error } = require("console");
 const conn = require("../config/db.config");
 // Import the fs module to read our sql file  
 const fs = require('fs');
@@ -41,6 +42,7 @@ async function install() {
     } catch (err) {
       // console.log("Err Occurred - Table not created");
       finalMessage.message = "Not all tables are created";
+      
     }
   }
   // Prepare the final message to return to the controller 
@@ -49,6 +51,7 @@ async function install() {
     finalMessage.status = 200;
   } else {
     finalMessage.status = 500;
+    console.log(error.message)
   }
   // Return the final message
   return finalMessage;
