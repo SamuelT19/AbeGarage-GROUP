@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from "../components/Banner/Banner";
-import OurExperience from "../components/OurExperience/OurExperience";
+import OurExperience from "../components/OurExperiance/OurExperiance";
 import OurServices from "../components/OurServices/OurServices";
 import QualityService from "../components/QualityService/QualityService";
 import AdditionalServices from "../components/AdditionalServices/AdditionalServices";

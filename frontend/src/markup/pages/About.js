@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import OurExperience from '../components/OurExperience/OurExperience';
+import OurExperience from '../components/OurExperiance/OurExperiance';
 import AdditionalServices from '../components/AdditionalServices/AdditionalServices';
 import WorkingSince from '../components/WorkingSince/WorkingSince';
 import Appointment from '../components/Appointment/Appointment';
