@@ -1,6 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router";
 import Home from "./markup/pages/Home";
+import Services from "./markup/pages/Services";
+import About from "./markup/pages/About"
+
 import Login from "./markup/pages/Login";
 import Unauthorized from "./markup/pages/Unauthorized";
 import AdminDashboard from "./markup/pages/admin/adminpage/AdminDashboard";
@@ -18,13 +21,17 @@ import EmployeeRouter from "./router/EmployeeRouter";
 import CustomerRouter from "./router/CustomerRouter";
 import OrderRouter from "./router/OrderRouter";
 import ServiceRouter from "./router/ServiceRouter";
+import ReadMore from "./markup/pages/ReadMore";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
+      <Route path='/ReadMore' element={<ReadMore />} />
         <Route path="/" element={<Home />} />
+        <Route path='/Services' element={<Services />} />
+        <Route path='/About' element={<About />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
