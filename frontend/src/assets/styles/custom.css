@@ -893,6 +893,19 @@ ul .pagination {
   font-size: xx-large;
   font-weight: 900;
 }
+.image img {
+  height: 400px;
+  width: 200px;
+}
+.imageI img{
+  height: 400px;
+  width: 800px;
+}
+
+.image1 img{
+  height: 450px;
+  width: 98%;
+}
 
 /* order edit  */
 .edit-card-additional {
