@@ -17,7 +17,7 @@ function AddNewOrder({}) {
   }
   return (
     <div>
-      <CustomerCard />
+      <CustomerCard  />
       <OrderVehicleCard vehicle={vehicle} />
       <OrderService/>
     </div>
