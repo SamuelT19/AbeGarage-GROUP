@@ -100,7 +100,7 @@ function AddEmployeeForm(props) {
           // Redirect to the employees page after 2 seconds
           // For now, just redirect to the home page
           setTimeout(() => {
-            navigate("/admin/employee/employees");
+            navigate("/admin/employee/add-employee");
           }, 2000);
         }
       })
