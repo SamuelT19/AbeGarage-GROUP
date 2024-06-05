@@ -13,7 +13,7 @@ function EditOrder() {
             <AdminMenu />
           </div>
           <div className='col-md-9 admin-right-side'>
-            <EditOrderForm />
+            <EditOrderForm/>
           </div>
         </div>
       </div>

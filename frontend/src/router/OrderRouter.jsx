@@ -14,15 +14,15 @@ import EditOrder from "../markup/pages/admin/order/EditOrder";
 function OrderRouter() {
   return (
     <Routes>
-      <Route path='/new-order' element={<OrderCustomersList />} />
+      <Route path="/new-order" element={<OrderCustomersList />} />
       <Route
-        path='/new-order/customer/:customer_id'
+        path="/new-order/customer/:customer_id"
         element={<OrderCustomerDetailInfo />}
       />
-      <Route path='/new-order/vehicle/:customer_id' element={<AddNewOrder />} />
-
+      <Route path="/new-order/vehicle/:customer_id" element={<AddNewOrder />} />
+      
       <Route
-        path='/orders'
+        path="/orders"
         element={
           <PrivateAuthRoute roles={[3, 2]}>
             <Orders />
@@ -30,14 +30,14 @@ function OrderRouter() {
         }
       />
       <Route
-        path=':orderId/:orderHash?'
+        path=":orderId/:orderHash?"
         element={
           <PrivateAuthRoute roles={[3, 2]}>
             <OrderDtail />
           </PrivateAuthRoute>
         }
       />
-      <Route path='/edit/:order_id' element={<EditOrder />} />
+      <Route path="/edit/:order_id" element={<EditOrder />} />
     </Routes>
   );
 }
