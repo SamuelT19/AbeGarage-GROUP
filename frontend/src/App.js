@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router";
 import Home from "./markup/pages/Home";
 import Services from "./markup/pages/Services";
-import About from "./markup/pages/About"
+import About from "./markup/pages/About";
 
 import Login from "./markup/pages/Login";
 import Unauthorized from "./markup/pages/Unauthorized";
@@ -29,18 +29,18 @@ function App() {
     <>
       <Header />
       <Routes>
-      <Route path='/ReadMore' element={<ReadMore />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/" element={<Contact/>} />
+        <Route path='/ReadMore' element={<ReadMore />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/Contact' element={<Contact />} />
         <Route path='/Services' element={<Services />} />
         <Route path='/About' element={<About />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
-        <Route path="/admin/employee/*" element={<EmployeeRouter />} />
-        <Route path="/admin/customer/*" element={<CustomerRouter />} />
-        <Route path="/admin/order/*" element={<OrderRouter />} />
-        <Route path="/admin/services/*" element={<ServiceRouter />} />
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/unauthorized' element={<Unauthorized />} />
+        <Route path='/admin/employee/*' element={<EmployeeRouter />} />
+        <Route path='/admin/customer/*' element={<CustomerRouter />} />
+        <Route path='/admin/order/*' element={<OrderRouter />} />
+        <Route path='/admin/services/*' element={<ServiceRouter />} />
       </Routes>
       <Footer />
     </>

@@ -133,7 +133,7 @@ function OrderService() {
       setSuccess(true);
       setServerError("");
       setTimeout(() => {
-        navigate("/admin/order/all");
+        navigate("/admin/order/orders");
       }, 2000);
     } catch (error) {
       console.error("Error creating order:", error);
