@@ -9,15 +9,12 @@ function OrderCustomerInfo({  }) {
   
   
   return (
-    <div style={{ marginBottom: "0px" }}>
+    <>
       <CustomerCard />
-
-      {/*  */}
-
-      <div style={{ marginTop: "-110px" }}>
+     
        <OrderCustomerVehicleInfo/>
-      </div>
-    </div>
+      </>
+    
   );
 }
 

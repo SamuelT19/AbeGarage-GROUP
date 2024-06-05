@@ -10,6 +10,10 @@ function CustomerCard() {
   const { employee } = useAuth();
   const loggedInEmployeeToken = employee?.employee_token || "";
   const [customerData, setCustomerData] = useState({});
+<<<<<<< HEAD
+=======
+  const navigate = useNavigate();
+>>>>>>> 95b9e33070e1704c797a57c3d460ca4eede80373
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,34 +37,37 @@ function CustomerCard() {
     };
 
     fetchData();
-  }, [customer_id, loggedInEmployeeToken, setCustomerData]);
+  }, [customer_id, loggedInEmployeeToken]);
 
   return (
-    <section className='contact-section card-customer-section'>
-      <div className='auto-container create-new'>
-        <div className='contact-title'>
+    <section className="contact-section card-customer-section">
+      <div className="auto-container create-new">
+        <div className="contact-title">
           <h2>Create a new order</h2>
-          <div className='card card-text'>
+          <div className="card card-text">
             <h5>
-              Name {customerData.customer_first_name}{" "}
-              {customerData.customer_last_name}
+              Name {customerData?.customer_first_name}{" "}
+              {customerData?.customer_last_name}
             </h5>
-            <p>Email: {customerData.customer_email}</p>
-            <p>Phone number: {customerData.customer_phone_number}</p>
+            <p>Email: {customerData?.customer_email}</p>
+            <p>Phone number: {customerData?.customer_phone_number}</p>
             <p>
               Active customer:
               {customerData?.active_customer_status === 1 ? "Yes" : "No"}
             </p>
 
-            <div className='edit-delete-icons'></div>
-            <Link to={`/admin/customer/edit/${customer_id}`}>
-              Edit customer <FaEdit />
-            </Link>
-            <span className='close-icon'>
-              <Link to={`/admin/order/new-order`}>
-                <DisabledByDefaultIcon />
+            <div className="edit-delete-icons">
+              <Link to={`/admin/customer/edit/${customer_id}`}>
+                Edit customer <FaEdit />
               </Link>
-            </span>
+              <span
+                className="close-icon"
+                onClick={() => navigate(`/admin/order/new-order`)}
+                style={{ cursor: "pointer" }}
+              >
+                <DisabledByDefaultIcon />
+              </span>
+            </div>
           </div>
         </div>
       </div>

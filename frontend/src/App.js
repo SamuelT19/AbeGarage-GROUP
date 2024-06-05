@@ -22,6 +22,7 @@ import CustomerRouter from "./router/CustomerRouter";
 import OrderRouter from "./router/OrderRouter";
 import ServiceRouter from "./router/ServiceRouter";
 import ReadMore from "./markup/pages/ReadMore";
+import Contact from "./markup/pages/Contact";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Routes>
       <Route path='/ReadMore' element={<ReadMore />} />
         <Route path="/" element={<Home />} />
+        <Route path="/" element={<Contact/>} />
         <Route path='/Services' element={<Services />} />
         <Route path='/About' element={<About />} />
         <Route path="/admin" element={<AdminDashboard />} />
