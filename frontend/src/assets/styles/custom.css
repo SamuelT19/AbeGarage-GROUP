@@ -895,12 +895,12 @@ ul .pagination {
   height: 400px;
   width: 200px;
 }
-.imageI img{
+.imageI img {
   height: 400px;
   width: 800px;
 }
 
-.image1 img{
+.image1 img {
   height: 450px;
   width: 98%;
 }
@@ -914,4 +914,17 @@ ul .pagination {
 }
 .edit-card-additional textarea {
   background-color: #f8f8f8;
+}
+
+/* some styles on footer */
+.widget-content {
+  display: flex;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+}
+.widget_newsletter {
+  padding-left: 20%;
 }

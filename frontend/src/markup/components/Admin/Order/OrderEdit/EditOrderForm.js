@@ -67,7 +67,7 @@ function EditOrderForm() {
           additional_request_price: data.orderData.additional_request_price,
         });
 
-        console.log(additional_request);
+        // console.log(additional_request);
 
         setSelectedServices(data.services);
         calculateTotalPrice(
