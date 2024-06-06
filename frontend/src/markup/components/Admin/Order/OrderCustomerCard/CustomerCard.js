@@ -37,11 +37,11 @@ function CustomerCard() {
   }, [customer_id, loggedInEmployeeToken]);
 
   return (
-    <section className="contact-section card-customer-section">
-      <div className="auto-container create-new">
-        <div className="contact-title">
+    <section className='contact-section card-customer-section'>
+      <div className='auto-container create-new'>
+        <div className='contact-title'>
           <h2>Create a new order</h2>
-          <div className="card card-text">
+          <div className='card card-text'>
             <h5>
               Name {customerData?.customer_first_name}{" "}
               {customerData?.customer_last_name}
@@ -53,15 +53,14 @@ function CustomerCard() {
               {customerData?.active_customer_status === 1 ? "Yes" : "No"}
             </p>
 
-            <div className="edit-delete-icons">
+            <div className='edit-delete-icons'>
               <Link to={`/admin/customer/edit/${customer_id}`}>
                 Edit customer <FaEdit />
               </Link>
               <span
-                className="close-icon"
+                className='close-icon'
                 onClick={() => navigate(`/admin/order/new-order`)}
-                style={{ cursor: "pointer" }}
-              >
+                style={{ cursor: "pointer" }}>
                 <DisabledByDefaultIcon />
               </span>
             </div>
