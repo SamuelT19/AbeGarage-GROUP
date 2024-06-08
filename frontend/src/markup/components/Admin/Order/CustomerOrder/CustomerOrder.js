@@ -45,21 +45,15 @@ const CustomerOrder = ({ customer_id }) => {
 
   return (
     <>
-      {apiError ? (
-        <section className='contact-section'>
-          <div className='auto-container'>
-            <div className='contact-title'>
-              <h2>{apiErrorMessage}</h2>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section className='contact-section1'>
-          <div className='auto-container'>
-            <div className='wrapper-box'>
-              <div className='left-column'>
-                {orders.length > 0 ? (
-                  orders.map((order) => (
+      <div className='customer_details col-lg-60 left-side '>
+        <div>
+          <div className='col-lg-20 service-block-one'>
+            <div className='left-column'>
+              {orders.length > 0 ? (
+                orders.map((order) => (
+                  <div
+                    key={order.order_id}
+                    className='inner-box hvr-float-shadow box-resize'>
                     <div key={order.order_id}>
                       <div>
                         <div>
@@ -96,15 +90,15 @@ const CustomerOrder = ({ customer_id }) => {
                         </div>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <div>No orders found</div>
-                )}
-              </div>
+                  </div>
+                ))
+              ) : (
+                <div>No orders found</div>
+              )}
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </div>
     </>
   );
 };

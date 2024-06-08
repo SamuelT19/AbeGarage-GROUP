@@ -641,6 +641,9 @@ ul .pagination {
   width: 100%;
 }
 
+.box-resize {
+  width: 60%;
+}
 /* orderlist icons */
 .center {
   text-align: center;
