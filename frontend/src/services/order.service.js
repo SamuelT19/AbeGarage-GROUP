@@ -145,6 +145,23 @@ const updateOrder = async (formData, token) => {
   return response;
 };
 
+const getOrdersByCustomerId = async (customer_id, token) => {
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  console.log(customer_id)
+  const response = await axiosBase.get(
+    `${api_url}/api/order/all/${customer_id}`,
+    requestOptions
+  );
+  console.log(response.data);
+  return response.data;
+};
+
+
 // Export all the functions
 const orderService = {
   getAllServices,
@@ -156,5 +173,29 @@ const orderService = {
   updateOrderProgress,
   getOrderByOrderId,
   updateOrder,
+  getOrdersByCustomerId,
 };
+
 export default orderService;
+
+
+// const getOrdersByCustomerId = async (customer_id, token) => {
+//   const requestOptions = {
+//     headers: {
+//       "Content-Type": "application/json",
+//       "x-access-token": token,
+//     },
+//   };
+//   const response = await axiosBase.get(
+//     `${api_url}/api/order/all/${customer_id}`,
+//     requestOptions
+//   );
+//   console.log(response.data.orderData); // Log the full response for debugging
+//   if (response.status === 200) {
+//     return response.data.orderData;
+//   } else if (response.status === 404) {
+//     throw new Error("No orders found for the specified customer.");
+//   } else {
+//     throw new Error("Error fetching orders. Please try again later.");
+//   }
+// };
