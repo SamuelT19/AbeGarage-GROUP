@@ -1,4 +1,17 @@
 /* Custom styles for the garage app */
+/* this css prevents the webpage from moving horizontally, add it and check */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* this css makes the welcome message(which appears at the header) more visible*/
+.right-column {
+  margin-right: 30px;
+}
+
 .signin-signout {
   padding: 0 55px;
 }
@@ -266,14 +279,14 @@ ul .pagination {
 .card {
   position: relative;
   width: 95%;
-  border: 2px solid rgb(236, 233, 233); 
+  border: 2px solid rgb(236, 233, 233);
   border-radius: 1px;
   margin-top: 10px;
   padding: 15px;
   margin-bottom: 20px;
   margin-left: 10px;
   height: 160px;
- box-shadow: 5px 5px 5px white(0, 0, 0, 1); 
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
   text-align: left;
 }
 
@@ -305,7 +318,7 @@ ul .pagination {
 .close-icon i {
   font-size: 15px;
 }
- 
+
 /* vehicle table */
 .card-table {
   position: relative;
@@ -319,7 +332,7 @@ ul .pagination {
   box-shadow: 5px 5px 5px white(0, 0, 0, 1);
   text-align: left;
   font-size: 12px;
-  background-color: white
+  background-color: white;
 }
 
 .table-title {
@@ -334,16 +347,13 @@ ul .pagination {
 
 /* vehicle card */
 .card-vehicle {
-   
   margin-top: -190px;
   height: 180px;
-   margin-bottom: -30px;
-   
-
+  margin-bottom: -30px;
 }
 /* order customer card */
-.order-customer-card{
- margin-top: -75px;
+.order-customer-card {
+  margin-top: -75px;
 }
 
 /* service card */
@@ -352,7 +362,6 @@ ul .pagination {
   margin-bottom: -10px;
   border: 2px solid rgb(243, 240, 240);
   border-radius: 1px;
-
 }
 
 .checkbox-container {

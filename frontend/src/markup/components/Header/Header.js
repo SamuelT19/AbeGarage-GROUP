@@ -2,7 +2,9 @@ import React from "react";
 // Import the Link component from react-router-dom
 import { Link } from "react-router-dom";
 // Import the logo image
-import logo from "../../../assets/images/logo.png";
+//import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/g3logo.png";
+// Import the login service to access the logout function
 // Import the login service to access the logout function
 import loginService from "../../../services/login.service";
 // Import the custom context hook
