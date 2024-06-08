@@ -6,13 +6,11 @@ import OrderCustomerVehicleInfo from "../OrderCustomerVehicle/OrderCustomerVehic
 
 function OrderCustomerInfo({  }) {
     
-  
-  
+   
   return (
     <>
-      <CustomerCard />
-     
-       <OrderCustomerVehicleInfo/>
+      <CustomerCard />     
+      <OrderCustomerVehicleInfo/>
       </>
     
   );
