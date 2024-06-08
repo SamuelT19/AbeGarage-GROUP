@@ -14,7 +14,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import {
   getStatusClass,
   orderStatusLabels,
-} from "../../../../../util/statusUtils"; // Adjust the import path if necessary
+} from "../../../../../util/statusUtils";
 
 function OrdersList() {
   const [orderData, setOrderData] = useState([]);
@@ -38,61 +38,59 @@ function OrdersList() {
     fetchOrders();
   }, [token]);
 
-const filteredOrders = orderData.filter((order) =>
-  [
-    order.customer.customer_first_name,
-    order.customer.customer_last_name,
-    order.customer.customer_email,
-    order.customer.customer_phone_number,
-  ].some((field) =>
-    field?.toString().toLowerCase().includes(query.toLowerCase())
-  )
-);
+  const filteredOrders = orderData.filter((order) =>
+    [
+      order.customer.customer_first_name,
+      order.customer.customer_last_name,
+      order.customer.customer_email,
+      order.customer.customer_phone_number,
+    ].some((field) =>
+      field?.toString().toLowerCase().includes(query.toLowerCase())
+    )
+  );
 
-const records = filteredOrders.slice(
-  (currentPage - 1) * recordsPerPage,
-  currentPage * recordsPerPage
-);
+  const records = filteredOrders.slice(
+    (currentPage - 1) * recordsPerPage,
+    currentPage * recordsPerPage
+  );
 
-const npage = Math.ceil(filteredOrders.length / recordsPerPage);
+  const npage = Math.ceil(filteredOrders.length / recordsPerPage);
 
-const firstPage = () => {
-  if (currentPage !== 1) {
-    setCurrentPage(1);
-  }
-};
+  const firstPage = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
+  };
 
-const prePage = () => {
-  if (currentPage !== 1) {
-    setCurrentPage(currentPage - 1);
-  }
-};
+  const prePage = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-const nextPage = () => {
-  if (currentPage !== npage) {
-    setCurrentPage(currentPage + 1);
-  }
-};
+  const nextPage = () => {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-const lastPage = () => {
-  if (currentPage !== npage) {
-    setCurrentPage(npage);
-  }
-};
-
-
+  const lastPage = () => {
+    if (currentPage !== npage) {
+      setCurrentPage(npage);
+    }
+  };
 
   return (
     <>
-      <section className="contact-section">
-        <div className="auto-container">
-          <div className="contact-title">
+      <section className='contact-section'>
+        <div className='auto-container'>
+          <div className='contact-title'>
             <h2>Orders</h2>
             <div>
               <input
-                type="text"
-                placeholder="Search by first name, last name, email, or phone number"
-                className="search"
+                type='text'
+                placeholder='Search by first name, last name, email, or phone number'
+                className='search'
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -116,7 +114,7 @@ const lastPage = () => {
                   <tr key={order.order.order_id}>
                     <td>{order.order.order_id}</td>
                     <td>
-                      <span className="bold-text">
+                      <span className='bold-text'>
                         {order.customer.customer_first_name}{" "}
                         {order.customer.customer_last_name}
                       </span>
@@ -126,7 +124,7 @@ const lastPage = () => {
                       {order.customer.customer_phone_number}
                     </td>
                     <td>
-                      <span className="bold-text">
+                      <span className='bold-text'>
                         {order.vehicle.vehicle_make}{" "}
                         {order.vehicle.vehicle_model}
                       </span>
@@ -145,81 +143,65 @@ const lastPage = () => {
                       {order.employee.employee_last_name}
                     </td>
 
-                    <td className="align-middle center">
+                    <td className='align-middle center'>
                       {/* <OrderStatusLabel statusCode={order.order.order_status} /> */}
                       <span
                         className={`status-label ${getStatusClass(
                           order.order.order_status
-                        )}`}
-                      >
+                        )}`}>
                         {orderStatusLabels[order.order.order_status]}
                       </span>
                     </td>
 
-                    <td className="center align-middle">
-                      <div className="edit-delete-icons">
+                    <td className='center align-middle'>
+                      <div className='edit-delete-icons'>
                         {order.order.order_status === "complete" ||
                         order.order.order_status === 3 ? (
                           <FaEdit style={{ color: "gray" }} />
                         ) : (
                           <Link
                             to={`/admin/order/edit/${order.order.order_id}`}
-                            className="icon-link"
-                          >
+                            className='icon-link'>
                             <FaEdit />
                           </Link>
                         )}
                         <Link
                           key={order.order.order_id}
-                          to={`/admin/order/${order.order.order_id}`}
-                        >
+                          to={`/admin/order/${order.order.order_id}`}>
                           <IoOpenOutline />
                         </Link>
                       </div>
-
-                      {/* <Link
-                      to={`/admin/order/edit/${order.order.order_id}`}
-                      className="icon-link"
-                    >
-                      <FaEdit />
-                    </Link>
-                    <Link
-                      key={order.order.order_id}
-                      to={`/admin/order/${order.order.order_id}`}
-                    >
-                      <IoOpenOutline />
-                    </Link> */}
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="text-center">
+                  <td colSpan='8' className='text-center'>
                     No orders found
                   </td>
                 </tr>
               )}
             </tbody>
           </Table>
-          <nav className="pagination justify-content-center">
-            <ul className="pagination">
-              <li className="page-item">
-                <a className="page-link" href="#" onClick={firstPage}>
+          <nav className='pagination justify-content-center'>
+            <ul className='pagination'>
+              <li className='page-item'>
+                <a className='page-link' href='#' onClick={firstPage}>
                   <ImFirst /> First
                 </a>
               </li>
-              <li className="page-item">
-                <a className="page-link" href="#" onClick={prePage}>
+              <li className='page-item'>
+                <a className='page-link' href='#' onClick={prePage}>
                   <GrFormPrevious /> Previous
                 </a>
               </li>
-              <li className="page-item">
-                <a className="page-link" href="#" onClick={nextPage}>
+              <li className='page-item'>
+                <a className='page-link' href='#' onClick={nextPage}>
                   <MdNavigateNext /> Next
                 </a>
               </li>
-              <li className="page-item">
-                <a className="page-link" href="#" onClick={lastPage}>
+              <li className='page-item'>
+                <a className='page-link' href='#' onClick={lastPage}>
                   <ImLast /> Last
                 </a>
               </li>

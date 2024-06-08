@@ -145,6 +145,24 @@ const updateOrder = async (formData, token) => {
   return response;
 };
 
+//get orders by customer id
+
+const getOrdersByCustomerId = async (customer_id, token) => {
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  console.log(customer_id);
+  const response = await axiosBase.get(
+    `${api_url}/api/order/all/${customer_id}`,
+    requestOptions
+  );
+  console.log(response.data);
+  return response.data;
+};
+
 // Export all the functions
 const orderService = {
   getAllServices,
@@ -156,5 +174,6 @@ const orderService = {
   updateOrderProgress,
   getOrderByOrderId,
   updateOrder,
+  getOrdersByCustomerId,
 };
 export default orderService;

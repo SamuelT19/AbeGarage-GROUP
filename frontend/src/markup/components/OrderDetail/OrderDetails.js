@@ -135,11 +135,7 @@ function OrderDetails() {
   };
 
   // console.log(singleOrder.orderData);
-  // const handleAdditionalRequestStatusUpdate = (order_id, status) => {
-  //   setAdditionalRequest(status);
-  // };
-
-  console.log(additionalRequest);
+  //console.log(additionalRequest);
 
   const handleSubmitProgress = async () => {
     try {
@@ -149,7 +145,7 @@ function OrderDetails() {
         order_services: updatedServices, // Ensure this is an array of objects with service_id and service_completed
       };
 
-      console.log("Submitting order update:", updatedOrder);
+      // console.log("Submitting order update:", updatedOrder);
 
       await OrderService.updateOrderProgress(orderId, updatedOrder);
       alert("Order progress submitted successfully.");

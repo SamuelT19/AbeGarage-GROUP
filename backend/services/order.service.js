@@ -344,6 +344,33 @@ const updateOrderProgress = async (order_id, orderData) => {
   }
 };
 
+const getOrdersByCustomerId = async (customer_id) => {
+  const sql = `
+    SELECT 
+      o.order_id,
+      ci.customer_id,
+      oi.completion_date,
+      cvi.vehicle_make,
+      cvi.vehicle_model,
+      os.order_status
+    FROM 
+      order_info oi
+    JOIN 
+      orders o ON oi.order_id = o.order_id
+    JOIN 
+      customer_identifier ci ON o.customer_id = ci.customer_id
+    JOIN 
+      customer_vehicle_info cvi ON o.vehicle_id = cvi.vehicle_id
+    JOIN 
+      order_status os ON o.order_id = os.order_id
+    WHERE
+      o.customer_id = ?;
+  `;
+  const rows = await query(sql, [customer_id]);
+  console.log(rows);
+  return rows.length > 0 ? rows : null;
+};
+
 module.exports = {
   createOrder,
   orderedServices,
@@ -352,4 +379,5 @@ module.exports = {
   getAllOrders,
   getOrderByID,
   updateOrderProgress,
+  getOrdersByCustomerId,
 };
