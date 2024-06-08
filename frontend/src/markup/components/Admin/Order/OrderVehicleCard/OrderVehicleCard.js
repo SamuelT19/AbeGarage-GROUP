@@ -13,10 +13,10 @@ function OrderVehicleCard({vehicle}){
     }
 
   return (
-    <section className="contact-section card-vehicle">
+    <section className="contact-section ">
       <div className="auto-container">
         <div className="contact-title">
-          <div className="card card-text">
+          <div className="card card-text card-vehicle">
             <h5>{vehicle.vehicle_make}</h5>
             <p>Vehicle color: {vehicle.vehicle_color}</p>
             <p>Vehicle make: {vehicle.vehicle_make}</p>
@@ -30,7 +30,7 @@ function OrderVehicleCard({vehicle}){
               </Link>
               <span className="close-icon">
                 <Link to={`/admin/order/new-order`}>
-                  <DisabledByDefaultIcon style={{ backgroundColor: "red", color: "white" }} />
+                  <DisabledByDefaultIcon style={{ color: "red" }} />
                 </Link>
               </span>
             </div>

@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 function OrderCustomerCard(customerData) {
   //
   return (
-    <section className='contact-section card-customer-section'>
-      <div className='auto-container create-new'>
-        <div className='contact-title'>
-          <h2>Edit order</h2>
-          <div className='card card-text'>
+    <section className="contact-section order-customer-card ">
+      <div className="auto-container ">
+        <div className="contact-title">
+          <h2 className="card-customer-section">Edit order</h2>
+          <div className="card card-text">
             <h5>
               Name {customerData.customer_first_name}{" "}
               {customerData.customer_last_name}
@@ -23,12 +23,8 @@ function OrderCustomerCard(customerData) {
               Active customer:
               {customerData.active_customer_status == 1 ? "Yes" : "No"}
             </p>
-
-            <div className='edit-delete-icons'></div>
-            <Link to={`/admin/customer/edit/${customerData.customer_id}`}>
-              Edit customer <FaEdit />
-            </Link>
-            <span className='close-icon'>
+          <Link to={`/admin/customer/edit/${customerData.customer_id}`}>Edit customer <FaEdit /></Link>
+            <span className="close-icon">
               <Link to={`/admin/order/new-order`}>
                 <DisabledByDefaultIcon />
               </Link>

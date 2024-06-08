@@ -266,18 +266,19 @@ ul .pagination {
 .card {
   position: relative;
   width: 95%;
-  border: 2px solid rgb(236, 233, 233);
+  border: 2px solid rgb(236, 233, 233); 
   border-radius: 1px;
   margin-top: 10px;
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 20px;
   margin-left: 10px;
-  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  height: 160px;
+ box-shadow: 5px 5px 5px white(0, 0, 0, 1); 
   text-align: left;
 }
 
 .card-customer-section {
-  margin-top: -40px;
+  margin-top: -1px;
 }
 .card .card-title {
   font-family: Arial, sans-serif;
@@ -289,7 +290,7 @@ ul .pagination {
   color: hsl(0, 0%, 30%);
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -304,20 +305,21 @@ ul .pagination {
 .close-icon i {
   font-size: 15px;
 }
-
+ 
 /* vehicle table */
 .card-table {
   position: relative;
   width: 92%;
   border: 2px solid rgb(236, 233, 233);
   border-radius: 1px;
-  margin-top: 10px;
+  margin-top: -160px;
   padding: 10px;
   margin-bottom: 80px;
   margin-left: 20px;
   box-shadow: 5px 5px 5px white(0, 0, 0, 1);
   text-align: left;
   font-size: 12px;
+  background-color: white
 }
 
 .table-title {
@@ -332,7 +334,16 @@ ul .pagination {
 
 /* vehicle card */
 .card-vehicle {
+   
   margin-top: -190px;
+  height: 180px;
+   margin-bottom: -30px;
+   
+
+}
+/* order customer card */
+.order-customer-card{
+ margin-top: -75px;
 }
 
 /* service card */
@@ -341,6 +352,7 @@ ul .pagination {
   margin-bottom: -10px;
   border: 2px solid rgb(243, 240, 240);
   border-radius: 1px;
+
 }
 
 .checkbox-container {
@@ -465,6 +477,20 @@ ul .pagination {
 }
 
 .chooseService {
+  position: relative;
+  width: 94%;
+  border: 2px solid #e3dfdf;
+  border-radius: 1px;
+  margin-top: -180px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 5px white(0, 0, 0, 1);
+  text-align: left;
+  background-color: white;
+}
+
+.chooseService-edit {
   position: relative;
   width: 94%;
   border: 2px solid #e3dfdf;

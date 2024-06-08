@@ -151,14 +151,14 @@ function OrderService() {
   };
 
   return (
-    <div>
+    <div className="contact-section mt--2">
       {apiError ? (
         <p style={{ color: "red" }}>{apiErrorMessage}</p>
       ) : (
         <div>
           <form onSubmit={handleSubmit}>
             <div>
-              <div className='chooseService'>
+              <div className="chooseService">
                 <p style={{ color: "navy", fontSize: "20px" }}>
                   <strong>Choose Services </strong>
                 </p>
@@ -175,7 +175,7 @@ function OrderService() {
                 )}
               </div>
             </div>
-            <div className='card-addional'>
+            <div className="card-addional">
               <div>
                 <p style={{ color: "navy", fontSize: "20px" }}>
                   <strong>
@@ -184,21 +184,21 @@ function OrderService() {
                 </p>
                 <br />
                 <textarea
-                  type='textarea'
-                  name='additional_request'
+                  type="textarea"
+                  name="additional_request"
                   value={order.additional_request}
                   onChange={handleChange}
-                  placeholder='Service description'
+                  placeholder="Service description"
                   style={{ width: "80%", height: "80px" }}
                 />
                 <div>
                   <input
-                    type='text'
-                    name='additional_request_price'
+                    type="text"
+                    name="additional_request_price"
                     value={order.additional_request_price}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder='Price'
+                    placeholder="Price"
                     style={{ width: "80%", height: "40px" }}
                   />
                 </div>
@@ -206,46 +206,47 @@ function OrderService() {
               <div>
                 <p>Estimated Completion Date: </p>
                 <input
-                  type='datetime-local'
-                  name='estimated_completion_date'
+                  type="datetime-local"
+                  name="estimated_completion_date"
                   value={order.estimated_completion_date}
                   onChange={handleChange}
-                  placeholder='Estimated Completion Date'
+                  placeholder="Estimated Completion Date"
                   style={{ width: "80%", height: "4px" }}
                 />
               </div>
               <div>
                 <textarea
-                  type='text'
-                  name='notes_for_internal_use'
+                  type="text"
+                  name="notes_for_internal_use"
                   value={order.notes_for_internal_use}
-                  placeholder='Notes for Internal Use'
+                  placeholder="Notes for Internal Use"
                   onChange={handleChange}
                 />
               </div>
               <div>
                 <textarea
-                  type='text'
-                  name='notes_for_customer'
+                  type="text"
+                  name="notes_for_customer"
                   value={order.notes_for_customer}
-                  placeholder='Notes for Customer'
+                  placeholder="Notes for Customer"
                   onChange={handleChange}
                 />
               </div>
               <div>
                 <p> Total Price: </p>
                 <input
-                  type='text'
+                  type="text"
                   value={formatPrice(totalPrice.toFixed(2))}
                   readOnly
-                  placeholder='Total price'
+                  placeholder="Total price"
                   style={{ width: "80%", height: "40px" }}
                 />
               </div>
               <button
                 style={{ width: "20%", marginBottom: "30px " }}
-                className='theme-btn btn-style-one'
-                type='submit'>
+                className="theme-btn btn-style-one"
+                type="submit"
+              >
                 Create Order
               </button>
             </div>

@@ -67,7 +67,7 @@ function EditOrderForm() {
           additional_request_price: data.orderData.additional_request_price,
         });
 
-        console.log(additional_request);
+        //console.log(additional_request);
 
         setSelectedServices(data.services);
         calculateTotalPrice(
@@ -182,7 +182,7 @@ function EditOrderForm() {
   };
 
   return (
-    <div>
+    <div className="contact-section">
       {apiError ? (
         <p style={{ color: "red" }}>{apiErrorMessage}</p>
       ) : (
@@ -201,7 +201,7 @@ function EditOrderForm() {
           )}
           <form onSubmit={handleSubmit}>
             <div>
-              <div className='chooseService'>
+              <div className="chooseService-edit">
                 <p style={{ color: "navy", fontSize: "20px" }}>
                   <strong>Choose Services </strong>
                 </p>
@@ -221,92 +221,93 @@ function EditOrderForm() {
                 )}
               </div>
             </div>
-            <div className='card-addional edit-card-additional'>
-              <div className='form-group'>
+            <div className="card-addional edit-card-additional">
+              <div className="form-group">
                 <p
-                  htmlFor='additional_request'
+                  htmlFor="additional_request"
                   style={{
                     color: "navy",
                     fontSize: "20px",
                     fontWeight: "bold",
                     marginBottom: "20px",
-                  }}>
+                  }}
+                >
                   Additional Request
                   <span style={{ color: "red" }}>___</span>
                 </p>
                 <input
-                  type='textarea'
-                  name='additional_request'
+                  type="textarea"
+                  name="additional_request"
                   value={order.additional_request}
                   onChange={handleChange}
-                  className='form-control'
-                  id='additional_request'
-                  placeholder='Enter any additional requests'
+                  className="form-control"
+                  id="additional_request"
+                  placeholder="Enter any additional requests"
                   style={{ width: "80%" }}
                 />
               </div>
-              <div className='form-group'>
-                <p htmlFor='additional_request_price'>
+              <div className="form-group">
+                <p htmlFor="additional_request_price">
                   Additional Request Price
                 </p>
                 <input
-                  type='text'
-                  name='additional_request_price'
+                  type="text"
+                  name="additional_request_price"
                   value={formatPrice(order.additional_request_price)}
                   onChange={handleChange}
-                  className='form-control'
-                  id='additional_request_price'
-                  placeholder='Enter price for additional requests'
+                  className="form-control"
+                  id="additional_request_price"
+                  placeholder="Enter price for additional requests"
                   style={{ width: "80%" }}
                 />
                 <span></span>
               </div>
-              <div className='form-group'>
-                <p htmlFor='estimated_completion_date'>
+              <div className="form-group">
+                <p htmlFor="estimated_completion_date">
                   Estimated Completion Date
                 </p>
                 <input
-                  type='datetime-local'
-                  name='estimated_completion_date'
+                  type="datetime-local"
+                  name="estimated_completion_date"
                   value={order.estimated_completion_date}
                   onChange={handleChange}
-                  placeholder='Estimated Completion Date'
+                  placeholder="Estimated Completion Date"
                   style={{ width: "80%", height: "4px" }}
                 />
               </div>
-              <div className='form-group'>
-                <p htmlFor='notes_for_internal_use'>Notes for Internal Use</p>
+              <div className="form-group">
+                <p htmlFor="notes_for_internal_use">Notes for Internal Use</p>
                 <textarea
-                  type='textarea'
-                  name='notes_for_internal_use'
+                  type="textarea"
+                  name="notes_for_internal_use"
                   value={order.notes_for_internal_use}
                   onChange={handleChange}
-                  placeholder='Notes for internal use'
-                  className='form-control'
-                  id='notes_for_internal_use'
+                  placeholder="Notes for internal use"
+                  className="form-control"
+                  id="notes_for_internal_use"
                   style={{ width: "80%", height: "50px" }}
                 />
               </div>
-              <div className='form-group'>
-                <label htmlFor='notes_for_customer'>Notes for Customer</label>
+              <div className="form-group">
+                <label htmlFor="notes_for_customer">Notes for Customer</label>
                 <textarea
-                  type='textarea'
-                  name='notes_for_customer'
+                  type="textarea"
+                  name="notes_for_customer"
                   value={order.notes_for_customer}
                   onChange={handleChange}
-                  placeholder='Notes for customer'
-                  className='form-control'
-                  id='notes_for_customer'
+                  placeholder="Notes for customer"
+                  className="form-control"
+                  id="notes_for_customer"
                   style={{ width: "80%", height: "50px" }}
                 />
               </div>
               <div>
                 <p> Total Price: </p>
                 <input
-                  type='text'
+                  type="text"
                   value={formatPrice(totalPrice.toFixed(2))}
                   readOnly
-                  placeholder='Total price'
+                  placeholder="Total price"
                   style={{ width: "80%", height: "30px" }}
                 />
               </div>
@@ -317,8 +318,9 @@ function EditOrderForm() {
                     marginBottom: "100px ",
                     marginTop: "10px ",
                   }}
-                  className='theme-btn btn-style-one'
-                  type='submit'>
+                  className="theme-btn btn-style-one"
+                  type="submit"
+                >
                   Submit
                 </button>
               </div>

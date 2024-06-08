@@ -57,11 +57,11 @@ function OrderCustomerVehicleInfo() {
   };
 
   return (
-    <>
+    <section className="contact-section">
       {apiError ? (
         <div>{apiErrorMessage}</div>
       ) : vehicles.length > 0 ? (
-        <Table className="card-table" striped bordered hover>
+        <Table className="card-table " striped bordered hover>
           <thead>
             <tr>
               <th colSpan="8">
@@ -100,17 +100,17 @@ function OrderCustomerVehicleInfo() {
         </Table>
       ) : (
         <div className="add-vehicle">
-            <p style={{color:"red"}}>No vehicles found</p>
-             <button
+          <p style={{ color: "red" }}>No vehicles found</p>
+          <button
             style={{ width: "20%", marginBottom: "30px " }}
             className="theme-btn btn-style-one"
             onClick={goToAddVehicle}
-            >
-             Add vehicle
-            </button>
+          >
+            Add vehicle
+          </button>
         </div>
       )}
-    </>
+    </section>
   );
 }
 
