@@ -61,32 +61,6 @@ async function editOrder(req, res, next) {
   }
 }
 
-// const orderedServices = async (req, res) => {
-//   try {
-//     const order_id = req.params.order_id;
-//     console.log(order_id);
-
-//     const services = await orderService.orderedServices(order_id);
-
-//     const [customerVehicle] = await orderService.getVehicleByOrderId(order_id);
-
-//     if (!services) {
-//       res.status(400).json({
-//         error: "Failed to fetch order",
-//       });
-//     } else {
-//       res.status(200).json({
-//         message: "single order fetched successfully",
-//         services,
-//         customerVehicle,
-//       });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// };
-
 const singleOrder = async (req, res) => {
   try {
     const { order_id } = req.params;
@@ -132,10 +106,34 @@ const updateOrderProgress = async (req, res) => {
   }
 };
 
+const CustomerOrder = async (req, res) => {
+  try {
+    const { customer_id } = req.params;
+    console.log(customer_id);
+
+    const orderData = await orderService.getOrdersByCustomerId(customer_id);
+
+    if (!orderData) {
+      res.status(400).json({
+        error: "Failed to fetch order",
+      });
+    } else {
+      res.status(200).json({
+        message: "customer order fetched successfully",
+        orderData,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 module.exports = {
   createOrder,
   getAllOrdersData,
   editOrder,
   singleOrder,
   updateOrderProgress,
+  CustomerOrder,
 };

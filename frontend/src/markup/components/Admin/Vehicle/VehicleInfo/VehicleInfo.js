@@ -11,20 +11,35 @@ function VehicleInfo(props) {
           <h4>
             {vehicle.vehicle_make} {vehicle.vehicle_model}
           </h4>
-          <div>Vehicle Color: {vehicle.vehicle_color}</div>
-          <div>Vehicle Tag: {vehicle.vehicle_tag}</div>
-          <div>Vehicle Year: {vehicle.vehicle_year}</div>
-          <div>Vehicle Mileage: {vehicle.vehicle_mileage}</div>
-          <div>Vehicle Serial: {vehicle.vehicle_serial}</div>
           <div>
-            <span>Edit vehicle info </span>
+            <span className='bold-text'> Vehicle Color:</span>
+            {vehicle.vehicle_color}
+          </div>
+          <div>
+            <span className='bold-text'> Vehicle Tag:</span>
+            {vehicle.vehicle_tag}
+          </div>
+          <div>
+            <span className='bold-text'> Vehicle Year:</span>
+            {vehicle.vehicle_year}
+          </div>
+          <div>
+            <span className='bold-text'> Vehicle Mileage:</span>
+            {vehicle.vehicle_mileage}
+          </div>
+          <div>
+            <span className='bold-text'> Vehicle Serial: </span>
+            {vehicle.vehicle_serial}
+          </div>
+          <div>
+            <span className='bold-text'> Edit vehicle info </span>
             <FaEdit
               style={{ color: "red", cursor: "pointer" }}
               onClick={() => handleEditClick(vehicle.vehicle_id)}
             />
           </div>
           <div>
-            Delete vehicle
+            <span className='bold-text'> Delete vehicle </span>
             <FaTrash
               style={{ color: "red", cursor: "pointer" }}
               onClick={() => handleDeleteClick(vehicle.vehicle_id)}

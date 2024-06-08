@@ -13,14 +13,22 @@ function CustomerInfo({ customerInfo }) {
   return (
     <>
       <div className='text'>
-        <div>Email: {customerInfo.customer_email}</div>
-        <div>Phone Number: {customerInfo.customer_phone_number} </div>
         <div>
-          Active Customer:
+          <span className='bold-text'>Email:</span>{" "}
+          {customerInfo.customer_email}
+        </div>
+        <div>
+          <span className='bold-text'>Phone Number: </span>
+          {customerInfo.customer_phone_number}{" "}
+        </div>
+        <div>
+          <span className='bold-text'>Active Customer:</span>
+
           {customerInfo.active_customer_status === 1 ? "Yes" : "No"}
         </div>
         <div>
-          Edit customer info
+          <span className='bold-text'>Edit customer info</span>
+
           <FaEdit
             style={{ color: "red", cursor: "pointer" }}
             onClick={handleEditClick}

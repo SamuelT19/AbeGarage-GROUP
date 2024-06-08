@@ -768,6 +768,16 @@ ul .pagination {
   background-color: #ebedef;
 }
 
+/* Service page */
+.service-block-one {
+  padding-right: 5px;
+  padding-left: 2px;
+}
+.service-name1 h2 {
+  font-size: x-large;
+  font-weight: 700;
+}
+
 /* Order details page css starts here*/
 
 .order_tracker {
