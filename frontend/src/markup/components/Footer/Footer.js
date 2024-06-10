@@ -27,9 +27,9 @@ function Footer(props) {
                   </div>
                   <div className='text'>
                     Email us : <br />{" "}
-                    <a href='mailto:contact.contact@autorex.com'>
-                      Abegarage@yahoo.com
-                    </a>
+                    <Link to='mailto:contact.contact@autorex.com'>
+                      g3autorepair@yahoo.com
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -62,17 +62,17 @@ function Footer(props) {
                       <div className='widget-content '>
                         <ul className='list'>
                           <li>
-                            <a href='/'>Home</a>
+                            <Link to='/'>Home</Link>
                           </li>
                           <li>
-                            <a href='/about'>About Us</a>
+                            <Link to='/about'>About Us</Link>
                           </li>
 
                           <li>
-                            <a href='/services'>Services</a>
+                            <Link to='/services'>Services</Link>
                           </li>
                           <li>
-                            <a href='/contact'>Contact Us</a>
+                            <Link to='/contact'>Contact Us</Link>
                           </li>
                         </ul>
                       </div>
@@ -82,20 +82,29 @@ function Footer(props) {
                     <div className='widget widget_links serviceLinks'>
                       <h4 className='widget_title '>
                         {/* <Link to='/services'> Our Services</Link> */}
-
-                        <a a href='/services'>
-                          {" "}
-                          Our Services
-                        </a>
+                        Our Services
                       </h4>
                       <div className='widget-content'>
                         <ul className='list flex-list footerli'>
-                          <li>Oil change & Programming the camera software</li>
-                          <li>Spark Plug replacement & The ignition system</li>
-                          <li>
-                            Fuel Cap tightening & Oxygen Sensor replacement
-                          </li>
-                          <li>Brake Work & Tire repairs and changes</li>
+                          <Link to='/services'>
+                            {" "}
+                            <li>
+                              Oil change & Programming the camera software
+                            </li>
+                          </Link>
+                          <Link to='/services'>
+                            <li>
+                              Spark Plug replacement & The ignition system
+                            </li>
+                          </Link>
+                          <Link to='/services'>
+                            <li>
+                              Fuel Cap tightening & Oxygen Sensor replacement
+                            </li>
+                          </Link>
+                          <Link to='/services'>
+                            <li>Brake Work & Tire repairs and changes</li>
+                          </Link>
                         </ul>
                       </div>
                     </div>
@@ -109,24 +118,24 @@ function Footer(props) {
                   <div className='newsletter-form'></div>
                   <ul className='social-links'>
                     <li>
-                      <a href='#'>
+                      <Link to='#'>
                         <span className='fab fa-facebook-f'></span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href='#'>
+                      <Link to='#'>
                         <span className='fab fa-linkedin-in'></span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href='#'>
+                      <Link to='#'>
                         <span className='fab fa-twitter'></span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href='#'>
+                      <Link to='#'>
                         <span className='fab fa-google-plus-g'></span>
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -138,7 +147,8 @@ function Footer(props) {
       <div className='auto-container'>
         <div className='footer-bottom'>
           <div className='copyright-text'>
-            © Copyright <a href='#'>Abe Garage</a> 2024 . All right reserved.
+            © Copyright <Link to='#'>G3 Auto Repair</Link> 2024 . All right
+            reserved.
           </div>
         </div>
       </div>

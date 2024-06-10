@@ -12,7 +12,7 @@ import { useAuth } from "../../../Contexts/AuthContext";
 
 function Header(props) {
   // Use the custom hook to access the data in the context
-  const { isLogged, setIsLogged, employee } = useAuth();
+  const { isAdmin, isLogged, setIsLogged, employee } = useAuth();
   // console.log(useAuth());
 
   // Log out event handler function
@@ -30,7 +30,9 @@ function Header(props) {
           <div className='auto-container'>
             <div className='inner-container'>
               <div className='left-column'>
-                <div className='text'>Enjoy the Beso while we fix your car</div>
+                <div className='text'>
+                  Quality service and expert care for your vehicle
+                </div>
                 <div className='office-hour'>
                   Monday - Saturday 7:00AM - 6:00PM
                 </div>
@@ -44,7 +46,7 @@ function Header(props) {
                   </div>
                 ) : (
                   <div className='phone-number'>
-                    Schedule Appointment: <strong>1800 456 7890 </strong>{" "}
+                    Schedule Appointment: <strong>+251713829204 </strong>{" "}
                   </div>
                 )}
               </div>
@@ -83,6 +85,11 @@ function Header(props) {
                         <li>
                           <Link to='/contact'>Contact Us</Link>
                         </li>
+                        {isLogged && isAdmin && (
+                          <li>
+                            <Link to='/admin'>Admin</Link>
+                          </li>
+                        )}
                       </ul>
                     </div>
                   </nav>

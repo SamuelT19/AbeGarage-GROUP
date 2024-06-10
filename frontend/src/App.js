@@ -23,6 +23,7 @@ import OrderRouter from "./router/OrderRouter";
 import ServiceRouter from "./router/ServiceRouter";
 import ReadMore from "./markup/pages/ReadMore";
 import Contact from "./markup/pages/Contact";
+import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
 
 function App() {
   return (
@@ -34,7 +35,16 @@ function App() {
         <Route path='/Contact' element={<Contact />} />
         <Route path='/Services' element={<Services />} />
         <Route path='/About' element={<About />} />
-        <Route path='/admin' element={<AdminDashboard />} />
+
+        <Route
+          path='/admin'
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <AdminDashboard />
+            </PrivateAuthRoute>
+          }
+        />
+
         <Route path='/login' element={<Login />} />
         <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/admin/employee/*' element={<EmployeeRouter />} />
