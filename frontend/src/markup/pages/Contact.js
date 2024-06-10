@@ -54,7 +54,7 @@ const Contact = () => {
                   </li>
                   <li>
                     <i className='flaticon-email' />
-                    <span>Email:</span> Abegarage@yahoo.com
+                    <span>Email:</span> g3autorepair@yahoo.com
                   </li>
                   <li>
                     <i className='flaticon-phone' />

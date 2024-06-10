@@ -981,3 +981,16 @@ ul .pagination {
   color: #b2b9c5;
   font-size: 17px;
 }
+
+
+/* some style on eye icon for login component */
+.password-wrapper {
+  position: relative;
+}
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
