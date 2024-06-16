@@ -994,3 +994,182 @@ ul .pagination {
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+
+
+/* some styles on header's  humberger */
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #fff; /* Navbar background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+/* Logo styling */
+.logo {
+  flex: 1; /* Grow to take remaining space */
+}
+
+
+/* Navbar toggler styling */
+.navbar-toggler {
+  cursor: pointer;
+  fill: #000;
+  align-items: center;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  display: none; /* Initially hidden */
+}
+
+.navbar-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* Navigation styling for larger screens */
+.navigation {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: row; /* Horizontal layout */
+}
+
+.navigation li {
+  padding: 10px 20px;
+}
+
+.navigation li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.navigation li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+
+
+.admin-left-side{
+  display: none;
+}
+
+
+
+  .navigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding-top: 20px;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .navigation.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  .right-column{
+    display: flex;
+  }
+
+  .close-btn {
+    position: relative;
+    /* bottom: 10px; */
+  left: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+  
+  }
+ 
+
+  .close-btn .navbar-icon {
+     display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  }
+   .close-btn:hover{
+    	background-color: rgba(0, 0, 0, 0.1);
+       width: 30px;
+    height: 30px;
+
+  }
+
+  .navbar-toggler {
+    display: flex; /* Show toggler on mobile */
+  }
+}
+
+/* Hide menu and close icons on larger screens */
+@media (min-width: 769px) {
+  .navbar-toggler {
+    display: none;
+  }
+
+  .close-btn {
+    display: none;
+  }
+}
+
+
+
+/* Add this CSS code in your stylesheet */
+.header-upper {
+  position: static;
+  transition: all 0.3s ease;
+}
+
+.fixed-header .header-upper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+/* Ensure the body has a top padding to prevent overlap */
+body {
+  padding-top: 0; /* Initial value, adjust based on your needs */
+}
+
+.fixed-header ~ * {
+  padding-top: 100px; /* Adjust based on the height of your header */
+}
+
+
+
+
+.admin-position {
+  background-color: #001659;
+position: fixed;
+width: 25%;
+/* height: 300px;  */
+  max-height: 65vh; /* Set a maximum height for the container */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
