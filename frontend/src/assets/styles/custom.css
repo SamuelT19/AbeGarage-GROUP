@@ -926,5 +926,6 @@ ul .pagination {
   justify-content: center;
 }
 .widget_newsletter {
-  padding-left: 20%;
+  /* padding-left: 20%; */
+   padding-left: 20%;
 }
