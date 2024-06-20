@@ -105,36 +105,38 @@ const OrderCustomersListForm = () => {
               </div>
 
               {query !== "" && filteredCustomers.length > 0 ? (
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Click</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredCustomers.map((data, i) => (
-                      <tr key={i}>
-                        <td>{data.customer_first_name}</td>
-                        <td>{data.customer_last_name}</td>
-                        <td>{data.customer_email}</td>
-                        <td>{data.customer_phone_number}</td>
-                        <td>
-                          <div className="edit-delete-icons">
-                            <Link
-                              to={`/admin/order/new-order/customer/${data.customer_id}`}
-                            >
-                              <GiClick />
-                            </Link>
-                          </div>
-                        </td>
+                <div className="table-responsive">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Click</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {filteredCustomers.map((data, i) => (
+                        <tr key={i}>
+                          <td>{data.customer_first_name}</td>
+                          <td>{data.customer_last_name}</td>
+                          <td>{data.customer_email}</td>
+                          <td>{data.customer_phone_number}</td>
+                          <td>
+                            <div className="edit-delete-icons">
+                              <Link
+                                to={`/admin/order/new-order/customer/${data.customer_id}`}
+                              >
+                                <GiClick />
+                              </Link>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
               ) : (
                 <>
                   {query !== "" && <div>No search results found.</div>}

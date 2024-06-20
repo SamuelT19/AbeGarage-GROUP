@@ -109,56 +109,59 @@ const EmployeesList = () => {
               <div className="contact-title">
                 <h2>Employees</h2>
               </div>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Active</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Added Date</th>
-                    <th>Role</th>
-                    <th>Edit/Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.map((employee) => (
-                    <tr key={employee.employee_id}>
-                      <td>{employee.active_employee ? "Yes" : "No"}</td>
-                      <td>{employee.employee_first_name}</td>
-                      <td>{employee.employee_last_name}</td>
-                      <td>{employee.employee_email}</td>
-                      <td>{employee.employee_phone}</td>
-                      <td>
-                        {format(
-                          new Date(employee.added_date),
-                          "MM - dd - yyyy | kk:mm"
-                        )}
-                      </td>
-                      <td>{employee.company_role_name}</td>
-                      <td>
-                        {/* <div className='edit-delete-icons'>edit | delete</div> */}
-                        <Link
-                          to={`/admin/employee/edit-employee/${employee.employee_id}`}
-                        >
-                          <FaEdit
-                            className="edit-icon"
-                            style={{ cursor: "pointer" }}
-                          />
-                        </Link>
-                        &nbsp; &nbsp;
-                        {/* // *Delet icon and event listnere  */}
-                        <FaTrash
-                          className="delete-icon"
-                          style={{ cursor: "pointer" }}
-                          onClick={() => confirmDeleteEmployee(employee)}
-                        />
-                      </td>
+
+              <div className="table-responsive">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Active</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Added Date</th>
+                      <th>Role</th>
+                      <th>Edit/Delete</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {employees.map((employee) => (
+                      <tr key={employee.employee_id}>
+                        <td>{employee.active_employee ? "Yes" : "No"}</td>
+                        <td>{employee.employee_first_name}</td>
+                        <td>{employee.employee_last_name}</td>
+                        <td>{employee.employee_email}</td>
+                        <td>{employee.employee_phone}</td>
+                        <td>
+                          {format(
+                            new Date(employee.added_date),
+                            "MM - dd - yyyy | kk:mm"
+                          )}
+                        </td>
+                        <td>{employee.company_role_name}</td>
+                        <td>
+                          {/* <div className='edit-delete-icons'>edit | delete</div> */}
+                          <Link
+                            to={`/admin/employee/edit-employee/${employee.employee_id}`}
+                          >
+                            <FaEdit
+                              className="edit-icon"
+                              style={{ cursor: "pointer" }}
+                            />
+                          </Link>
+                          &nbsp; &nbsp;
+                          {/* // *Delet icon and event listnere  */}
+                          <FaTrash
+                            className="delete-icon"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => confirmDeleteEmployee(employee)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
             </div>
           </section>
         </>

@@ -82,126 +82,133 @@ function OrdersList() {
 
   return (
     <>
-      <section className='contact-section'>
-        <div className='auto-container'>
-          <div className='contact-title'>
+      <section className="contact-section">
+        <div className="auto-container">
+          <div className="contact-title">
             <h2>Orders</h2>
             <div>
               <input
-                type='text'
-                placeholder='Search by first name, last name, email, or phone number'
-                className='search'
+                type="text"
+                placeholder="Search by first name, last name, email, or phone number"
+                className="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
             </div>
           </div>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Order Id</th>
-                <th>Customer</th>
-                <th>Vehicle</th>
-                <th>Order Date</th>
-                <th>Received by</th>
-                <th>Order status</th>
-                <th>Edit/view</th>
-              </tr>
-            </thead>
-            <tbody>
-              {records.length > 0 ? (
-                records.map((order) => (
-                  <tr key={order.order.order_id}>
-                    <td>{order.order.order_id}</td>
-                    <td>
-                      <span className='bold-text'>
-                        {order.customer.customer_first_name}{" "}
-                        {order.customer.customer_last_name}
-                      </span>
-                      <br />
-                      {order.customer.customer_email}
-                      <br />
-                      {order.customer.customer_phone_number}
-                    </td>
-                    <td>
-                      <span className='bold-text'>
-                        {order.vehicle.vehicle_make}{" "}
-                        {order.vehicle.vehicle_model}
-                      </span>
-                      <br />
-                      {order.vehicle.vehicle_year} <br />
-                      {order.vehicle.vehicle_tag}
-                    </td>
-                    <td>
-                      {format(
-                        new Date(order.order.order_date),
-                        "MM - dd - yyyy | kk:mm"
-                      )}
-                    </td>
-                    <td>
-                      {order.employee.employee_first_name}{" "}
-                      {order.employee.employee_last_name}
-                    </td>
 
-                    <td className='align-middle center'>
-                      {/* <OrderStatusLabel statusCode={order.order.order_status} /> */}
-                      <span
-                        className={`status-label ${getStatusClass(
-                          order.order.order_status
-                        )}`}>
-                        {orderStatusLabels[order.order.order_status]}
-                      </span>
-                    </td>
-
-                    <td className='center align-middle'>
-                      <div className='edit-delete-icons'>
-                        {order.order.order_status === "complete" ||
-                        order.order.order_status === 3 ? (
-                          <FaEdit style={{ color: "gray" }} />
-                        ) : (
-                          <Link
-                            to={`/admin/order/edit/${order.order.order_id}`}
-                            className='icon-link'>
-                            <FaEdit />
-                          </Link>
+          <div className="table-responsive">
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Order Id</th>
+                  <th>Customer</th>
+                  <th>Vehicle</th>
+                  <th>Order Date</th>
+                  <th>Received by</th>
+                  <th>Order status</th>
+                  <th>Edit/view</th>
+                </tr>
+              </thead>
+              <tbody>
+                {records.length > 0 ? (
+                  records.map((order) => (
+                    <tr key={order.order.order_id}>
+                      <td>{order.order.order_id}</td>
+                      <td>
+                        <span className="bold-text">
+                          {order.customer.customer_first_name}{" "}
+                          {order.customer.customer_last_name}
+                        </span>
+                        <br />
+                        {order.customer.customer_email}
+                        <br />
+                        {order.customer.customer_phone_number}
+                      </td>
+                      <td>
+                        <span className="bold-text">
+                          {order.vehicle.vehicle_make}{" "}
+                          {order.vehicle.vehicle_model}
+                        </span>
+                        <br />
+                        {order.vehicle.vehicle_year} <br />
+                        {order.vehicle.vehicle_tag}
+                      </td>
+                      <td>
+                        {format(
+                          new Date(order.order.order_date),
+                          "MM - dd - yyyy | kk:mm"
                         )}
-                        <Link
-                          key={order.order.order_id}
-                          to={`/admin/order/${order.order.order_id}`}>
-                          <IoOpenOutline />
-                        </Link>
-                      </div>
+                      </td>
+                      <td>
+                        {order.employee.employee_first_name}{" "}
+                        {order.employee.employee_last_name}
+                      </td>
+
+                      <td className="align-middle center">
+                        {/* <OrderStatusLabel statusCode={order.order.order_status} /> */}
+                        <span
+                          className={`status-label ${getStatusClass(
+                            order.order.order_status
+                          )}`}
+                        >
+                          {orderStatusLabels[order.order.order_status]}
+                        </span>
+                      </td>
+
+                      <td className="center align-middle">
+                        <div className="edit-delete-icons">
+                          {order.order.order_status === "complete" ||
+                          order.order.order_status === 3 ? (
+                            <FaEdit style={{ color: "gray" }} />
+                          ) : (
+                            <Link
+                              to={`/admin/order/edit/${order.order.order_id}`}
+                              className="icon-link"
+                            >
+                              <FaEdit />
+                            </Link>
+                          )}
+                          <Link
+                            key={order.order.order_id}
+                            to={`/admin/order/${order.order.order_id}`}
+                          >
+                            <IoOpenOutline />
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="8" className="text-center">
+                      No orders found
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan='8' className='text-center'>
-                    No orders found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
-          <nav className='pagination justify-content-center'>
-            <ul className='pagination'>
-              <li className='page-item'>
-                <a className='page-link' href='#' onClick={firstPage}>
+                )}
+              </tbody>
+            </Table>
+          </div>
+
+          <nav className="pagination justify-content-center">
+            <ul className="pagination">
+              <li className="page-item">
+                <a className="page-link" href="#" onClick={firstPage}>
                   <ImFirst /> First
                 </a>
               </li>
-              <li className='page-item'>
-                <a className='page-link' href='#' onClick={prePage}>
+              <li className="page-item">
+                <a className="page-link" href="#" onClick={prePage}>
                   <GrFormPrevious /> Previous
                 </a>
               </li>
-              <li className='page-item'>
-                <a className='page-link' href='#' onClick={nextPage}>
+              <li className="page-item">
+                <a className="page-link" href="#" onClick={nextPage}>
                   <MdNavigateNext /> Next
                 </a>
               </li>
-              <li className='page-item'>
-                <a className='page-link' href='#' onClick={lastPage}>
+              <li className="page-item">
+                <a className="page-link" href="#" onClick={lastPage}>
                   <ImLast /> Last
                 </a>
               </li>
