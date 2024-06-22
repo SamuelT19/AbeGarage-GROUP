@@ -5,7 +5,6 @@ import loginService from "../../../services/login.service";
 import { useAuth } from "../../../Contexts/AuthContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-// Make sure to import the stylesheet where you added the CSS
 
 function Header() {
   const { isAdmin, isLogged, setIsLogged, employee } = useAuth();
@@ -38,6 +37,10 @@ function Header() {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleMenuClick = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -97,32 +100,49 @@ function Header() {
                     <CloseIcon className="navbar-icon" />
                   </button>
                   <li className="dropdown">
-                    <Link to="/">Home</Link>
+                    <Link to="/" onClick={handleMenuClick}>
+                      Home
+                    </Link>
                   </li>
                   <li className="dropdown">
-                    <Link to="/about">About Us</Link>
+                    <Link to="/about" onClick={handleMenuClick}>
+                      About Us
+                    </Link>
                   </li>
                   <li className="dropdown">
-                    <Link to="/services">Services</Link>
+                    <Link to="/services" onClick={handleMenuClick}>
+                      Services
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/contact">Contact Us</Link>
+                    <Link to="/contact" onClick={handleMenuClick}>
+                      Contact Us
+                    </Link>
                   </li>
                   {isLogged && isAdmin && (
                     <li>
-                      <Link to="/admin">Admin</Link>
+                      <Link to="/admin" onClick={handleMenuClick}>
+                        Admin
+                      </Link>
                     </li>
                   )}
                   {isLogged && isMobile && (
                     <li>
-                      <Link className="" onClick={logOut} to="/">
+                      <Link
+                        className=""
+                        onClick={() => {
+                          logOut();
+                          handleMenuClick();
+                        }}
+                        to="/"
+                      >
                         Log Out
                       </Link>
                     </li>
                   )}
                   {!isLogged && isMobile && (
                     <li>
-                      <Link to="/login" className="">
+                      <Link to="/login" className="" onClick={handleMenuClick}>
                         Login
                       </Link>
                     </li>
