@@ -1069,7 +1069,7 @@ ul .pagination {
 
   .navigation {
     position: fixed;
-    top: 0;
+    top: 17%;
     right: 0;
     height: 100vh;
     width: 150px;
@@ -1096,7 +1096,7 @@ ul .pagination {
   .close-btn {
     position: relative;
     /* bottom: 10px; */
-  left: 35px;
+    left: 75%;
     background: none;
     border: none;
     cursor: pointer;
