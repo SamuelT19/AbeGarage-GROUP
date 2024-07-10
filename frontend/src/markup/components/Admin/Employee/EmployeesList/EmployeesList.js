@@ -168,7 +168,7 @@ const [query, setQuery] = useState("");
               </div>
 
               <div className="table-responsive">
-                <Table striped bordered hover>
+                <Table striped bordered hover table-responsive-sm>
                   <thead>
                     <tr>
                       <th>Active</th>
